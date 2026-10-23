@@ -365,21 +365,29 @@ def gallery_markup(entries: list[dict], prefix: str) -> str:
     for entry in entries:
         manifest, change = entry["manifest"], entry["change"]
         build = manifest["build"]
-        stamp = datetime.fromisoformat(manifest["upstream_time"].replace("Z", "+00:00"))
-        when = stamp.strftime("%b %d, %Y %H:%M UTC")
         card = hashlib.sha256(change["path"].encode("utf-8")).hexdigest()[:12]
         image_path = f"{prefix}infographics/recent/{build}-{card}.svg"
         report_path = f"{prefix}builds/{build}.md"
         path = html.escape(change["path"])
         old, new = html.escape(fmt(change["old"])), html.escape(fmt(change["new"]))
-        lines += ["<td width=\"20%\" valign=\"top\">",
-                  f'<a href="{report_path}"><img src="{image_path}" width="220" alt="Build {build}: {path}, {old} to {new}"></a><br>',
-                  f'<strong><a href="{report_path}">Build {build}</a></strong><br>',
-                  f'<small>{html.escape(when)} · <a href="{html.escape(manifest["source"], quote=True)}">upstream commit</a></small><br>',
-                  f'<code>{path}</code><br>',
-                  f'<code>{old}</code> → <code>{new}</code> ({html.escape(change["kind"])})',
+        lines += ["<td width=\"20%\">",
+                  f'<a href="{report_path}"><img src="{image_path}" width="185" alt="Build {build}: {path}, {old} to {new}"></a>',
                   "</td>"]
-    lines += ["</tr>", "</table>", ""]
+    lines += ["</tr>", "</table>", "", "### Exact changes and times", "", "<ol>"]
+    for entry in entries:
+        manifest, change = entry["manifest"], entry["change"]
+        build = manifest["build"]
+        stamp = datetime.fromisoformat(manifest["upstream_time"].replace("Z", "+00:00"))
+        when = stamp.strftime("%b %d, %Y %H:%M UTC")
+        path = html.escape(change["path"])
+        old, new = html.escape(fmt(change["old"])), html.escape(fmt(change["new"]))
+        report_path = f"{prefix}builds/{build}.md"
+        source = html.escape(manifest["source"], quote=True)
+        lines.append(f'<li><strong>Build {build} · {html.escape(when)}</strong> '
+                     f'(<a href="{report_path}">full report</a>; <a href="{source}">upstream commit</a>)<br>'
+                     f'<code>{path}</code>: <code>{old}</code> → <code>{new}</code> '
+                     f'({html.escape(change["kind"])})</li>')
+    lines += ["</ol>", ""]
     return "\n".join(lines)
 
 
