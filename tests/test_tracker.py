@@ -4,6 +4,7 @@ import sys
 import tempfile
 import unittest
 from unittest.mock import patch
+import xml.etree.ElementTree as ET
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
@@ -58,9 +59,36 @@ class ComparisonTests(unittest.TestCase):
                   "kind": "changed", "old": 50, "new": 65, "delta": 15}
         self.assertEqual(tracker.readable_change(future),
                          ("Unknown dash", "Travel speed", "50 → 65 (+15)"))
+        self.assertEqual(tracker.readable_change({"path": "abilities.ability_artist_bamboogrove.m_bDurationReducible",
+                                                  "kind": "added", "old": None, "new": False})[0],
+                         "Violet · Abstract Landscape")
+        self.assertEqual(tracker.readable_change({"path": "abilities.ability_warden_riot_protocol.m_nEnabledStateMask",
+                                                  "kind": "added", "old": None, "new": "MODIFIER_STATE_FEAR_IMMUNE"})[0],
+                         "Warden · Last Stand")
 
 
 class PipelineTests(unittest.TestCase):
+    def test_change_card_uses_matching_game_icon_and_exact_values(self):
+        manifest = {"build": 6819, "upstream_time": "2026-10-22T23:53:52Z"}
+        change = {"path": "abilities.ability_artist_pullbrush.m_flMinStrokeDistance",
+                  "kind": "added", "old": None, "new": 15.0}
+        svg = tracker.change_card(manifest, {"build": 6817}, change, 1)
+        root = ET.fromstring(svg)
+        self.assertEqual(len(root.findall("{http://www.w3.org/2000/svg}image")), 1)
+        self.assertIn("unset → 15.0", svg)
+        self.assertIn("Oct 22, 2026 23:53 UTC", svg)
+        self.assertNotIn("<rect x=\"220\"", svg)
+
+    def test_unknown_field_card_has_no_generic_icon(self):
+        svg = tracker.change_card({"build": 7000, "upstream_time": "2026-10-23T12:00:00Z"},
+                                  {"build": 6999},
+                                  {"path": "generic_data.m_Example.m_flRange", "kind": "changed",
+                                   "old": 50, "new": 65, "delta": 15}, 2)
+        root = ET.fromstring(svg)
+        self.assertFalse(root.findall("{http://www.w3.org/2000/svg}image"))
+        self.assertIn("50 → 65", svg)
+        self.assertIn("1 of 2 changes", svg)
+
     def test_report_leads_with_readable_change_and_keeps_source(self):
         change = {"path": "generic_data.m_StreetBrawl.m_vecBuyTime[4]",
                   "category": "street-brawl", "kind": "changed",

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import argparse
-from collections import Counter
+import base64
 from datetime import datetime, timezone
 import gzip
 import hashlib
@@ -250,34 +250,16 @@ def report(manifest: dict, prior: dict | None, changes: list[dict], posts: list[
 
 
 def infographic(manifest: dict, prior: dict | None, changes: list[dict]):
+    """Show one actual change; link to the report for the rest of the build."""
     number = manifest["build"]
-    counts = Counter(change["category"] for change in changes)
-    labels = [("Street Brawl", "street-brawl"), ("Heroes", "heroes"),
-              ("Abilities / items", "abilities"), ("Map / NPCs", "map-and-npcs"),
-              ("Modifiers", "modifiers"), ("Other", "other-data")]
-    maximum = max([counts[key] for _, key in labels] + [1])
-    bars = []
-    for index, (label, key) in enumerate(labels):
-        y = 178 + index * 48
-        width = round(450 * counts[key] / maximum)
-        bars.append(f'<text x="38" y="{y}" class="label">{label}</text>'
-                    f'<rect x="220" y="{y-19}" width="450" height="23" rx="4" fill="#243341"/>'
-                    f'<rect x="220" y="{y-19}" width="{width}" height="23" rx="4" fill="{ "#ffbe68" if key == "street-brawl" else "#73d9d1" }"/>'
-                    f'<text x="690" y="{y}" class="count">{counts[key]}</text>')
-    old = prior["build"] if prior else "baseline"
-    note = "From extracted game data · Open the report for exact values"
-    svg = (f'<svg xmlns="http://www.w3.org/2000/svg" width="760" height="520" viewBox="0 0 760 520" role="img" '
-           f'aria-label="Deadlock build {number} change summary"><style>'
-           '.title{font:700 36px system-ui;fill:#f2f5ef}.sub{font:17px system-ui;fill:#b9cad0}'
-           '.label{font:17px system-ui;fill:#eff2ec}.count{font:700 18px system-ui;fill:#eff2ec}'
-           '.foot{font:14px system-ui;fill:#aabdc4}</style>'
-           '<rect width="760" height="520" fill="#111b26"/>'
-           '<rect x="0" width="760" height="8" fill="#ffbe68"/>'
-           f'<text x="38" y="67" class="title">Deadlock build {number}</text>'
-           f'<text x="38" y="101" class="sub">Compared with {old} · {len(changes)} changed values</text>'
-           '<line x1="38" x2="722" y1="125" y2="125" stroke="#41515d"/>'
-           + "".join(bars) +
-           f'<text x="38" y="490" class="foot">{html.escape(note)}</text></svg>')
+    known_icon = [change for change in changes if icon_for_change(change)
+                  and not isinstance(change["old"], (dict, list))
+                  and not isinstance(change["new"], (dict, list))]
+    scalar = [change for change in changes
+              if not isinstance(change["old"], (dict, list))
+              and not isinstance(change["new"], (dict, list))]
+    featured = next(iter(known_icon or scalar or changes), None)
+    svg = change_card(manifest, prior, featured, len(changes))
     write_atomic(REPORTS / "infographics" / f"{number}.svg", svg.encode("utf-8"))
 
 
@@ -315,7 +297,7 @@ def update_summaries(manifest: dict, changes: list[dict]):
                       f"  Source: `{change['path']}` · `{fmt(change['old'])}` → `{fmt(change['new'])}`"]
     else:
         lines.append("No Street Brawl value change appears in the archived comparisons yet.")
-    lines += ["", "[Browse all builds](index.md) · [See the latest build graphic](infographics/latest.svg)", ""]
+    lines += ["", "[Browse all builds](index.md) · [See the latest change card](infographics/latest.svg)", ""]
     write_atomic(REPORTS / "street-brawl.md", "\n".join(lines).encode("utf-8"))
     write_atomic(DATA / "state.json", json_bytes({"latest_build": number, "latest_commit": manifest["commit"]}))
 
@@ -343,9 +325,15 @@ def recent_change_entries(limit: int = 5) -> list[dict]:
 
 ABILITY_LABELS = {
     "ability_artist_pullbrush": "Violet · Living Ink",
-    "ability_artist_bamboogrove": "Violet · Bamboo Grove",
-    "ability_artist_homingbrush": "Violet · Homing Brush",
-    "ability_warden_riot_protocol": "Warden · Riot Protocol",
+    "ability_artist_bamboogrove": "Violet · Abstract Landscape",
+    "ability_artist_homingbrush": "Violet · Living Ink",
+    "ability_warden_riot_protocol": "Warden · Last Stand",
+}
+ABILITY_ICONS = {
+    "ability_artist_pullbrush": "living-ink.webp",
+    "ability_artist_homingbrush": "living-ink.webp",
+    "ability_artist_bamboogrove": "abstract-landscape.webp",
+    "ability_warden_riot_protocol": "last-stand.webp",
 }
 FIELD_LABELS = {
     "m_flMinStrokeDistance": "Minimum stroke distance",
@@ -400,38 +388,77 @@ def readable_change(change: dict) -> tuple[str, str, str]:
     return context, field, f"{fmt(change['old'])} → {fmt(change['new'])}"
 
 
-def recent_card(entry: dict) -> str:
-    """Render one source-backed field change as a compact data-only SVG."""
-    manifest, prior, change = entry["manifest"], entry["prior"], entry["change"]
+def icon_for_change(change: dict) -> str | None:
+    parts = change["path"].split(".")
+    return ABILITY_ICONS.get(parts[1]) if len(parts) > 1 and parts[0] == "abilities" else None
+
+
+def change_card(manifest: dict, prior: dict | None, change: dict | None, total: int) -> str:
+    """A single, source-backed change card. Missing icons leave the card text-only."""
+    number = manifest["build"]
     stamp = datetime.fromisoformat(manifest["upstream_time"].replace("Z", "+00:00"))
     when = stamp.strftime("%b %d, %Y %H:%M UTC")
-    context, field, summary = readable_change(change)
+    icon = icon_for_change(change) if change else None
+    icon_markup = ""
+    if icon:
+        binary = (ROOT / "assets" / "icons" / icon).read_bytes()
+        encoded = base64.b64encode(binary).decode("ascii")
+        icon_markup = (f'<rect x="326" y="22" width="72" height="72" rx="15" fill="#303d4b"/>'
+                       f'<image x="335" y="31" width="54" height="54" '
+                       f'href="data:image/webp;base64,{encoded}"/>')
 
-    def short(rendered, width=33):
-        return html.escape(rendered if len(rendered) <= width else rendered[:width - 1] + "…")
+    if change:
+        context, field, summary = readable_change(change)
+        old = "unset" if change["kind"] == "added" else fmt(change["old"])
+        new = "removed" if change["kind"] == "removed" else fmt(change["new"])
+        transition = f"{old} → {new}"
+        if len(transition) <= 22:
+            main, detail = transition, summary if summary != transition else "Confirmed in extracted game data"
+        else:
+            main, detail = summary, "Full before and after values in the report"
+        if "delta" in change:
+            detail = f"Change {change['delta']:+g}"
+            if "percent" in change:
+                detail += f" · {change['percent']:+.2f}%"
+        footer = (f"1 of {total} changes · See the full build report" if total > 1
+                  else f"Compared with build {prior['build']}" if prior else "First archived build")
+        description = f"Build {number}, {context}, {field}: {summary}. {old} to {new}."
+    else:
+        context = "No tracked change" if prior else "First archived build"
+        field = "Six game data files checked"
+        main = "No values changed" if prior else "Starting point"
+        detail = ("Other game files may still have changed" if prior
+                  else "There are no earlier values to compare")
+        footer = f"Compared with build {prior['build']}" if prior else "Browse the archived build report"
+        description = f"Build {number}: {main}."
 
-    old = "unset" if change["kind"] == "added" else fmt(change["old"])
-    new = "removed" if change["kind"] == "removed" else fmt(change["new"])
-    transition = short(f"{old} → {new}", 39)
-    description = html.escape(f'Build {manifest["build"]}: {change["path"]}, '
-                              f'{fmt(change["old"])} to {fmt(change["new"])} ({change["kind"]})')
-    return (f'<svg xmlns="http://www.w3.org/2000/svg" width="340" height="238" viewBox="0 0 340 238" '
-            f'role="img" aria-label="{description}"><title>{description}</title>'
-            '<style>text{font-family:system-ui,sans-serif}.title{font-size:19px;font-weight:700;fill:#f2f5ef}'
-            '.meta{font-size:13px;fill:#b9cad0}.field{font-size:16px;font-weight:600;fill:#eff2ec}'
-            '.value{font-size:20px;font-weight:700;fill:#73d9d1}.raw{font-size:14px;fill:#eff2ec}'
-            '.foot{font-size:12px;fill:#b9cad0}</style>'
-            '<rect width="340" height="238" rx="12" fill="#111b26"/>'
-            '<rect width="340" height="6" fill="#ffbe68"/>'
-            f'<text x="20" y="43" class="title">{short(context, 29)}</text>'
-            f'<text x="20" y="66" class="meta">Build {manifest["build"]} vs {prior["build"]}</text>'
-            '<line x1="20" x2="320" y1="82" y2="82" stroke="#41515d"/>'
-            f'<text x="20" y="109" class="field">{short(field, 34)}</text>'
-            f'<text x="20" y="143" class="value">{short(summary, 30)}</text>'
-            f'<text x="20" y="169" class="raw">{transition}</text>'
-            '<line x1="20" x2="320" y1="187" y2="187" stroke="#41515d"/>'
-            f'<text x="20" y="213" class="foot">{html.escape(when)} · recorded by SteamTracking</text>'
+    def escaped_short(value: str, limit: int) -> str:
+        return html.escape(value if len(value) <= limit else value[:limit - 1] + "…")
+
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" width="420" height="260" '
+            f'viewBox="0 0 420 260" role="img" aria-label="{html.escape(description, quote=True)}">'
+            f'<title>{html.escape(description)}</title>'
+            '<style>text{font-family:system-ui,sans-serif}.title{font-size:19px;font-weight:700;fill:#f7f3e9}'
+            '.meta{font-size:12px;fill:#bdc6ce}.field{font-size:16px;font-weight:600;fill:#e0e8e9}'
+            '.value{font-size:29px;font-weight:750;fill:#80e3d5}.detail{font-size:15px;fill:#f0c686}'
+            '.foot{font-size:13px;fill:#bdc6ce}</style>'
+            '<rect width="420" height="260" rx="18" fill="#121e2a"/>'
+            '<rect x="0" y="0" width="420" height="7" rx="3" fill="#efbe79"/>'
+            + icon_markup +
+            f'<text x="22" y="43" class="title">{escaped_short(context, 29 if icon else 39)}</text>'
+            f'<text x="22" y="66" class="meta">Build {number} · {html.escape(when)}</text>'
+            '<line x1="22" x2="398" y1="106" y2="106" stroke="#3a4d5d"/>'
+            f'<text x="22" y="137" class="field">{escaped_short(field, 39)}</text>'
+            f'<text x="22" y="177" class="value">{escaped_short(main, 25)}</text>'
+            f'<text x="22" y="200" class="detail">{escaped_short(detail, 47)}</text>'
+            '<line x1="22" x2="398" y1="221" y2="221" stroke="#3a4d5d"/>'
+            f'<text x="22" y="244" class="foot">{escaped_short(footer, 55)}</text>'
             '</svg>')
+
+
+def recent_card(entry: dict) -> str:
+    """Render the same single-change card used by per-build graphics."""
+    return change_card(entry["manifest"], entry["prior"], entry["change"], 1)
 
 
 def recent_card_filename(entry: dict) -> str:
@@ -452,11 +479,10 @@ def gallery_markup(entries: list[dict], prefix: str) -> str:
         manifest, change = entry["manifest"], entry["change"]
         build = manifest["build"]
         image_path = f"{prefix}infographics/recent/{recent_card_filename(entry)}"
-        report_path = f"{prefix}builds/{build}.md"
-        path = html.escape(change["path"])
-        old, new = html.escape(fmt(change["old"])), html.escape(fmt(change["new"]))
+        context, field, summary = readable_change(change)
+        alt = html.escape(f"Build {build}: {context}, {field}, {summary}", quote=True)
         lines += ["<td width=\"20%\">",
-                  f'<a href="{report_path}"><img src="{image_path}" width="185" alt="Build {build}: {path}, {old} to {new}"></a>',
+                  f'<a href="{image_path}"><img src="{image_path}" width="185" alt="{alt}"></a>',
                   "</td>"]
     lines += ["</tr>", "</table>", "", "### What changed, and when", "", "<ol>"]
     for entry in entries:
@@ -469,11 +495,13 @@ def gallery_markup(entries: list[dict], prefix: str) -> str:
         old = "unset" if change["kind"] == "added" else fmt(change["old"])
         new = "removed" if change["kind"] == "removed" else fmt(change["new"])
         report_path = f"{prefix}builds/{build}.md"
+        image_path = f"{prefix}infographics/recent/{recent_card_filename(entry)}"
         source = html.escape(manifest["source"], quote=True)
         lines.append(f'<li><strong>{html.escape(context)} — {html.escape(field)}: '
                      f'{html.escape(summary)}</strong><br>'
                      f'Build {build} · {html.escape(when)} '
-                     f'(<a href="{report_path}">all changes</a>; <a href="{source}">source commit</a>)<br>'
+                     f'(<a href="{image_path}">view card</a>; <a href="{report_path}">all changes</a>; '
+                     f'<a href="{source}">source commit</a>)<br>'
                      f'<code>{html.escape(old)}</code> → <code>{html.escape(new)}</code> · '
                      f'Source field: <code>{path}</code></li>')
     lines += ["</ol>", ""]
@@ -510,8 +538,8 @@ def update_recent_gallery():
              "Dates show when SteamTracking recorded each build (UTC).", "",
              "[See the latest five changes](recent-changes.md) · [Latest report](latest.md) · "
              "[Street Brawl](street-brawl.md)", "",
-             "![Changes in the latest build](infographics/latest.svg)", "",
-             "| Build | Recorded (UTC) | Changes | Report | Graphic |", "|---:|---|---:|---|---|"]
+             "![One change from the latest build](infographics/latest.svg)", "",
+             "| Build | Recorded (UTC) | Changes | Report | Card |", "|---:|---|---:|---|---|"]
     for build in all_builds:
         manifest = json.loads((BUILDS / str(build) / "snapshot.json").read_text(encoding="utf-8"))
         prior_builds = [older for older in all_builds if older < build]

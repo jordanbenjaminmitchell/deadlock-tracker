@@ -4,7 +4,7 @@ See what changed between Deadlock builds, with the exact before and after values
 
 These are changes in extracted files. A value changing in a file does not, on its own, tell us how it felt or worked in a match.
 
-![Latest build infographic](reports/infographics/latest.svg)
+![One change from the latest build](reports/infographics/latest.svg)
 
 **[Latest report](reports/latest.md) · [Recent changes](reports/recent-changes.md) · [Street Brawl](reports/street-brawl.md) · [Build history](reports/index.md)**
 
@@ -16,19 +16,19 @@ Here are the five most recent individual values we found changing in the game da
 <table>
 <tr>
 <td width="20%">
-<a href="reports/builds/6819.md"><img src="reports/infographics/recent/6819-3516b34da949.svg" width="185" alt="Build 6819: abilities.ability_artist_pullbrush.m_flMinStrokeDistance, null to 15.0"></a>
+<a href="reports/infographics/recent/6819-7c3bc775ffd6.svg"><img src="reports/infographics/recent/6819-7c3bc775ffd6.svg" width="185" alt="Build 6819: Violet · Living Ink, Minimum stroke distance, Added 15.0"></a>
 </td>
 <td width="20%">
-<a href="reports/builds/6813.md"><img src="reports/infographics/recent/6813-ef49fb71a42a.svg" width="185" alt="Build 6813: abilities.ability_warden_riot_protocol.m_AutoCastDelayModifier.m_nEnabledStateMask, null to &quot;MODIFIER_STATE_FEAR_IMMUNE&quot;"></a>
+<a href="reports/infographics/recent/6813-4ac8e64d4b98.svg"><img src="reports/infographics/recent/6813-4ac8e64d4b98.svg" width="185" alt="Build 6813: Warden · Last Stand, Auto-cast delay state flags, Fear-immunity flag added"></a>
 </td>
 <td width="20%">
-<a href="reports/builds/6813.md"><img src="reports/infographics/recent/6813-ed1302b8c18d.svg" width="185" alt="Build 6813: abilities.ability_warden_riot_protocol.m_WardenBuffModifier.m_nEnabledStateMask, &quot;MODIFIER_STATE_SINCLAIR_TAX_ULT_ACTIVE | MODIFIER_STATE_SINCLAIR_TAX_KEEP_MODEL_SWAP&quot; to &quot;MODIFIER_STATE_SINCLAIR_TAX_ULT_ACTIVE | MODIFIER_STATE_SINCLAIR_TAX_KEEP_MODEL_SWAP | MODIFIER_STATE_FEAR_IMMUNE&quot;"></a>
+<a href="reports/infographics/recent/6813-31c66ad54ffe.svg"><img src="reports/infographics/recent/6813-31c66ad54ffe.svg" width="185" alt="Build 6813: Warden · Last Stand, Warden buff state flags, Fear-immunity flag added"></a>
 </td>
 <td width="20%">
-<a href="reports/builds/6801.md"><img src="reports/infographics/recent/6801-3422f85cede8.svg" width="185" alt="Build 6801: abilities.ability_artist_bamboogrove.m_BambooModifier.m_ImmuneModifier.m_bDurationReducible, null to false"></a>
+<a href="reports/infographics/recent/6801-3875ea06f36b.svg"><img src="reports/infographics/recent/6801-3875ea06f36b.svg" width="185" alt="Build 6801: Violet · Abstract Landscape, Duration reduction allowed, Now off"></a>
 </td>
 <td width="20%">
-<a href="reports/builds/6801.md"><img src="reports/infographics/recent/6801-d1ed0119b44e.svg" width="185" alt="Build 6801: abilities.ability_artist_homingbrush.m_StackModifier.m_bDurationExtendible, null to true"></a>
+<a href="reports/infographics/recent/6801-645c36996f46.svg"><img src="reports/infographics/recent/6801-645c36996f46.svg" width="185" alt="Build 6801: Violet · Living Ink, Duration extension allowed, Now on"></a>
 </td>
 </tr>
 </table>
@@ -36,19 +36,19 @@ Here are the five most recent individual values we found changing in the game da
 ### What changed, and when
 
 <ol>
-<li><strong>Violet · Living Ink — Minimum stroke distance: Added 15.0</strong><br>Build 6819 · Oct 22, 2026 23:53 UTC (<a href="reports/builds/6819.md">all changes</a>; <a href="https://github.com/SteamTracking/GameTracking-Deadlock/commit/17462b250a0ca80e7f80102f2c83cc3eecff5f12">source commit</a>)<br><code>unset</code> → <code>15.0</code> · Source field: <code>abilities.ability_artist_pullbrush.m_flMinStrokeDistance</code></li>
-<li><strong>Warden · Riot Protocol — Auto-cast delay state flags: Fear-immunity flag added</strong><br>Build 6813 · Oct 22, 2026 04:14 UTC (<a href="reports/builds/6813.md">all changes</a>; <a href="https://github.com/SteamTracking/GameTracking-Deadlock/commit/a94d8b455203f12b176de75a5598dd8e6e8a94d4">source commit</a>)<br><code>unset</code> → <code>&quot;MODIFIER_STATE_FEAR_IMMUNE&quot;</code> · Source field: <code>abilities.ability_warden_riot_protocol.m_AutoCastDelayModifier.m_nEnabledStateMask</code></li>
-<li><strong>Warden · Riot Protocol — Warden buff state flags: Fear-immunity flag added</strong><br>Build 6813 · Oct 22, 2026 04:14 UTC (<a href="reports/builds/6813.md">all changes</a>; <a href="https://github.com/SteamTracking/GameTracking-Deadlock/commit/a94d8b455203f12b176de75a5598dd8e6e8a94d4">source commit</a>)<br><code>&quot;MODIFIER_STATE_SINCLAIR_TAX_ULT_ACTIVE | MODIFIER_STATE_SINCLAIR_TAX_KEEP_MODEL_SWAP&quot;</code> → <code>&quot;MODIFIER_STATE_SINCLAIR_TAX_ULT_ACTIVE | MODIFIER_STATE_SINCLAIR_TAX_KEEP_MODEL_SWAP | MODIFIER_STATE_FEAR_IMMUNE&quot;</code> · Source field: <code>abilities.ability_warden_riot_protocol.m_WardenBuffModifier.m_nEnabledStateMask</code></li>
-<li><strong>Violet · Bamboo Grove — Duration reduction allowed: Now off</strong><br>Build 6801 · Oct 20, 2026 21:02 UTC (<a href="reports/builds/6801.md">all changes</a>; <a href="https://github.com/SteamTracking/GameTracking-Deadlock/commit/37f9aebdc62766aa13748f73309b9b8120549833">source commit</a>)<br><code>unset</code> → <code>false</code> · Source field: <code>abilities.ability_artist_bamboogrove.m_BambooModifier.m_ImmuneModifier.m_bDurationReducible</code></li>
-<li><strong>Violet · Homing Brush — Duration extension allowed: Now on</strong><br>Build 6801 · Oct 20, 2026 21:02 UTC (<a href="reports/builds/6801.md">all changes</a>; <a href="https://github.com/SteamTracking/GameTracking-Deadlock/commit/37f9aebdc62766aa13748f73309b9b8120549833">source commit</a>)<br><code>unset</code> → <code>true</code> · Source field: <code>abilities.ability_artist_homingbrush.m_StackModifier.m_bDurationExtendible</code></li>
+<li><strong>Violet · Living Ink — Minimum stroke distance: Added 15.0</strong><br>Build 6819 · Oct 22, 2026 23:53 UTC (<a href="reports/infographics/recent/6819-7c3bc775ffd6.svg">view card</a>; <a href="reports/builds/6819.md">all changes</a>; <a href="https://github.com/SteamTracking/GameTracking-Deadlock/commit/17462b250a0ca80e7f80102f2c83cc3eecff5f12">source commit</a>)<br><code>unset</code> → <code>15.0</code> · Source field: <code>abilities.ability_artist_pullbrush.m_flMinStrokeDistance</code></li>
+<li><strong>Warden · Last Stand — Auto-cast delay state flags: Fear-immunity flag added</strong><br>Build 6813 · Oct 22, 2026 04:14 UTC (<a href="reports/infographics/recent/6813-4ac8e64d4b98.svg">view card</a>; <a href="reports/builds/6813.md">all changes</a>; <a href="https://github.com/SteamTracking/GameTracking-Deadlock/commit/a94d8b455203f12b176de75a5598dd8e6e8a94d4">source commit</a>)<br><code>unset</code> → <code>&quot;MODIFIER_STATE_FEAR_IMMUNE&quot;</code> · Source field: <code>abilities.ability_warden_riot_protocol.m_AutoCastDelayModifier.m_nEnabledStateMask</code></li>
+<li><strong>Warden · Last Stand — Warden buff state flags: Fear-immunity flag added</strong><br>Build 6813 · Oct 22, 2026 04:14 UTC (<a href="reports/infographics/recent/6813-31c66ad54ffe.svg">view card</a>; <a href="reports/builds/6813.md">all changes</a>; <a href="https://github.com/SteamTracking/GameTracking-Deadlock/commit/a94d8b455203f12b176de75a5598dd8e6e8a94d4">source commit</a>)<br><code>&quot;MODIFIER_STATE_SINCLAIR_TAX_ULT_ACTIVE | MODIFIER_STATE_SINCLAIR_TAX_KEEP_MODEL_SWAP&quot;</code> → <code>&quot;MODIFIER_STATE_SINCLAIR_TAX_ULT_ACTIVE | MODIFIER_STATE_SINCLAIR_TAX_KEEP_MODEL_SWAP | MODIFIER_STATE_FEAR_IMMUNE&quot;</code> · Source field: <code>abilities.ability_warden_riot_protocol.m_WardenBuffModifier.m_nEnabledStateMask</code></li>
+<li><strong>Violet · Abstract Landscape — Duration reduction allowed: Now off</strong><br>Build 6801 · Oct 20, 2026 21:02 UTC (<a href="reports/infographics/recent/6801-3875ea06f36b.svg">view card</a>; <a href="reports/builds/6801.md">all changes</a>; <a href="https://github.com/SteamTracking/GameTracking-Deadlock/commit/37f9aebdc62766aa13748f73309b9b8120549833">source commit</a>)<br><code>unset</code> → <code>false</code> · Source field: <code>abilities.ability_artist_bamboogrove.m_BambooModifier.m_ImmuneModifier.m_bDurationReducible</code></li>
+<li><strong>Violet · Living Ink — Duration extension allowed: Now on</strong><br>Build 6801 · Oct 20, 2026 21:02 UTC (<a href="reports/infographics/recent/6801-645c36996f46.svg">view card</a>; <a href="reports/builds/6801.md">all changes</a>; <a href="https://github.com/SteamTracking/GameTracking-Deadlock/commit/37f9aebdc62766aa13748f73309b9b8120549833">source commit</a>)<br><code>unset</code> → <code>true</code> · Source field: <code>abilities.ability_artist_homingbrush.m_StackModifier.m_bDurationExtendible</code></li>
 </ol>
 <!-- RECENT_CHANGES_END -->
 
 ## How the tracker works
 
-Every three hours, the [GitHub Actions workflow](.github/workflows/track.yml) checks SteamTracking for new Deadlock client builds. It confirms the build number in `steam.inf`, compares six extracted game data files with the previous archived build, and writes a report and data-only SVG graphic. You can also run it manually. If there is no new build, it leaves the archive alone.
+Every three hours, the [GitHub Actions workflow](.github/workflows/track.yml) checks SteamTracking for new Deadlock client builds. It confirms the build number in `steam.inf`, compares six extracted game data files with the previous archived build, and writes a report and a single-change card. If a build has more than one change, its card shows one example and links to the complete report. You can also run it manually. If there is no new build, it leaves the archive alone.
 
-The reports show before and after values, including the numerical difference and percentage where those make sense. Each one links back to the source commit and files. Snapshots live in `data/builds/`, and identical file content is stored once in `data/blobs/`. A download or parsing failure stops the run before it saves a partial build.
+The reports show before and after values, including the numerical difference and percentage where those make sense. Each one links back to the source commit and files. Cards use [verified Deadlock ability icons](assets/icons/SOURCES.md) when there is an exact match; other cards stay text-only. Snapshots live in `data/builds/`, and identical file content is stored once in `data/blobs/`. A download or parsing failure stops the run before it saves a partial build.
 
 ### Local commands
 

@@ -9,4 +9,4 @@ Recorded Oct 17, 2026 at 21:32 UTC. [Read the build report](builds/6794.md) or [
 - **Street Brawl — Buy time, fifth value: 65 → 50 (-15)**<br>
   Source: `generic_data.m_StreetBrawl.m_vecBuyTime[4]` · `65` → `50`
 
-[Browse all builds](index.md) · [See the latest build graphic](infographics/latest.svg)
+[Browse all builds](index.md) · [See the latest change card](infographics/latest.svg)

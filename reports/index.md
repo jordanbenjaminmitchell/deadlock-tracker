@@ -4,9 +4,9 @@ Browse the builds we have archived, newest first. Dates show when SteamTracking 
 
 [See the latest five changes](recent-changes.md) · [Latest report](latest.md) · [Street Brawl](street-brawl.md)
 
-![Changes in the latest build](infographics/latest.svg)
+![One change from the latest build](infographics/latest.svg)
 
-| Build | Recorded (UTC) | Changes | Report | Graphic |
+| Build | Recorded (UTC) | Changes | Report | Card |
 |---:|---|---:|---|---|
 | 6819 | Oct 22, 2026 23:53 | 1 | [Read](builds/6819.md) | [View](infographics/6819.svg) |
 | 6817 | Oct 22, 2026 20:38 | 0 | [Read](builds/6817.md) | [View](infographics/6817.svg) |
