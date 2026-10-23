@@ -46,6 +46,19 @@ class ComparisonTests(unittest.TestCase):
                          {"a": "changed", "b": "changed", "c[1]": "removed", "d": "added"})
         self.assertNotIn("delta", next(c for c in changes if c["path"] == "b"))
 
+    def test_readable_change_preserves_direction_and_does_not_invent_units(self):
+        added = {"path": "abilities.ability_artist_pullbrush.m_flMinStrokeDistance",
+                 "kind": "added", "old": None, "new": 15.0}
+        self.assertEqual(tracker.readable_change(added),
+                         ("Violet · Living Ink", "Minimum stroke distance", "Added 15.0"))
+        changed = {"path": "generic_data.m_StreetBrawl.m_vecBuyTime[4]",
+                   "kind": "changed", "old": 65, "new": 50, "delta": -15}
+        self.assertIn("65 → 50 (-15)", tracker.readable_change(changed)[2])
+        future = {"path": "abilities.ability_unknown_dash.m_flTravelSpeed",
+                  "kind": "changed", "old": 50, "new": 65, "delta": 15}
+        self.assertEqual(tracker.readable_change(future),
+                         ("Unknown dash", "Travel speed", "50 → 65 (+15)"))
+
 
 class PipelineTests(unittest.TestCase):
     def test_discovery_deduplicates_and_orders(self):

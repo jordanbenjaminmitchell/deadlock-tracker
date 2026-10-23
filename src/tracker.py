@@ -321,34 +321,88 @@ def recent_change_entries(limit: int = 5) -> list[dict]:
     return entries
 
 
+ABILITY_LABELS = {
+    "ability_artist_pullbrush": "Violet · Living Ink",
+    "ability_artist_bamboogrove": "Violet · Bamboo Grove",
+    "ability_artist_homingbrush": "Violet · Homing Brush",
+    "ability_warden_riot_protocol": "Warden · Riot Protocol",
+}
+FIELD_LABELS = {
+    "m_flMinStrokeDistance": "Minimum stroke distance",
+    "m_bDurationReducible": "Duration reduction allowed",
+    "m_bDurationExtendible": "Duration extension allowed",
+    "m_nEnabledStateMask": "Enabled state flags",
+}
+
+
+def readable_words(identifier: str) -> str:
+    """Turn an internal identifier into a cautious display label."""
+    identifier = re.sub(r"^m_(?:fl|vec|str|n|b|e)(?=[A-Z])", "", identifier)
+    identifier = identifier.removeprefix("m_").removeprefix("ability_")
+    words = re.sub(r"([a-z0-9])([A-Z])", r"\1 \2", identifier).replace("_", " ").lower()
+    return re.sub(r"\bmin\b", "minimum", re.sub(r"\bmax\b", "maximum", words)).capitalize()
+
+
+def readable_change(change: dict) -> tuple[str, str, str]:
+    """Return context, field label, and a concise, evidence-limited value summary."""
+    parts = change["path"].split(".")
+    if parts[0] == "abilities" and len(parts) > 1:
+        context = ABILITY_LABELS.get(parts[1], readable_words(parts[1]))
+    elif len(parts) > 1:
+        context = readable_words(parts[1])
+    else:
+        context = readable_words(parts[0])
+    field = FIELD_LABELS.get(parts[-1], readable_words(parts[-1]))
+    if parts[-1] == "m_nEnabledStateMask" and len(parts) > 3:
+        parent = {"m_AutoCastDelayModifier": "Auto-cast delay",
+                  "m_WardenBuffModifier": "Warden buff"}.get(parts[-2], readable_words(parts[-2]))
+        field = f"{parent} state flags"
+    if parts[-1] == "m_nEnabledStateMask" and isinstance(change["new"], str):
+        old_flags = set(change["old"].split(" | ")) if isinstance(change["old"], str) else set()
+        added = set(change["new"].split(" | ")) - old_flags
+        if added == {"MODIFIER_STATE_FEAR_IMMUNE"}:
+            return context, field, "Fear-immunity flag added"
+    if change["kind"] == "added":
+        value = "on" if change["new"] is True else "off" if change["new"] is False else fmt(change["new"])
+        return context, field, f"Set to {value}" if isinstance(change["new"], bool) else f"Added {value}"
+    if change["kind"] == "removed":
+        return context, field, "Field removed"
+    if "delta" in change:
+        return context, field, f"{fmt(change['old'])} → {fmt(change['new'])} ({change['delta']:+g})"
+    if isinstance(change["old"], bool) and isinstance(change["new"], bool):
+        return context, field, f"{'On' if change['old'] else 'Off'} → {'on' if change['new'] else 'off'}"
+    return context, field, f"{fmt(change['old'])} → {fmt(change['new'])}"
+
+
 def recent_card(entry: dict) -> str:
     """Render one source-backed field change as a compact data-only SVG."""
     manifest, prior, change = entry["manifest"], entry["prior"], entry["change"]
     stamp = datetime.fromisoformat(manifest["upstream_time"].replace("Z", "+00:00"))
     when = stamp.strftime("%b %d, %Y %H:%M UTC")
-    field = change["path"].split(".")[-1]
+    context, field, summary = readable_change(change)
 
-    def short(value, width=31):
-        rendered = fmt(value)
+    def short(rendered, width=33):
         return html.escape(rendered if len(rendered) <= width else rendered[:width - 1] + "…")
 
-    path_label = html.escape(field if len(field) <= 37 else field[:36] + "…")
-    old, new = short(change["old"]), short(change["new"])
+    old = "unset" if change["kind"] == "added" else fmt(change["old"])
+    new = "removed" if change["kind"] == "removed" else fmt(change["new"])
+    transition = short(f"{old} → {new}", 39)
     description = html.escape(f'Build {manifest["build"]}: {change["path"]}, '
                               f'{fmt(change["old"])} to {fmt(change["new"])} ({change["kind"]})')
     return (f'<svg xmlns="http://www.w3.org/2000/svg" width="340" height="238" viewBox="0 0 340 238" '
             f'role="img" aria-label="{description}"><title>{description}</title>'
-            '<style>text{font-family:system-ui,sans-serif}.title{font-size:26px;font-weight:700;fill:#f2f5ef}'
-            '.meta{font-size:13px;fill:#b9cad0}.field{font-size:15px;font-weight:600;fill:#eff2ec}'
-            '.value{font-size:17px;fill:#73d9d1}.foot{font-size:12px;fill:#b9cad0}</style>'
+            '<style>text{font-family:system-ui,sans-serif}.title{font-size:19px;font-weight:700;fill:#f2f5ef}'
+            '.meta{font-size:13px;fill:#b9cad0}.field{font-size:16px;font-weight:600;fill:#eff2ec}'
+            '.value{font-size:20px;font-weight:700;fill:#73d9d1}.raw{font-size:14px;fill:#eff2ec}'
+            '.foot{font-size:12px;fill:#b9cad0}</style>'
             '<rect width="340" height="238" rx="12" fill="#111b26"/>'
             '<rect width="340" height="6" fill="#ffbe68"/>'
-            f'<text x="20" y="44" class="title">BUILD {manifest["build"]}</text>'
-            f'<text x="20" y="68" class="meta">vs {prior["build"]} · {html.escape(change["kind"])}</text>'
+            f'<text x="20" y="43" class="title">{short(context, 29)}</text>'
+            f'<text x="20" y="66" class="meta">Build {manifest["build"]} vs {prior["build"]}</text>'
             '<line x1="20" x2="320" y1="82" y2="82" stroke="#41515d"/>'
-            f'<text x="20" y="108" class="field">{path_label}</text>'
-            f'<text x="20" y="139" class="meta">FROM  {old}</text>'
-            f'<text x="20" y="169" class="value">TO  {new}</text>'
+            f'<text x="20" y="109" class="field">{short(field, 34)}</text>'
+            f'<text x="20" y="143" class="value">{short(summary, 30)}</text>'
+            f'<text x="20" y="169" class="raw">{transition}</text>'
             '<line x1="20" x2="320" y1="187" y2="187" stroke="#41515d"/>'
             f'<text x="20" y="213" class="foot">{html.escape(when)} · upstream commit</text>'
             '</svg>')
@@ -358,6 +412,7 @@ def gallery_markup(entries: list[dict], prefix: str) -> str:
     lines = ["## Latest verified field changes", "",
              "Five most recent scalar changes in tracked VData. Times are upstream commit timestamps in UTC; "
              "changes within one build share a timestamp and are ordered by field path. "
+             "Values keep their source units; no unit conversion is inferred. "
              "Each build report contains its full set of changes.", ""]
     if not entries:
         return "\n".join(lines + ["No comparable field changes are archived yet.", ""])
@@ -379,14 +434,18 @@ def gallery_markup(entries: list[dict], prefix: str) -> str:
         build = manifest["build"]
         stamp = datetime.fromisoformat(manifest["upstream_time"].replace("Z", "+00:00"))
         when = stamp.strftime("%b %d, %Y %H:%M UTC")
+        context, field, summary = readable_change(change)
         path = html.escape(change["path"])
-        old, new = html.escape(fmt(change["old"])), html.escape(fmt(change["new"]))
+        old = "unset" if change["kind"] == "added" else fmt(change["old"])
+        new = "removed" if change["kind"] == "removed" else fmt(change["new"])
         report_path = f"{prefix}builds/{build}.md"
         source = html.escape(manifest["source"], quote=True)
-        lines.append(f'<li><strong>Build {build} · {html.escape(when)}</strong> '
+        lines.append(f'<li><strong>{html.escape(context)} — {html.escape(field)}: '
+                     f'{html.escape(summary)}</strong><br>'
+                     f'Build {build} · {html.escape(when)} '
                      f'(<a href="{report_path}">full report</a>; <a href="{source}">upstream commit</a>)<br>'
-                     f'<code>{path}</code>: <code>{old}</code> → <code>{new}</code> '
-                     f'({html.escape(change["kind"])})</li>')
+                     f'<code>{html.escape(old)}</code> → <code>{html.escape(new)}</code> · '
+                     f'Source field: <code>{path}</code></li>')
     lines += ["</ol>", ""]
     return "\n".join(lines)
 
