@@ -297,15 +297,122 @@ def update_summaries(manifest: dict, changes: list[dict]):
         lines.append("No Street Brawl field change in the latest comparison.")
     lines += ["", "[Browse all build reports](builds/) · [Latest infographic](infographics/" + str(number) + ".svg)", ""]
     write_atomic(REPORTS / "street-brawl.md", "\n".join(lines).encode("utf-8"))
+    write_atomic(DATA / "state.json", json_bytes({"latest_build": number, "latest_commit": manifest["commit"]}))
+
+
+def recent_change_entries(limit: int = 5) -> list[dict]:
+    """Select the newest scalar VData changes; field paths break ties within a build."""
+    manifests = [json.loads(path.read_text(encoding="utf-8")) for path in
+                 sorted(BUILDS.glob("*/snapshot.json"), key=lambda path: int(path.parent.name))]
+    comparisons = [(manifests[position], manifests[position - 1])
+                   for position in range(1, len(manifests))]
+    comparisons.sort(key=lambda pair: (pair[0]["upstream_time"], pair[0]["build"]), reverse=True)
+    entries = []
+    for manifest, prior in comparisons:
+        changes = diff_manifests(prior, manifest)
+        scalar = (change for change in changes
+                  if not isinstance(change["old"], (dict, list))
+                  and not isinstance(change["new"], (dict, list))
+                  and "._include[" not in change["path"])
+        for change in sorted(scalar, key=lambda item: item["path"]):
+            entries.append({"manifest": manifest, "prior": prior, "change": change})
+            if len(entries) == limit:
+                return entries
+    return entries
+
+
+def recent_card(entry: dict) -> str:
+    """Render one source-backed field change as a compact data-only SVG."""
+    manifest, prior, change = entry["manifest"], entry["prior"], entry["change"]
+    stamp = datetime.fromisoformat(manifest["upstream_time"].replace("Z", "+00:00"))
+    when = stamp.strftime("%b %d, %Y %H:%M UTC")
+    field = change["path"].split(".")[-1]
+
+    def short(value, width=31):
+        rendered = fmt(value)
+        return html.escape(rendered if len(rendered) <= width else rendered[:width - 1] + "…")
+
+    path_label = html.escape(field if len(field) <= 37 else field[:36] + "…")
+    old, new = short(change["old"]), short(change["new"])
+    description = html.escape(f'Build {manifest["build"]}: {change["path"]}, '
+                              f'{fmt(change["old"])} to {fmt(change["new"])} ({change["kind"]})')
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" width="340" height="238" viewBox="0 0 340 238" '
+            f'role="img" aria-label="{description}"><title>{description}</title>'
+            '<style>text{font-family:system-ui,sans-serif}.title{font-size:26px;font-weight:700;fill:#f2f5ef}'
+            '.meta{font-size:13px;fill:#b9cad0}.field{font-size:15px;font-weight:600;fill:#eff2ec}'
+            '.value{font-size:17px;fill:#73d9d1}.foot{font-size:12px;fill:#b9cad0}</style>'
+            '<rect width="340" height="238" rx="12" fill="#111b26"/>'
+            '<rect width="340" height="6" fill="#ffbe68"/>'
+            f'<text x="20" y="44" class="title">BUILD {manifest["build"]}</text>'
+            f'<text x="20" y="68" class="meta">vs {prior["build"]} · {html.escape(change["kind"])}</text>'
+            '<line x1="20" x2="320" y1="82" y2="82" stroke="#41515d"/>'
+            f'<text x="20" y="108" class="field">{path_label}</text>'
+            f'<text x="20" y="139" class="meta">FROM  {old}</text>'
+            f'<text x="20" y="169" class="value">TO  {new}</text>'
+            '<line x1="20" x2="320" y1="187" y2="187" stroke="#41515d"/>'
+            f'<text x="20" y="213" class="foot">{html.escape(when)} · upstream commit</text>'
+            '</svg>')
+
+
+def gallery_markup(entries: list[dict], prefix: str) -> str:
+    lines = ["## Latest verified field changes", "",
+             "Five most recent scalar changes in tracked VData. Times are upstream commit timestamps in UTC; "
+             "changes within one build share a timestamp and are ordered by field path. "
+             "Each build report contains its full set of changes.", ""]
+    if not entries:
+        return "\n".join(lines + ["No comparable field changes are archived yet.", ""])
+    lines += ["<table>", "<tr>"]
+    for entry in entries:
+        manifest, change = entry["manifest"], entry["change"]
+        build = manifest["build"]
+        stamp = datetime.fromisoformat(manifest["upstream_time"].replace("Z", "+00:00"))
+        when = stamp.strftime("%b %d, %Y %H:%M UTC")
+        card = hashlib.sha256(change["path"].encode("utf-8")).hexdigest()[:12]
+        image_path = f"{prefix}infographics/recent/{build}-{card}.svg"
+        report_path = f"{prefix}builds/{build}.md"
+        path = html.escape(change["path"])
+        old, new = html.escape(fmt(change["old"])), html.escape(fmt(change["new"]))
+        lines += ["<td width=\"20%\" valign=\"top\">",
+                  f'<a href="{report_path}"><img src="{image_path}" width="220" alt="Build {build}: {path}, {old} to {new}"></a><br>',
+                  f'<strong><a href="{report_path}">Build {build}</a></strong><br>',
+                  f'<small>{html.escape(when)} · <a href="{html.escape(manifest["source"], quote=True)}">upstream commit</a></small><br>',
+                  f'<code>{path}</code><br>',
+                  f'<code>{old}</code> → <code>{new}</code> ({html.escape(change["kind"])})',
+                  "</td>"]
+    lines += ["</tr>", "</table>", ""]
+    return "\n".join(lines)
+
+
+def update_recent_gallery():
+    """Refresh the README landing gallery and the browsable report index offline."""
+    entries = recent_change_entries()
+    for entry in entries:
+        build, change = entry["manifest"]["build"], entry["change"]
+        card = hashlib.sha256(change["path"].encode("utf-8")).hexdigest()[:12]
+        write_atomic(REPORTS / "infographics" / "recent" / f"{build}-{card}.svg",
+                     recent_card(entry).encode("utf-8"))
+    write_atomic(REPORTS / "recent-changes.md", gallery_markup(entries, "").encode("utf-8"))
+
+    readme_path = ROOT / "README.md"
+    readme = readme_path.read_text(encoding="utf-8")
+    start, end = "<!-- RECENT_CHANGES_START -->", "<!-- RECENT_CHANGES_END -->"
+    if readme.count(start) != 1 or readme.count(end) != 1:
+        raise SourceError("README gallery markers are missing or duplicated")
+    before, remainder = readme.split(start, 1)
+    _, after = remainder.split(end, 1)
+    readme = before + start + "\n" + gallery_markup(entries, "reports/") + end + after
+    write_atomic(readme_path, readme.encode("utf-8"))
+
     all_builds = sorted((int(p.parent.name) for p in BUILDS.glob("*/snapshot.json")), reverse=True)
     index = ["# Deadlock build history", "", "Generated from archived SteamTracking VData snapshots.", "",
+             "[View the latest five field changes](recent-changes.md) · [Latest report](latest.md) · "
+             "[Street Brawl](street-brawl.md)", "",
              "![Latest build changes](infographics/latest.svg)", "",
-             "[Latest report](latest.md) · [Street Brawl](street-brawl.md)", "", "| Build | Report | Infographic |", "|---:|---|---|"]
+             "| Build | Report | Infographic |", "|---:|---|---|"]
     for build in all_builds:
         index.append(f"| {build} | [Exact changes](builds/{build}.md) | [View](infographics/{build}.svg) |")
     index.append("")
     write_atomic(REPORTS / "index.md", "\n".join(index).encode("utf-8"))
-    write_atomic(DATA / "state.json", json_bytes({"latest_build": number, "latest_commit": manifest["commit"]}))
 
 
 def run(max_builds: int | None = None):
@@ -338,14 +445,19 @@ def run(max_builds: int | None = None):
         update_summaries(manifest, changes)
         print(f"Archived {number}: {len(changes)} exact data changes", flush=True)
         last = manifest
+    update_recent_gallery()
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--max-builds", type=int, default=None, help="Bound work for local smoke runs")
+    parser.add_argument("--refresh-gallery", action="store_true", help="Rebuild the recent-change gallery from archived data without network access")
     args = parser.parse_args()
     try:
-        run(args.max_builds)
+        if args.refresh_gallery:
+            update_recent_gallery()
+        else:
+            run(args.max_builds)
     except SourceError as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         sys.exit(1)

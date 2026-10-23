@@ -2,9 +2,9 @@
 
 Generated from archived SteamTracking VData snapshots.
 
-![Latest build changes](infographics/latest.svg)
+[View the latest five field changes](recent-changes.md) · [Latest report](latest.md) · [Street Brawl](street-brawl.md)
 
-[Latest report](latest.md) · [Street Brawl](street-brawl.md)
+![Latest build changes](infographics/latest.svg)
 
 | Build | Report | Infographic |
 |---:|---|---|
