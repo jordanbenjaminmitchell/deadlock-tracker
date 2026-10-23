@@ -197,56 +197,56 @@ def fmt(value):
 
 def report(manifest: dict, prior: dict | None, changes: list[dict], posts: list[dict]):
     number = manifest["build"]
-    prior_text = f"build {prior['build']}" if prior else "no archived baseline"
-    counts = Counter(change["category"] for change in changes)
+    prior_text = f"build {prior['build']}" if prior else "the first archived snapshot"
+    stamp = datetime.fromisoformat(manifest["upstream_time"].replace("Z", "+00:00"))
+    when = stamp.strftime("%b %d, %Y at %H:%M UTC")
     lines = [f"# Deadlock build {number}", "",
-             f"- Source: [SteamTracking commit]({manifest['source']}) (decompiled game files)",
-             f"- Client version: `{number}`; source revision: `{manifest['source_revision']}`",
-             f"- Upstream commit time: {manifest['upstream_time']}",
-             f"- Compared with: {prior_text}",
-             "- Verification: values below are confirmed in extracted VData; gameplay effects require separate interpretation.",
-             "- Scope: six tracked VData files. Executable, map geometry, and other files may change independently.", ""]
-    if not prior:
-        lines += ["This is the first snapshot; there are no old values to compare.", ""]
-    elif not changes:
-        lines += ["No values changed in the tracked VData files. This does not establish that gameplay code was unchanged.", ""]
-    else:
-        lines += [f"**{len(changes)} exact data changes** across {sum(value > 0 for value in counts.values())} categories.", ""]
+             f"SteamTracking recorded this build on **{when}**. "
+             + (f"Compared with build {prior['build']}, " if prior else "This is the first archived build, so ")
+             + (f"we found **{len(changes)} changed {'value' if len(changes) == 1 else 'values'}** "
+                "in the six game data files we track." if prior else "there are no earlier values to compare."), ""]
+    if prior and not changes:
+        lines += ["No tracked value changed in this comparison. Other game files or code may still have changed.", ""]
+    lines += ["These are changes in extracted game data. They do not, by themselves, confirm what players experienced in a match.", ""]
     sections = [("Street Brawl", "street-brawl"), ("Heroes", "heroes"),
                 ("Abilities and items", "abilities"), ("Map and NPC data", "map-and-npcs"),
                 ("Modifiers", "modifiers"), ("Other data", "other-data")]
     for title, key in sections:
         selected = [change for change in changes if change["category"] == key]
-        lines += [f"## {title} ({len(selected)})", ""]
         if not selected:
-            lines += ["No confirmed value change in tracked fields.", ""]
             continue
+        lines += [f"## {title} ({len(selected)})", ""]
         for change in selected:
-            tail = ""
-            if "delta" in change:
-                tail = f" (Δ {change['delta']:+g}"
-                if "percent" in change:
-                    tail += f", {change['percent']:+.2f}%"
-                tail += ")"
-            lines.append(f"- `{change['path']}`: `{fmt(change['old'])}` → `{fmt(change['new'])}`{tail} [{change['kind']}]")
+            context, field, summary = readable_change(change)
+            percent = f" · {change['percent']:+.2f}%" if "percent" in change else ""
+            lines.append(f"- **{context} — {field}: {summary}{percent}**<br>")
+            lines.append(f"  Source: `{change['path']}` · `{fmt(change['old'])}` → `{fmt(change['new'])}`")
         lines.append("")
     ignored = {"game/citadel/steam.inf", *(f"{SCRIPTS}/{name}.vdata" for name in FILES)}
     other_files = [item for item in manifest.get("changed_files", [])
                    if item["path"] not in ignored and not item["path"].startswith("manifests/")]
-    lines += [f"## Other upstream file changes ({len(other_files)})", "",
-              "File-level evidence only. Gameplay effects are unknown unless a tracked value above confirms them.", ""]
-    lines += [f"- `{item['status']}` `{item['path']}`" for item in other_files[:40]] or ["None listed in the upstream commit."]
-    if len(other_files) > 40:
-        lines.append(f"- … and {len(other_files) - 40} more; see the upstream commit.")
-    lines.append("")
-    lines += ["## Community discussion", ""]
-    lines += [f"- [{post['title']}]({post['url']}) (unverified community discussion)" for post in posts] or ["No exact-build discussion retrieved."]
-    lines += ["", "## Data and provenance", ""]
+    if other_files:
+        lines += [f"## Other files in the same upstream commit ({len(other_files)})", "",
+                  "These file names show what else changed; they do not tell us how gameplay changed.", ""]
+        lines += [f"- `{item['status']}` `{item['path']}`" for item in other_files[:40]]
+        if len(other_files) > 40:
+            lines.append(f"- … and {len(other_files) - 40} more in the upstream commit.")
+        lines.append("")
+    if posts:
+        lines += ["## Community discussion", "",
+                  "These posts may add context, but they are not evidence for the values above.", ""]
+        lines += [f"- [{post['title']}]({post['url']})" for post in posts]
+        lines.append("")
+    lines += ["## Check the source", "",
+              f"[See the SteamTracking commit]({manifest['source']}) · "
+              f"Client build `{number}` · Source revision `{manifest['source_revision']}` · "
+              + (f"Compared with {prior_text}" if prior else "First archived build"), "",
+              "We compare six extracted VData files. Code, map geometry, assets, and other files are outside this comparison.", ""]
     for name, file in manifest["files"].items():
         lines.append(f"- `{name}.vdata`: [upstream file]({file['url']}), normalized SHA-256 `{file['sha256']}`")
-    lines += ["", "The normalized snapshots are stored in `data/blobs/` and indexed by `data/builds/<build>/snapshot.json`.", ""]
+    lines += ["", f"The archived snapshot is [`data/builds/{number}/snapshot.json`](../../data/builds/{number}/snapshot.json); "
+              "its normalized files are in `data/blobs/`.", ""]
     write_atomic(REPORTS / "builds" / f"{number}.md", "\n".join(lines).encode("utf-8"))
-    return counts
 
 
 def infographic(manifest: dict, prior: dict | None, changes: list[dict]):
@@ -265,7 +265,7 @@ def infographic(manifest: dict, prior: dict | None, changes: list[dict]):
                     f'<rect x="220" y="{y-19}" width="{width}" height="23" rx="4" fill="{ "#ffbe68" if key == "street-brawl" else "#73d9d1" }"/>'
                     f'<text x="690" y="{y}" class="count">{counts[key]}</text>')
     old = prior["build"] if prior else "baseline"
-    note = "Exact VData field changes; no gameplay effect inferred."
+    note = "From extracted game data · Open the report for exact values"
     svg = (f'<svg xmlns="http://www.w3.org/2000/svg" width="760" height="520" viewBox="0 0 760 520" role="img" '
            f'aria-label="Deadlock build {number} change summary"><style>'
            '.title{font:700 36px system-ui;fill:#f2f5ef}.sub{font:17px system-ui;fill:#b9cad0}'
@@ -273,8 +273,8 @@ def infographic(manifest: dict, prior: dict | None, changes: list[dict]):
            '.foot{font:14px system-ui;fill:#aabdc4}</style>'
            '<rect width="760" height="520" fill="#111b26"/>'
            '<rect x="0" width="760" height="8" fill="#ffbe68"/>'
-           f'<text x="38" y="67" class="title">BUILD {number}</text>'
-           f'<text x="38" y="101" class="sub">vs {old} · {len(changes)} confirmed data changes</text>'
+           f'<text x="38" y="67" class="title">Deadlock build {number}</text>'
+           f'<text x="38" y="101" class="sub">Compared with {old} · {len(changes)} changed values</text>'
            '<line x1="38" x2="722" y1="125" y2="125" stroke="#41515d"/>'
            + "".join(bars) +
            f'<text x="38" y="490" class="foot">{html.escape(note)}</text></svg>')
@@ -284,18 +284,38 @@ def infographic(manifest: dict, prior: dict | None, changes: list[dict]):
 def update_summaries(manifest: dict, changes: list[dict]):
     number = manifest["build"]
     path = REPORTS / "builds" / f"{number}.md"
-    write_atomic(REPORTS / "latest.md", path.read_bytes())
+    write_atomic(REPORTS / "latest.md",
+                 path.read_text(encoding="utf-8").replace("../../data/", "../data/").encode("utf-8"))
     write_atomic(REPORTS / "infographics" / "latest.svg",
                  (REPORTS / "infographics" / f"{number}.svg").read_bytes())
     brawl = [change for change in changes if change["category"] == "street-brawl"]
-    lines = ["# Street Brawl tracker", "", f"Latest archived build: [{number}](builds/{number}.md).", ""]
-    if brawl:
-        lines += ["## Latest confirmed changes", ""]
-        for change in brawl:
-            lines.append(f"- `{change['path']}`: `{fmt(change['old'])}` → `{fmt(change['new'])}`")
+    lines = ["# Street Brawl changes", "",
+             f"The latest archived build is [{number}](builds/{number}.md). "
+             + (f"It has {len(brawl)} confirmed Street Brawl {'change' if len(brawl) == 1 else 'changes'}."
+                if brawl else "It has no confirmed Street Brawl value change."), ""]
+    latest_brawl = None
+    manifests = [json.loads(path.read_text(encoding="utf-8")) for path in
+                 sorted(BUILDS.glob("*/snapshot.json"), key=lambda path: int(path.parent.name))]
+    for position in range(len(manifests) - 1, 0, -1):
+        found = [change for change in diff_manifests(manifests[position - 1], manifests[position])
+                 if change["category"] == "street-brawl"]
+        if found:
+            latest_brawl = (manifests[position], found)
+            break
+    if latest_brawl:
+        source, found = latest_brawl
+        stamp = datetime.fromisoformat(source["upstream_time"].replace("Z", "+00:00"))
+        lines += [f"## Most recent confirmed change: build {source['build']}", "",
+                  f"Recorded {stamp.strftime('%b %d, %Y at %H:%M UTC')}. "
+                  f"[Read the build report](builds/{source['build']}.md) or "
+                  f"[check the source commit]({source['source']}).", ""]
+        for change in found:
+            context, field, summary = readable_change(change)
+            lines += [f"- **{context} — {field}: {summary}**<br>",
+                      f"  Source: `{change['path']}` · `{fmt(change['old'])}` → `{fmt(change['new'])}`"]
     else:
-        lines.append("No Street Brawl field change in the latest comparison.")
-    lines += ["", "[Browse all build reports](builds/) · [Latest infographic](infographics/" + str(number) + ".svg)", ""]
+        lines.append("No Street Brawl value change appears in the archived comparisons yet.")
+    lines += ["", "[Browse all builds](index.md) · [See the latest build graphic](infographics/latest.svg)", ""]
     write_atomic(REPORTS / "street-brawl.md", "\n".join(lines).encode("utf-8"))
     write_atomic(DATA / "state.json", json_bytes({"latest_build": number, "latest_commit": manifest["commit"]}))
 
@@ -340,7 +360,9 @@ def readable_words(identifier: str) -> str:
     identifier = re.sub(r"^m_(?:fl|vec|str|n|b|e)(?=[A-Z])", "", identifier)
     identifier = identifier.removeprefix("m_").removeprefix("ability_")
     words = re.sub(r"([a-z0-9])([A-Z])", r"\1 \2", identifier).replace("_", " ").lower()
-    return re.sub(r"\bmin\b", "minimum", re.sub(r"\bmax\b", "maximum", words)).capitalize()
+    words = re.sub(r"\bmin\b", "minimum", re.sub(r"\bmax\b", "maximum", words))
+    words = re.sub(r"\bui\b", "UI", words)
+    return words[:1].upper() + words[1:]
 
 
 def readable_change(change: dict) -> tuple[str, str, str]:
@@ -349,10 +371,12 @@ def readable_change(change: dict) -> tuple[str, str, str]:
     if parts[0] == "abilities" and len(parts) > 1:
         context = ABILITY_LABELS.get(parts[1], readable_words(parts[1]))
     elif len(parts) > 1:
-        context = readable_words(parts[1])
+        context = "Street Brawl" if parts[1] == "m_StreetBrawl" else readable_words(parts[1])
     else:
         context = readable_words(parts[0])
     field = FIELD_LABELS.get(parts[-1], readable_words(parts[-1]))
+    if change["path"] == "generic_data.m_StreetBrawl.m_vecBuyTime[4]":
+        field = "Buy time, fifth value"
     if parts[-1] == "m_nEnabledStateMask" and len(parts) > 3:
         parent = {"m_AutoCastDelayModifier": "Auto-cast delay",
                   "m_WardenBuffModifier": "Warden buff"}.get(parts[-2], readable_words(parts[-2]))
@@ -363,8 +387,10 @@ def readable_change(change: dict) -> tuple[str, str, str]:
         if added == {"MODIFIER_STATE_FEAR_IMMUNE"}:
             return context, field, "Fear-immunity flag added"
     if change["kind"] == "added":
+        if isinstance(change["new"], (dict, list)):
+            return context, field, "Structured value added"
         value = "on" if change["new"] is True else "off" if change["new"] is False else fmt(change["new"])
-        return context, field, f"Set to {value}" if isinstance(change["new"], bool) else f"Added {value}"
+        return context, field, f"Now {value}" if isinstance(change["new"], bool) else f"Added {value}"
     if change["kind"] == "removed":
         return context, field, "Field removed"
     if "delta" in change:
@@ -404,7 +430,7 @@ def recent_card(entry: dict) -> str:
             f'<text x="20" y="143" class="value">{short(summary, 30)}</text>'
             f'<text x="20" y="169" class="raw">{transition}</text>'
             '<line x1="20" x2="320" y1="187" y2="187" stroke="#41515d"/>'
-            f'<text x="20" y="213" class="foot">{html.escape(when)} · upstream commit</text>'
+            f'<text x="20" y="213" class="foot">{html.escape(when)} · recorded by SteamTracking</text>'
             '</svg>')
 
 
@@ -414,11 +440,11 @@ def recent_card_filename(entry: dict) -> str:
 
 
 def gallery_markup(entries: list[dict], prefix: str) -> str:
-    lines = ["## Latest verified field changes", "",
-             "Five most recent scalar changes in tracked VData. Times are upstream commit timestamps in UTC; "
-             "changes within one build share a timestamp and are ordered by field path. "
-             "Values keep their source units; no unit conversion is inferred. "
-             "Each build report contains its full set of changes.", ""]
+    lines = ["## The latest five changes", "",
+             "Here are the five most recent individual values we found changing in the game data we track. "
+             "The time on each card is when SteamTracking recorded the build (UTC). "
+             "Values use the source's units; we do not guess at missing units. "
+             "Open a build report to see every change in that build.", ""]
     if not entries:
         return "\n".join(lines + ["No comparable field changes are archived yet.", ""])
     lines += ["<table>", "<tr>"]
@@ -432,7 +458,7 @@ def gallery_markup(entries: list[dict], prefix: str) -> str:
         lines += ["<td width=\"20%\">",
                   f'<a href="{report_path}"><img src="{image_path}" width="185" alt="Build {build}: {path}, {old} to {new}"></a>',
                   "</td>"]
-    lines += ["</tr>", "</table>", "", "### Exact changes and times", "", "<ol>"]
+    lines += ["</tr>", "</table>", "", "### What changed, and when", "", "<ol>"]
     for entry in entries:
         manifest, change = entry["manifest"], entry["change"]
         build = manifest["build"]
@@ -447,7 +473,7 @@ def gallery_markup(entries: list[dict], prefix: str) -> str:
         lines.append(f'<li><strong>{html.escape(context)} — {html.escape(field)}: '
                      f'{html.escape(summary)}</strong><br>'
                      f'Build {build} · {html.escape(when)} '
-                     f'(<a href="{report_path}">full report</a>; <a href="{source}">upstream commit</a>)<br>'
+                     f'(<a href="{report_path}">all changes</a>; <a href="{source}">source commit</a>)<br>'
                      f'<code>{html.escape(old)}</code> → <code>{html.escape(new)}</code> · '
                      f'Source field: <code>{path}</code></li>')
     lines += ["</ol>", ""]
@@ -480,15 +506,37 @@ def update_recent_gallery():
     write_atomic(readme_path, readme.encode("utf-8"))
 
     all_builds = sorted((int(p.parent.name) for p in BUILDS.glob("*/snapshot.json")), reverse=True)
-    index = ["# Deadlock build history", "", "Generated from archived SteamTracking VData snapshots.", "",
-             "[View the latest five field changes](recent-changes.md) · [Latest report](latest.md) · "
+    index = ["# Deadlock build history", "", "Browse the builds we have archived, newest first. "
+             "Dates show when SteamTracking recorded each build (UTC).", "",
+             "[See the latest five changes](recent-changes.md) · [Latest report](latest.md) · "
              "[Street Brawl](street-brawl.md)", "",
-             "![Latest build changes](infographics/latest.svg)", "",
-             "| Build | Report | Infographic |", "|---:|---|---|"]
+             "![Changes in the latest build](infographics/latest.svg)", "",
+             "| Build | Recorded (UTC) | Changes | Report | Graphic |", "|---:|---|---:|---|---|"]
     for build in all_builds:
-        index.append(f"| {build} | [Exact changes](builds/{build}.md) | [View](infographics/{build}.svg) |")
+        manifest = json.loads((BUILDS / str(build) / "snapshot.json").read_text(encoding="utf-8"))
+        prior_builds = [older for older in all_builds if older < build]
+        count = "Baseline" if not prior_builds else str(len(diff_manifests(
+            json.loads((BUILDS / str(max(prior_builds)) / "snapshot.json").read_text(encoding="utf-8")), manifest)))
+        stamp = datetime.fromisoformat(manifest["upstream_time"].replace("Z", "+00:00"))
+        index.append(f"| {build} | {stamp.strftime('%b %d, %Y %H:%M')} | {count} | "
+                     f"[Read](builds/{build}.md) | [View](infographics/{build}.svg) |")
     index.append("")
     write_atomic(REPORTS / "index.md", "\n".join(index).encode("utf-8"))
+
+
+def refresh_presentation():
+    """Rewrite public pages and graphics from the existing archive, without fetching data."""
+    manifests = [json.loads(path.read_text(encoding="utf-8")) for path in
+                 sorted(BUILDS.glob("*/snapshot.json"), key=lambda path: int(path.parent.name))]
+    for position, manifest in enumerate(manifests):
+        prior = manifests[position - 1] if position else None
+        changes = diff_manifests(prior, manifest)
+        report(manifest, prior, changes, [])
+        infographic(manifest, prior, changes)
+    if manifests:
+        latest = manifests[-1]
+        update_summaries(latest, diff_manifests(manifests[-2], latest) if len(manifests) > 1 else [])
+    update_recent_gallery()
 
 
 def run(max_builds: int | None = None):
@@ -528,9 +576,12 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--max-builds", type=int, default=None, help="Bound work for local smoke runs")
     parser.add_argument("--refresh-gallery", action="store_true", help="Rebuild the recent-change gallery from archived data without network access")
+    parser.add_argument("--refresh-presentation", action="store_true", help="Rebuild all public reports and graphics from archived data without network access")
     args = parser.parse_args()
     try:
-        if args.refresh_gallery:
+        if args.refresh_presentation:
+            refresh_presentation()
+        elif args.refresh_gallery:
             update_recent_gallery()
         else:
             run(args.max_builds)

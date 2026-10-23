@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 import sys
 
-from tracker import BUILDS, diff_manifests, fmt
+from tracker import BUILDS, diff_manifests, readable_change
 
 
 def main():
@@ -30,10 +30,10 @@ def main():
                          ensure_ascii=False, indent=2))
     else:
         print(f"# Build {args.old} → {args.new}\n")
-        print(f"{len(changes)} exact changes in tracked VData.\n")
+        print(f"{len(changes)} changed {'value' if len(changes) == 1 else 'values'} in the game data we track.\n")
         for change in changes:
-            delta = f" (Δ {change['delta']:+g})" if "delta" in change else ""
-            print(f"- [{change['category']}] `{change['path']}`: `{fmt(change['old'])}` → `{fmt(change['new'])}`{delta}")
+            context, field, summary = readable_change(change)
+            print(f"- {context} — {field}: {summary}\n  Source field: {change['path']}")
 
 
 if __name__ == "__main__":

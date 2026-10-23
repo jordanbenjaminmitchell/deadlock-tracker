@@ -61,6 +61,22 @@ class ComparisonTests(unittest.TestCase):
 
 
 class PipelineTests(unittest.TestCase):
+    def test_report_leads_with_readable_change_and_keeps_source(self):
+        change = {"path": "generic_data.m_StreetBrawl.m_vecBuyTime[4]",
+                  "category": "street-brawl", "kind": "changed",
+                  "old": 65, "new": 50, "delta": -15, "percent": -23.076923}
+        manifest = {"build": 6794, "upstream_time": "2026-10-17T21:32:00Z",
+                    "source": "https://example.test/commit", "source_revision": "123",
+                    "files": {}, "changed_files": []}
+        with tempfile.TemporaryDirectory(dir=Path(__file__).parent) as folder:
+            with patch.object(tracker, "REPORTS", Path(folder)):
+                tracker.report(manifest, {"build": 6793}, [change], [])
+                page = (Path(folder) / "builds" / "6794.md").read_text(encoding="utf-8")
+        self.assertIn("Street Brawl — Buy time, fifth value: 65 → 50 (-15) · -23.08%", page)
+        self.assertIn("Source: `generic_data.m_StreetBrawl.m_vecBuyTime[4]`", page)
+        self.assertNotIn("## Heroes", page)
+        self.assertNotIn("No exact-build discussion retrieved", page)
+
     def test_discovery_deduplicates_and_orders(self):
         def row(number, sha):
             return {"sha": sha, "commit": {"message": f"{number} | files",
