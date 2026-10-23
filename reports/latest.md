@@ -1,0 +1,58 @@
+# Deadlock build 6819
+
+- Source: [SteamTracking commit](https://github.com/SteamTracking/GameTracking-Deadlock/commit/17462b250a0ca80e7f80102f2c83cc3eecff5f12) (decompiled game files)
+- Client version: `6819`; source revision: `11162696`
+- Upstream commit time: 2026-10-22T23:53:52Z
+- Compared with: build 6817
+- Verification: values below are confirmed in extracted VData; gameplay effects require separate interpretation.
+- Scope: six tracked VData files. Executable, map geometry, and other files may change independently.
+
+**1 exact data changes** across 1 categories.
+
+## Street Brawl (0)
+
+No confirmed value change in tracked fields.
+
+## Heroes (0)
+
+No confirmed value change in tracked fields.
+
+## Abilities and items (1)
+
+- `abilities.ability_artist_pullbrush.m_flMinStrokeDistance`: `null` → `15.0` [added]
+
+## Map and NPC data (0)
+
+No confirmed value change in tracked fields.
+
+## Modifiers (0)
+
+No confirmed value change in tracked fields.
+
+## Other data (0)
+
+No confirmed value change in tracked fields.
+
+## Other upstream file changes (4)
+
+File-level evidence only. Gameplay effects are unknown unless a tracked value above confirms them.
+
+- `M` `DumpSource2/.stringsignore`
+- `M` `DumpSource2/schemas/client/CCitadel_Ability_Artist_PullBrushVData.h`
+- `M` `DumpSource2/schemas/server/CCitadel_Ability_Artist_PullBrushVData.h`
+- `M` `game/citadel/pak01_dir.txt`
+
+## Community discussion
+
+No exact-build discussion retrieved.
+
+## Data and provenance
+
+- `abilities.vdata`: [upstream file](https://raw.githubusercontent.com/SteamTracking/GameTracking-Deadlock/17462b250a0ca80e7f80102f2c83cc3eecff5f12/game/citadel/pak01_dir/scripts/abilities.vdata), normalized SHA-256 `1024fb868d4579545bd3b3479b5a6ca3d50ba8bd9b3136507c8030d8472b83a5`
+- `generic_data.vdata`: [upstream file](https://raw.githubusercontent.com/SteamTracking/GameTracking-Deadlock/17462b250a0ca80e7f80102f2c83cc3eecff5f12/game/citadel/pak01_dir/scripts/generic_data.vdata), normalized SHA-256 `89c429009b6baa46fdd0b1357cdec367f1de2a25d9caf4d942dc3b0be115673e`
+- `heroes.vdata`: [upstream file](https://raw.githubusercontent.com/SteamTracking/GameTracking-Deadlock/17462b250a0ca80e7f80102f2c83cc3eecff5f12/game/citadel/pak01_dir/scripts/heroes.vdata), normalized SHA-256 `df211c3e48ae3ef4f23e689ae1a1e5242450bef3cc8891b393733ae7b671088d`
+- `misc.vdata`: [upstream file](https://raw.githubusercontent.com/SteamTracking/GameTracking-Deadlock/17462b250a0ca80e7f80102f2c83cc3eecff5f12/game/citadel/pak01_dir/scripts/misc.vdata), normalized SHA-256 `9c9167a6160b71aba73096d1aff29b63ba21a49583d25f01d63ebf2b0c8a2ac9`
+- `modifiers.vdata`: [upstream file](https://raw.githubusercontent.com/SteamTracking/GameTracking-Deadlock/17462b250a0ca80e7f80102f2c83cc3eecff5f12/game/citadel/pak01_dir/scripts/modifiers.vdata), normalized SHA-256 `acaf491797766311b4bf2581ea8a46bf1099d0951665ffe32ecb35e03b842065`
+- `npc_units.vdata`: [upstream file](https://raw.githubusercontent.com/SteamTracking/GameTracking-Deadlock/17462b250a0ca80e7f80102f2c83cc3eecff5f12/game/citadel/pak01_dir/scripts/npc_units.vdata), normalized SHA-256 `cb9a4e658ae34071c9f5e465f8419da38b6b7120f92c23c385065fea73f5b3d4`
+
+The normalized snapshots are stored in `data/blobs/` and indexed by `data/builds/<build>/snapshot.json`.

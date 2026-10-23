@@ -1,0 +1,41 @@
+name: Track Deadlock builds
+
+on:
+  schedule:
+    - cron: '17 */3 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: deadlock-tracker
+  cancel-in-progress: false
+
+jobs:
+  track:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test
+        run: python -m unittest discover -s tests -v
+      - name: Collect and compare builds
+        run: python src/tracker.py
+      - name: Commit verified snapshots and reports
+        shell: bash
+        run: |
+          git add data reports
+          if git diff --cached --quiet; then
+            echo 'No new build or report changes.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m "Archive Deadlock builds through $(python -c 'import json;print(json.load(open("data/state.json"))["latest_build"])')"
+          git push
