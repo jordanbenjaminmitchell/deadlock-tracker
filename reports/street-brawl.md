@@ -6,7 +6,6 @@ The latest archived build is [6819](builds/6819.md). It has no confirmed Street 
 
 Recorded Oct 17, 2026 at 21:32 UTC. [Read the build report](builds/6794.md) or [check the source commit](https://github.com/SteamTracking/GameTracking-Deadlock/commit/df1192043fd269aee7edf4dffdfb4cfc03d05f64).
 
-- **Street Brawl — Buy time, fifth value: 65 → 50 (-15)**<br>
-  Source: `generic_data.m_StreetBrawl.m_vecBuyTime[4]` · `65` → `50`
+- **Street Brawl — Buy time, fifth value**: 65 → **50** (Change -15 · -23.08%)
 
 [Browse all builds](index.md) · [See the latest change card](infographics/latest.svg)

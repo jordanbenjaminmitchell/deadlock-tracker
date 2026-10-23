@@ -204,55 +204,62 @@ def fmt(value):
 
 def report(manifest: dict, prior: dict | None, changes: list[dict], posts: list[dict]):
     number = manifest["build"]
-    prior_text = f"build {prior['build']}" if prior else "the first archived snapshot"
     stamp = datetime.fromisoformat(manifest["upstream_time"].replace("Z", "+00:00"))
     when = stamp.strftime("%b %d, %Y at %H:%M UTC")
     lines = [f"# Deadlock build {number}", "",
-             f"SteamTracking recorded this build on **{when}**. "
-             + (f"Compared with build {prior['build']}, " if prior else "This is the first archived build, so ")
-             + (f"we found **{len(changes)} changed {'value' if len(changes) == 1 else 'values'}** "
-                "in the six game data files we track." if prior else "there are no earlier values to compare."), ""]
+             f"Recorded {when}. " + (f"Compared with build {prior['build']}." if prior else
+                                     "This is the first saved build, so there is no earlier value to compare."), ""]
+    if prior:
+        lines += [f"**{len(changes)} tracked {'change' if len(changes) == 1 else 'changes'}.**", ""]
     if prior and not changes:
-        lines += ["No tracked value changed in this comparison. Other game files or code may still have changed.", ""]
-    lines += ["These are changes in extracted game data. They do not, by themselves, confirm what players experienced in a match.", ""]
+        lines += ["No value changed in the game data we track for this build.", ""]
+    lines += ["These are values found in extracted game data. They do not confirm how a change felt in a match.", ""]
     sections = [("Street Brawl", "street-brawl"), ("Heroes", "heroes"),
                 ("Abilities and items", "abilities"), ("Map and NPC data", "map-and-npcs"),
                 ("Modifiers", "modifiers"), ("Other data", "other-data")]
+    shown = 0
     for title, key in sections:
-        selected = [change for change in changes if change["category"] == key]
+        selected = [change for change in changes if change["category"] == key and is_public_change(change)]
         if not selected:
             continue
-        lines += [f"## {title} ({len(selected)})", ""]
+        groups = {}
         for change in selected:
-            context, field, summary = readable_change(change)
-            percent = f" · {change['percent']:+.2f}%" if "percent" in change else ""
-            lines.append(f"- **{context} — {field}: {summary}{percent}**<br>")
-            lines.append(f"  Source: `{change['path']}` · `{fmt(change['old'])}` → `{fmt(change['new'])}`")
+            view = public_change(change)
+            groups[view] = groups.get(view, 0) + 1
+        lines += [f"## {title} ({len(selected)})", ""]
+        for (context, field, before, after, note), count in groups.items():
+            lines.append(f"- **{context} — {field}**: {before} → **{after}**"
+                         + (f" ({note})" if note else "")
+                         + (f" · {count} matching values" if count > 1 else ""))
         lines.append("")
+        shown += len(selected)
+    if shown < len(changes):
+        lines += [f"**{shown} readable value changes are shown above.** The other {len(changes) - shown} "
+                  "changes involve game data references or structures. Their exact before and after values "
+                  "are under ‘Check the exact source values’ below.", ""]
+    if posts:
+        lines += ["## Community discussion", "",
+                  "These posts may add context; the values above come from game data.", ""]
+        lines += [f"- [{post['title']}]({post['url']})" for post in posts]
+        lines.append("")
+    lines += ["[See the source commit](" + manifest["source"] + ")", "",
+              "<details>", "<summary>Check the exact source values</summary>", "",
+              f"Client build `{number}` · Source revision `{manifest['source_revision']}`", "",
+              "The lines below preserve the original field names and values used for this comparison.", ""]
+    for change in changes:
+        lines.append(f"- `{change['path']}`: `{fmt(change['old'])}` → `{fmt(change['new'])}`")
     ignored = {"game/citadel/steam.inf", *(f"{SCRIPTS}/{name}.vdata" for name in FILES)}
     other_files = [item for item in manifest.get("changed_files", [])
                    if item["path"] not in ignored and not item["path"].startswith("manifests/")]
     if other_files:
-        lines += [f"## Other files in the same upstream commit ({len(other_files)})", "",
-                  "These file names show what else changed; they do not tell us how gameplay changed.", ""]
+        lines += ["", f"Other files in the same upstream commit ({len(other_files)}):", ""]
         lines += [f"- `{item['status']}` `{item['path']}`" for item in other_files[:40]]
         if len(other_files) > 40:
-            lines.append(f"- … and {len(other_files) - 40} more in the upstream commit.")
-        lines.append("")
-    if posts:
-        lines += ["## Community discussion", "",
-                  "These posts may add context, but they are not evidence for the values above.", ""]
-        lines += [f"- [{post['title']}]({post['url']})" for post in posts]
-        lines.append("")
-    lines += ["## Check the source", "",
-              f"[See the SteamTracking commit]({manifest['source']}) · "
-              f"Client build `{number}` · Source revision `{manifest['source_revision']}` · "
-              + (f"Compared with {prior_text}" if prior else "First archived build"), "",
-              "We compare six extracted VData files. Code, map geometry, assets, and other files are outside this comparison.", ""]
+            lines.append(f"- … and {len(other_files) - 40} more.")
+    lines += ["", "Tracked source files:", ""]
     for name, file in manifest["files"].items():
         lines.append(f"- `{name}.vdata`: [upstream file]({file['url']}), normalized SHA-256 `{file['sha256']}`")
-    lines += ["", f"The archived snapshot is [`data/builds/{number}/snapshot.json`](../../data/builds/{number}/snapshot.json); "
-              "its normalized files are in `data/blobs/`.", ""]
+    lines += ["", f"[Archived snapshot](../../data/builds/{number}/snapshot.json)", "", "</details>", ""]
     write_atomic(REPORTS / "builds" / f"{number}.md", "\n".join(lines).encode("utf-8"))
 
 
@@ -293,9 +300,9 @@ def update_summaries(manifest: dict, changes: list[dict]):
                   f"[Read the build report](builds/{source['build']}.md) or "
                   f"[check the source commit]({source['source']}).", ""]
         for change in found:
-            context, field, summary = readable_change(change)
-            lines += [f"- **{context} — {field}: {summary}**<br>",
-                      f"  Source: `{change['path']}` · `{fmt(change['old'])}` → `{fmt(change['new'])}`"]
+            context, field, before, after, note = public_change(change)
+            lines.append(f"- **{context} — {field}**: {before} → **{after}**"
+                         + (f" ({note})" if note else ""))
     else:
         lines.append("No Street Brawl value change appears in the archived comparisons yet.")
     lines += ["", "[Browse all builds](index.md) · [See the latest change card](infographics/latest.svg)", ""]
@@ -316,7 +323,7 @@ def recent_change_entries(limit: int = 5) -> list[dict]:
         scalar = (change for change in changes
                   if not isinstance(change["old"], (dict, list))
                   and not isinstance(change["new"], (dict, list))
-                  and "._include[" not in change["path"])
+                  and is_public_change(change))
         for change in sorted(scalar, key=lambda item: item["path"]):
             entries.append({"manifest": manifest, "prior": prior, "change": change})
             if len(entries) == limit:
@@ -353,7 +360,8 @@ FIELD_LABELS = {
 def readable_words(identifier: str) -> str:
     """Turn an internal identifier into a cautious display label."""
     identifier = re.sub(r"^m_(?:fl|vec|str|n|b|e)(?=[A-Z])", "", identifier)
-    identifier = identifier.removeprefix("m_").removeprefix("ability_")
+    identifier = identifier.removeprefix("m_").removeprefix("ability_").removeprefix("hero_")
+    identifier = re.sub(r"^E(?=[A-Z])", "", identifier)
     words = re.sub(r"([a-z0-9])([A-Z])", r"\1 \2", identifier).replace("_", " ").lower()
     words = re.sub(r"\bmin\b", "minimum", re.sub(r"\bmax\b", "maximum", words))
     words = re.sub(r"\bui\b", "UI", words)
@@ -393,6 +401,144 @@ def readable_change(change: dict) -> tuple[str, str, str]:
     if isinstance(change["old"], bool) and isinstance(change["new"], bool):
         return context, field, f"{'On' if change['old'] else 'Off'} → {'on' if change['new'] else 'off'}"
     return context, field, f"{fmt(change['old'])} → {fmt(change['new'])}"
+
+
+def public_change(change: dict) -> tuple[str, str, str, str, str]:
+    """Show archived before/after values without exposing internal field names."""
+    context, field, _ = readable_change(change)
+    old, new = change["old"], change["new"]
+    if change["path"].endswith("m_nEnabledStateMask") and isinstance(new, str):
+        flag = "MODIFIER_STATE_FEAR_IMMUNE"
+        old_flags = set(old.split(" | ")) if isinstance(old, str) else set()
+        new_flags = set(new.split(" | "))
+        if flag in new_flags and flag not in old_flags:
+            field = field.replace(" state flags", " fear immunity")
+            before = "Not listed" if change["kind"] == "added" else "Off"
+            return context, field, before, "On", "Fear immunity added"
+
+    def value(item):
+        if item is True:
+            return "On"
+        if item is False:
+            return "Off"
+        if isinstance(item, (dict, list)):
+            return "Structured data"
+        if isinstance(item, str):
+            states = {"EHeroDevState_PreRelease": "Pre-release",
+                      "EHeroDevState_Release": "Released"}
+            if item in states:
+                return states[item]
+            if item.startswith("E") and "_" in item:
+                parts = item.split(" | ")
+                if all(re.fullmatch(r"E[A-Za-z]+_[A-Za-z0-9_]+", part) for part in parts):
+                    return ", ".join(readable_words(part.split("_", 1)[1]) for part in parts)
+            if (item.startswith(("MODIFIER_STATE_", "ability_", "citadel_", "#"))
+                    or "/" in item or ".vdata" in item or "_" in item or "." in item):
+                return "Game data reference"
+            return item
+        return fmt(item)
+
+    before = "Not listed" if change["kind"] == "added" else value(old)
+    after = "Removed" if change["kind"] == "removed" else value(new)
+    note = f"Change {change['delta']:+g}" if "delta" in change else ""
+    if note and "percent" in change:
+        note += f" · {change['percent']:+.2f}%"
+    return context, field, before, after, note
+
+
+def public_change(change: dict) -> tuple[str, str, str, str, str]:
+    """Show archived before/after values without exposing internal field names."""
+    context, field, _ = readable_change(change)
+    old, new = change["old"], change["new"]
+    if change["path"].endswith("m_nEnabledStateMask") and isinstance(new, str):
+        flag = "MODIFIER_STATE_FEAR_IMMUNE"
+        old_flags = set(old.split(" | ")) if isinstance(old, str) else set()
+        new_flags = set(new.split(" | "))
+        if flag in new_flags and flag not in old_flags:
+            field = field.replace(" state flags", " fear immunity")
+            before = "Not listed" if change["kind"] == "added" else "Off"
+            return context, field, before, "On", "Fear immunity added"
+
+    def value(item):
+        if item is True:
+            return "On"
+        if item is False:
+            return "Off"
+        if isinstance(item, (dict, list)):
+            return "Structured data"
+        if isinstance(item, str):
+            states = {"EHeroDevState_PreRelease": "Pre-release",
+                      "EHeroDevState_Release": "Released"}
+            if item in states:
+                return states[item]
+            if item.startswith("E") and "_" in item:
+                parts = item.split(" | ")
+                if all(re.fullmatch(r"E[A-Za-z]+_[A-Za-z0-9_]+", part) for part in parts):
+                    return ", ".join(readable_words(part.split("_", 1)[1]) for part in parts)
+            if (item.startswith(("MODIFIER_STATE_", "ability_", "citadel_", "#"))
+                    or "/" in item or ".vdata" in item or "_" in item or "." in item):
+                return "Game data reference"
+            return item
+        return fmt(item)
+
+    before = "Not listed" if change["kind"] == "added" else value(old)
+    after = "Removed" if change["kind"] == "removed" else value(new)
+    note = f"Change {change['delta']:+g}" if "delta" in change else ""
+    if note and "percent" in change:
+        note += f" · {change['percent']:+.2f}%"
+    return context, field, before, after, note
+
+
+def public_change(change: dict) -> tuple[str, str, str, str, str]:
+    """Show archived before/after values without exposing internal field names."""
+    context, field, _ = readable_change(change)
+    old, new = change["old"], change["new"]
+    if change["path"].endswith("m_nEnabledStateMask") and isinstance(new, str):
+        flag = "MODIFIER_STATE_FEAR_IMMUNE"
+        old_flags = set(old.split(" | ")) if isinstance(old, str) else set()
+        new_flags = set(new.split(" | "))
+        if flag in new_flags and flag not in old_flags:
+            field = field.replace(" state flags", " fear immunity")
+            before = "Not listed" if change["kind"] == "added" else "Off"
+            return context, field, before, "On", "Fear immunity added"
+
+    def value(item):
+        if item is True:
+            return "On"
+        if item is False:
+            return "Off"
+        if isinstance(item, (dict, list)):
+            return "Structured data"
+        if isinstance(item, str):
+            states = {"EHeroDevState_PreRelease": "Pre-release",
+                      "EHeroDevState_Release": "Released"}
+            if item in states:
+                return states[item]
+            if item.startswith("E") and "_" in item:
+                parts = item.split(" | ")
+                if all(re.fullmatch(r"E[A-Za-z]+_[A-Za-z0-9_]+", part) for part in parts):
+                    return ", ".join(readable_words(part.split("_", 1)[1]) for part in parts)
+            if (item.startswith(("MODIFIER_STATE_", "ability_", "citadel_", "#"))
+                    or "/" in item or ".vdata" in item or "_" in item or "." in item):
+                return "Game data reference"
+            return item
+        return fmt(item)
+
+    before = "Not listed" if change["kind"] == "added" else value(old)
+    after = "Removed" if change["kind"] == "removed" else value(new)
+    note = f"Change {change['delta']:+g}" if "delta" in change else ""
+    if note and "percent" in change:
+        note += f" · {change['percent']:+.2f}%"
+    return context, field, before, after, note
+
+
+def is_public_change(change: dict) -> bool:
+    """Keep readable values in the main view; exact excluded values stay in source details."""
+    if "._include[" in change["path"]:
+        return False
+    _, _, before, after, _ = public_change(change)
+    opaque = {"Structured data", "Game data reference"}
+    return before not in opaque and after not in opaque
 
 
 def game_icon_spec(manifest: dict, change: dict) -> tuple[str, str, str] | None:
@@ -457,12 +603,10 @@ def ensure_icon_for_change(manifest: dict, change: dict | None) -> None:
 
 
 def featured_change(manifest: dict, changes: list[dict]) -> dict | None:
-    scalar = [change for change in changes
-              if not isinstance(change["old"], (dict, list))
-              and not isinstance(change["new"], (dict, list))]
+    scalar = [change for change in changes if is_public_change(change)]
     illustrated = [change for change in scalar
                    if icon_for_change(change, manifest) or game_icon_spec(manifest, change)]
-    return next(iter(illustrated or scalar or changes), None)
+    return next(iter(illustrated or scalar), None)
 
 
 def change_card(manifest: dict, prior: dict | None, change: dict | None, total: int) -> str:
@@ -480,27 +624,19 @@ def change_card(manifest: dict, prior: dict | None, change: dict | None, total: 
                        f'href="data:image/webp;base64,{encoded}"/>')
 
     if change:
-        context, field, summary = readable_change(change)
-        old = "unset" if change["kind"] == "added" else fmt(change["old"])
-        new = "removed" if change["kind"] == "removed" else fmt(change["new"])
-        transition = f"{old} → {new}"
-        if len(transition) <= 22:
-            main, detail = transition, summary if summary != transition else "Confirmed in extracted game data"
-        else:
-            main, detail = summary, "Full before and after values in the report"
-        if "delta" in change:
-            detail = f"Change {change['delta']:+g}"
-            if "percent" in change:
-                detail += f" · {change['percent']:+.2f}%"
+        context, field, before, after, note = public_change(change)
+        main = f"{before} → {after}"
+        detail = note or "Before and after from saved game data"
         footer = (f"1 of {total} changes · See the full build report" if total > 1
                   else f"Compared with build {prior['build']}" if prior else "First archived build")
-        description = f"Build {number}, {context}, {field}: {summary}. {old} to {new}."
+        description = f"Build {number}, {context}, {field}: before {before}; now {after}."
     else:
-        context = "No tracked change" if prior else "First archived build"
-        field = "Six game data files checked"
-        main = "No values changed" if prior else "Starting point"
-        detail = ("Other game files may still have changed" if prior
-                  else "There are no earlier values to compare")
+        context = ("No simple value change" if total else "No tracked change") if prior else "First archived build"
+        field = "Game data checked" if not total else f"{total} data changes found"
+        main = "See build report" if total else "No values changed" if prior else "Starting point"
+        detail = ("The report has the exact before and after data" if total else
+                  "Other game files may still have changed" if prior else
+                  "There are no earlier values to compare")
         footer = f"Compared with build {prior['build']}" if prior else "Browse the archived build report"
         description = f"Build {number}: {main}."
 
@@ -540,19 +676,17 @@ def recent_card_filename(entry: dict) -> str:
 
 def gallery_markup(entries: list[dict], prefix: str) -> str:
     lines = ["## The latest five changes", "",
-             "Here are the five most recent individual values we found changing in the game data we track. "
-             "The time on each card is when SteamTracking recorded the build (UTC). "
-             "Values use the source's units; we do not guess at missing units. "
-             "Open a build report to see every change in that build.", ""]
+             "Each card shows one value before and after the update. The date is when SteamTracking recorded that build (UTC). "
+             "If a value was added, ‘Not listed’ means the previous saved build had no value for that field.", ""]
     if not entries:
-        return "\n".join(lines + ["No comparable field changes are archived yet.", ""])
+        return "\n".join(lines + ["No comparable changes are saved yet.", ""])
     lines += ["<table>", "<tr>"]
     for entry in entries:
         manifest, change = entry["manifest"], entry["change"]
         build = manifest["build"]
         image_path = f"{prefix}infographics/recent/{recent_card_filename(entry)}"
-        context, field, summary = readable_change(change)
-        alt = html.escape(f"Build {build}: {context}, {field}, {summary}", quote=True)
+        context, field, before, after, _ = public_change(change)
+        alt = html.escape(f"Build {build}: {context}, {field}, before {before}, now {after}", quote=True)
         lines += ["<td width=\"20%\">",
                   f'<a href="{image_path}"><img src="{image_path}" width="185" alt="{alt}"></a>',
                   "</td>"]
@@ -562,20 +696,15 @@ def gallery_markup(entries: list[dict], prefix: str) -> str:
         build = manifest["build"]
         stamp = datetime.fromisoformat(manifest["upstream_time"].replace("Z", "+00:00"))
         when = stamp.strftime("%b %d, %Y %H:%M UTC")
-        context, field, summary = readable_change(change)
-        path = html.escape(change["path"])
-        old = "unset" if change["kind"] == "added" else fmt(change["old"])
-        new = "removed" if change["kind"] == "removed" else fmt(change["new"])
+        context, field, before, after, note = public_change(change)
         report_path = f"{prefix}builds/{build}.md"
         image_path = f"{prefix}infographics/recent/{recent_card_filename(entry)}"
-        source = html.escape(manifest["source"], quote=True)
-        lines.append(f'<li><strong>{html.escape(context)} — {html.escape(field)}: '
-                     f'{html.escape(summary)}</strong><br>'
-                     f'Build {build} · {html.escape(when)} '
-                     f'(<a href="{image_path}">view card</a>; <a href="{report_path}">all changes</a>; '
-                     f'<a href="{source}">source commit</a>)<br>'
-                     f'<code>{html.escape(old)}</code> → <code>{html.escape(new)}</code> · '
-                     f'Source field: <code>{path}</code></li>')
+        line = (f'<li><strong>{html.escape(context)} — {html.escape(field)}</strong><br>'
+                f'{html.escape(before)} → <strong>{html.escape(after)}</strong>'
+                + (f' ({html.escape(note)})' if note else '')
+                + f'<br>Recorded {html.escape(when)} · Build {build} '
+                f'(<a href="{image_path}">view card</a>; <a href="{report_path}">all changes</a>)</li>')
+        lines.append(line)
     lines += ["</ol>", ""]
     return "\n".join(lines)
 

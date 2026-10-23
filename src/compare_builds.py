@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 import sys
 
-from tracker import BUILDS, diff_manifests, readable_change
+from tracker import BUILDS, diff_manifests, public_change
 
 
 def main():
@@ -32,8 +32,8 @@ def main():
         print(f"# Build {args.old} → {args.new}\n")
         print(f"{len(changes)} changed {'value' if len(changes) == 1 else 'values'} in the game data we track.\n")
         for change in changes:
-            context, field, summary = readable_change(change)
-            print(f"- {context} — {field}: {summary}\n  Source field: {change['path']}")
+            context, field, before, after, note = public_change(change)
+            print(f"- {context} — {field}: {before} → {after}" + (f" ({note})" if note else ""))
 
 
 if __name__ == "__main__":

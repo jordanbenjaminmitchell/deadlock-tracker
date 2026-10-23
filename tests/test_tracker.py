@@ -69,6 +69,21 @@ class ComparisonTests(unittest.TestCase):
                          "Warden · Last Stand")
 
 
+class PublicPresentationTests(unittest.TestCase):
+    def test_added_value_is_not_misreported_as_increase(self):
+        change = {"path": "abilities.ability_artist_pullbrush.m_flMinStrokeDistance",
+                  "kind": "added", "old": None, "new": 15.0}
+        self.assertEqual(tracker.public_change(change),
+                         ("Violet · Living Ink", "Minimum stroke distance", "Not listed", "15.0", ""))
+
+    def test_fear_flag_is_plain_language_and_keeps_prior_state(self):
+        change = {"path": "abilities.ability_warden_riot_protocol.m_WardenBuffModifier.m_nEnabledStateMask",
+                  "kind": "changed", "old": "MODIFIER_STATE_OTHER",
+                  "new": "MODIFIER_STATE_OTHER | MODIFIER_STATE_FEAR_IMMUNE"}
+        self.assertEqual(tracker.public_change(change),
+                         ("Warden · Last Stand", "Warden buff fear immunity", "Off", "On", "Fear immunity added"))
+
+
 class PipelineTests(unittest.TestCase):
     def test_new_ability_icon_is_cached_from_its_game_image_path(self):
         class IconResponse(io.BytesIO):
@@ -119,7 +134,7 @@ class PipelineTests(unittest.TestCase):
         svg = tracker.change_card(manifest, {"build": 6817}, change, 1)
         root = ET.fromstring(svg)
         self.assertEqual(len(root.findall("{http://www.w3.org/2000/svg}image")), 1)
-        self.assertIn("unset → 15.0", svg)
+        self.assertIn("Not listed → 15.0", svg)
         self.assertIn("Oct 22, 2026 23:53 UTC", svg)
         self.assertNotIn("<rect x=\"220\"", svg)
 
@@ -144,8 +159,9 @@ class PipelineTests(unittest.TestCase):
             with patch.object(tracker, "REPORTS", Path(folder)):
                 tracker.report(manifest, {"build": 6793}, [change], [])
                 page = (Path(folder) / "builds" / "6794.md").read_text(encoding="utf-8")
-        self.assertIn("Street Brawl — Buy time, fifth value: 65 → 50 (-15) · -23.08%", page)
-        self.assertIn("Source: `generic_data.m_StreetBrawl.m_vecBuyTime[4]`", page)
+        self.assertIn("Street Brawl — Buy time, fifth value**: 65 → **50** (Change -15 · -23.08%)", page)
+        self.assertIn("<summary>Check the exact source values</summary>", page)
+        self.assertIn("`generic_data.m_StreetBrawl.m_vecBuyTime[4]`: `65` → `50`", page)
         self.assertNotIn("## Heroes", page)
         self.assertNotIn("No exact-build discussion retrieved", page)
 

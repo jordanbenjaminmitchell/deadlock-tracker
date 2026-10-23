@@ -1,28 +1,34 @@
 # Deadlock build 6819
 
-SteamTracking recorded this build on **Oct 22, 2026 at 23:53 UTC**. Compared with build 6817, we found **1 changed value** in the six game data files we track.
+Recorded Oct 22, 2026 at 23:53 UTC. Compared with build 6817.
 
-These are changes in extracted game data. They do not, by themselves, confirm what players experienced in a match.
+**1 tracked change.**
+
+These are values found in extracted game data. They do not confirm how a change felt in a match.
 
 ## Abilities and items (1)
 
-- **Violet · Living Ink — Minimum stroke distance: Added 15.0**<br>
-  Source: `abilities.ability_artist_pullbrush.m_flMinStrokeDistance` · `null` → `15.0`
+- **Violet · Living Ink — Minimum stroke distance**: Not listed → **15.0**
 
-## Other files in the same upstream commit (4)
+[See the source commit](https://github.com/SteamTracking/GameTracking-Deadlock/commit/17462b250a0ca80e7f80102f2c83cc3eecff5f12)
 
-These file names show what else changed; they do not tell us how gameplay changed.
+<details>
+<summary>Check the exact source values</summary>
+
+Client build `6819` · Source revision `11162696`
+
+The lines below preserve the original field names and values used for this comparison.
+
+- `abilities.ability_artist_pullbrush.m_flMinStrokeDistance`: `null` → `15.0`
+
+Other files in the same upstream commit (4):
 
 - `M` `DumpSource2/.stringsignore`
 - `M` `DumpSource2/schemas/client/CCitadel_Ability_Artist_PullBrushVData.h`
 - `M` `DumpSource2/schemas/server/CCitadel_Ability_Artist_PullBrushVData.h`
 - `M` `game/citadel/pak01_dir.txt`
 
-## Check the source
-
-[See the SteamTracking commit](https://github.com/SteamTracking/GameTracking-Deadlock/commit/17462b250a0ca80e7f80102f2c83cc3eecff5f12) · Client build `6819` · Source revision `11162696` · Compared with build 6817
-
-We compare six extracted VData files. Code, map geometry, assets, and other files are outside this comparison.
+Tracked source files:
 
 - `abilities.vdata`: [upstream file](https://raw.githubusercontent.com/SteamTracking/GameTracking-Deadlock/17462b250a0ca80e7f80102f2c83cc3eecff5f12/game/citadel/pak01_dir/scripts/abilities.vdata), normalized SHA-256 `1024fb868d4579545bd3b3479b5a6ca3d50ba8bd9b3136507c8030d8472b83a5`
 - `generic_data.vdata`: [upstream file](https://raw.githubusercontent.com/SteamTracking/GameTracking-Deadlock/17462b250a0ca80e7f80102f2c83cc3eecff5f12/game/citadel/pak01_dir/scripts/generic_data.vdata), normalized SHA-256 `89c429009b6baa46fdd0b1357cdec367f1de2a25d9caf4d942dc3b0be115673e`
@@ -31,4 +37,6 @@ We compare six extracted VData files. Code, map geometry, assets, and other file
 - `modifiers.vdata`: [upstream file](https://raw.githubusercontent.com/SteamTracking/GameTracking-Deadlock/17462b250a0ca80e7f80102f2c83cc3eecff5f12/game/citadel/pak01_dir/scripts/modifiers.vdata), normalized SHA-256 `acaf491797766311b4bf2581ea8a46bf1099d0951665ffe32ecb35e03b842065`
 - `npc_units.vdata`: [upstream file](https://raw.githubusercontent.com/SteamTracking/GameTracking-Deadlock/17462b250a0ca80e7f80102f2c83cc3eecff5f12/game/citadel/pak01_dir/scripts/npc_units.vdata), normalized SHA-256 `cb9a4e658ae34071c9f5e465f8419da38b6b7120f92c23c385065fea73f5b3d4`
 
-The archived snapshot is [`data/builds/6819/snapshot.json`](../data/builds/6819/snapshot.json); its normalized files are in `data/blobs/`.
+[Archived snapshot](../data/builds/6819/snapshot.json)
+
+</details>
