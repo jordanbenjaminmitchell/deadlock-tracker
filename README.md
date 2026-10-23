@@ -14,19 +14,19 @@ Five most recent scalar changes in tracked VData. Times are upstream commit time
 <table>
 <tr>
 <td width="20%">
-<a href="reports/builds/6819.md"><img src="reports/infographics/recent/6819-0d2b1fa53934.svg" width="185" alt="Build 6819: abilities.ability_artist_pullbrush.m_flMinStrokeDistance, null to 15.0"></a>
+<a href="reports/builds/6819.md"><img src="reports/infographics/recent/6819-920f427becbf.svg" width="185" alt="Build 6819: abilities.ability_artist_pullbrush.m_flMinStrokeDistance, null to 15.0"></a>
 </td>
 <td width="20%">
-<a href="reports/builds/6813.md"><img src="reports/infographics/recent/6813-d577a716ff9e.svg" width="185" alt="Build 6813: abilities.ability_warden_riot_protocol.m_AutoCastDelayModifier.m_nEnabledStateMask, null to &quot;MODIFIER_STATE_FEAR_IMMUNE&quot;"></a>
+<a href="reports/builds/6813.md"><img src="reports/infographics/recent/6813-3a8207e2e990.svg" width="185" alt="Build 6813: abilities.ability_warden_riot_protocol.m_AutoCastDelayModifier.m_nEnabledStateMask, null to &quot;MODIFIER_STATE_FEAR_IMMUNE&quot;"></a>
 </td>
 <td width="20%">
-<a href="reports/builds/6813.md"><img src="reports/infographics/recent/6813-9ad5f3cf223c.svg" width="185" alt="Build 6813: abilities.ability_warden_riot_protocol.m_WardenBuffModifier.m_nEnabledStateMask, &quot;MODIFIER_STATE_SINCLAIR_TAX_ULT_ACTIVE | MODIFIER_STATE_SINCLAIR_TAX_KEEP_MODEL_SWAP&quot; to &quot;MODIFIER_STATE_SINCLAIR_TAX_ULT_ACTIVE | MODIFIER_STATE_SINCLAIR_TAX_KEEP_MODEL_SWAP | MODIFIER_STATE_FEAR_IMMUNE&quot;"></a>
+<a href="reports/builds/6813.md"><img src="reports/infographics/recent/6813-f35e2cec127a.svg" width="185" alt="Build 6813: abilities.ability_warden_riot_protocol.m_WardenBuffModifier.m_nEnabledStateMask, &quot;MODIFIER_STATE_SINCLAIR_TAX_ULT_ACTIVE | MODIFIER_STATE_SINCLAIR_TAX_KEEP_MODEL_SWAP&quot; to &quot;MODIFIER_STATE_SINCLAIR_TAX_ULT_ACTIVE | MODIFIER_STATE_SINCLAIR_TAX_KEEP_MODEL_SWAP | MODIFIER_STATE_FEAR_IMMUNE&quot;"></a>
 </td>
 <td width="20%">
-<a href="reports/builds/6801.md"><img src="reports/infographics/recent/6801-3ff9683b2b56.svg" width="185" alt="Build 6801: abilities.ability_artist_bamboogrove.m_BambooModifier.m_ImmuneModifier.m_bDurationReducible, null to false"></a>
+<a href="reports/builds/6801.md"><img src="reports/infographics/recent/6801-9e0cb8672ae5.svg" width="185" alt="Build 6801: abilities.ability_artist_bamboogrove.m_BambooModifier.m_ImmuneModifier.m_bDurationReducible, null to false"></a>
 </td>
 <td width="20%">
-<a href="reports/builds/6801.md"><img src="reports/infographics/recent/6801-41dfd9fe9e10.svg" width="185" alt="Build 6801: abilities.ability_artist_homingbrush.m_StackModifier.m_bDurationExtendible, null to true"></a>
+<a href="reports/builds/6801.md"><img src="reports/infographics/recent/6801-d1fe143cd0e3.svg" width="185" alt="Build 6801: abilities.ability_artist_homingbrush.m_StackModifier.m_bDurationExtendible, null to true"></a>
 </td>
 </tr>
 </table>

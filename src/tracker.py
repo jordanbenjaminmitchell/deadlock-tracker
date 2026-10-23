@@ -408,6 +408,11 @@ def recent_card(entry: dict) -> str:
             '</svg>')
 
 
+def recent_card_filename(entry: dict) -> str:
+    digest = hashlib.sha256(recent_card(entry).encode("utf-8")).hexdigest()[:12]
+    return f'{entry["manifest"]["build"]}-{digest}.svg'
+
+
 def gallery_markup(entries: list[dict], prefix: str) -> str:
     lines = ["## Latest verified field changes", "",
              "Five most recent scalar changes in tracked VData. Times are upstream commit timestamps in UTC; "
@@ -420,8 +425,7 @@ def gallery_markup(entries: list[dict], prefix: str) -> str:
     for entry in entries:
         manifest, change = entry["manifest"], entry["change"]
         build = manifest["build"]
-        card = hashlib.sha256(change["path"].encode("utf-8")).hexdigest()[:12]
-        image_path = f"{prefix}infographics/recent/{build}-{card}.svg"
+        image_path = f"{prefix}infographics/recent/{recent_card_filename(entry)}"
         report_path = f"{prefix}builds/{build}.md"
         path = html.escape(change["path"])
         old, new = html.escape(fmt(change["old"])), html.escape(fmt(change["new"]))
@@ -453,11 +457,16 @@ def gallery_markup(entries: list[dict], prefix: str) -> str:
 def update_recent_gallery():
     """Refresh the README landing gallery and the browsable report index offline."""
     entries = recent_change_entries()
+    card_dir = REPORTS / "infographics" / "recent"
+    expected = set()
     for entry in entries:
-        build, change = entry["manifest"]["build"], entry["change"]
-        card = hashlib.sha256(change["path"].encode("utf-8")).hexdigest()[:12]
-        write_atomic(REPORTS / "infographics" / "recent" / f"{build}-{card}.svg",
+        name = recent_card_filename(entry)
+        expected.add(name)
+        write_atomic(card_dir / name,
                      recent_card(entry).encode("utf-8"))
+    for obsolete in card_dir.glob("*.svg"):
+        if obsolete.name not in expected:
+            obsolete.unlink()
     write_atomic(REPORTS / "recent-changes.md", gallery_markup(entries, "").encode("utf-8"))
 
     readme_path = ROOT / "README.md"
