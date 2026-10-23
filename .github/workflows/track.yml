@@ -30,7 +30,7 @@ jobs:
       - name: Commit verified snapshots and reports
         shell: bash
         run: |
-          git add README.md data reports
+          git add README.md assets data reports
           if git diff --cached --quiet; then
             echo 'No new build or report changes.'
             exit 0

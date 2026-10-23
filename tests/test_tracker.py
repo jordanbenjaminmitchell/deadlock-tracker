@@ -1,9 +1,11 @@
+import io
 import json
 from pathlib import Path
 import sys
 import tempfile
 import unittest
 from unittest.mock import patch
+from urllib.error import URLError
 import xml.etree.ElementTree as ET
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
@@ -68,6 +70,48 @@ class ComparisonTests(unittest.TestCase):
 
 
 class PipelineTests(unittest.TestCase):
+    def test_new_ability_icon_is_cached_from_its_game_image_path(self):
+        class IconResponse(io.BytesIO):
+            headers = {"Content-Type": "image/webp"}
+
+        manifest = {"build": 7000, "files": {"abilities": {"sha256": "example"}}}
+        change = {"path": "abilities.ability_new_dash.m_flSpeed"}
+        data = {"ability_new_dash": {"m_strAbilityImage":
+                                    "file://{images}/hud/abilities/newhero/new_dash.psd"}}
+        with tempfile.TemporaryDirectory(dir=Path(__file__).parent) as folder:
+            with patch.object(tracker, "ROOT", Path(folder)), \
+                 patch.object(tracker, "ability_blob", return_value=data), \
+                 patch.object(tracker, "urlopen", return_value=IconResponse(b"RIFF0000WEBPicon")) as fetch_icon:
+                tracker.ensure_icon_for_change(manifest, change)
+                icon = Path(folder) / "assets" / "icons" / "newhero__new_dash.webp"
+                self.assertEqual(icon.read_bytes(), b"RIFF0000WEBPicon")
+                sources = json.loads((icon.parent / "auto-sources.json").read_text(encoding="utf-8"))
+                self.assertIn("newhero__new_dash.webp", sources)
+                self.assertEqual(tracker.icon_for_change(change, manifest), icon.name)
+                self.assertIn("newhero/new_dash.webp", fetch_icon.call_args.args[0].full_url)
+
+    def test_missing_new_icon_keeps_card_text_only(self):
+        manifest = {"build": 7000, "files": {"abilities": {"sha256": "example"}}}
+        change = {"path": "abilities.ability_new_dash.m_flSpeed", "kind": "changed",
+                  "old": 50, "new": 65, "delta": 15}
+        data = {"ability_new_dash": {"m_strAbilityImage":
+                                    "file://{images}/hud/abilities/newhero/new_dash.psd"}}
+        with tempfile.TemporaryDirectory(dir=Path(__file__).parent) as folder:
+            with patch.object(tracker, "ROOT", Path(folder)), \
+                 patch.object(tracker, "ability_blob", return_value=data), \
+                 patch.object(tracker, "urlopen", side_effect=URLError("offline")):
+                tracker.ensure_icon_for_change(manifest, change)
+                self.assertIsNone(tracker.icon_for_change(change, manifest))
+                self.assertFalse((Path(folder) / "assets" / "icons").exists())
+
+    def test_changed_game_art_does_not_reuse_old_icon(self):
+        manifest = {"files": {"abilities": {"sha256": "changed-art"}}}
+        change = {"path": "abilities.ability_artist_homingbrush.m_flSpeed"}
+        data = {"ability_artist_homingbrush": {"m_strAbilityImage":
+                                              "file://{images}/hud/abilities/artist/new_livingink.psd"}}
+        with patch.object(tracker, "ability_blob", return_value=data):
+            self.assertIsNone(tracker.icon_for_change(change, manifest))
+
     def test_change_card_uses_matching_game_icon_and_exact_values(self):
         manifest = {"build": 6819, "upstream_time": "2026-10-22T23:53:52Z"}
         change = {"path": "abilities.ability_artist_pullbrush.m_flMinStrokeDistance",

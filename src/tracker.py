@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import base64
 from datetime import datetime, timezone
+from functools import lru_cache
 import gzip
 import hashlib
 import html
@@ -35,6 +36,7 @@ BLOBS = DATA / "blobs"
 REPORTS = ROOT / "reports"
 FIRST_BUILD = 6793
 USER_AGENT = "deadlock-tracker/1.0 (+https://github.com/jordanbenjaminmitchell/deadlock-tracker)"
+ICON_CDN = "https://assets-bucket.deadlock-api.com/assets-api-res/images/abilities/"
 
 
 class SourceError(RuntimeError):
@@ -100,6 +102,11 @@ def load_blob(digest: str):
     path = BLOBS / f"{digest}.json.gz"
     with gzip.open(path, "rt", encoding="utf-8") as stream:
         return json.load(stream)
+
+
+@lru_cache(maxsize=32)
+def ability_blob(digest: str):
+    return load_blob(digest)
 
 
 def write_atomic(path: Path, content: bytes):
@@ -252,13 +259,7 @@ def report(manifest: dict, prior: dict | None, changes: list[dict], posts: list[
 def infographic(manifest: dict, prior: dict | None, changes: list[dict]):
     """Show one actual change; link to the report for the rest of the build."""
     number = manifest["build"]
-    known_icon = [change for change in changes if icon_for_change(change)
-                  and not isinstance(change["old"], (dict, list))
-                  and not isinstance(change["new"], (dict, list))]
-    scalar = [change for change in changes
-              if not isinstance(change["old"], (dict, list))
-              and not isinstance(change["new"], (dict, list))]
-    featured = next(iter(known_icon or scalar or changes), None)
+    featured = featured_change(manifest, changes)
     svg = change_card(manifest, prior, featured, len(changes))
     write_atomic(REPORTS / "infographics" / f"{number}.svg", svg.encode("utf-8"))
 
@@ -335,6 +336,12 @@ ABILITY_ICONS = {
     "ability_artist_bamboogrove": "abstract-landscape.webp",
     "ability_warden_riot_protocol": "last-stand.webp",
 }
+KNOWN_ICON_GAME_PATHS = {
+    "ability_artist_pullbrush": "file://{images}/hud/abilities/artist/artist_livingink.psd",
+    "ability_artist_homingbrush": "file://{images}/hud/abilities/artist/artist_livingink.psd",
+    "ability_artist_bamboogrove": "file://{images}/hud/abilities/artist/artist_landscape.psd",
+    "ability_warden_riot_protocol": "file://{images}/hud/abilities/warden/warden_riot_protocol.psd",
+}
 FIELD_LABELS = {
     "m_flMinStrokeDistance": "Minimum stroke distance",
     "m_bDurationReducible": "Duration reduction allowed",
@@ -388,9 +395,74 @@ def readable_change(change: dict) -> tuple[str, str, str]:
     return context, field, f"{fmt(change['old'])} → {fmt(change['new'])}"
 
 
-def icon_for_change(change: dict) -> str | None:
+def game_icon_spec(manifest: dict, change: dict) -> tuple[str, str, str] | None:
+    """Resolve an ability's own image path from its archived game data."""
     parts = change["path"].split(".")
-    return ABILITY_ICONS.get(parts[1]) if len(parts) > 1 and parts[0] == "abilities" else None
+    record = manifest.get("files", {}).get("abilities")
+    if len(parts) < 2 or parts[0] != "abilities" or not record:
+        return None
+    ability = ability_blob(record["sha256"]).get(parts[1], {})
+    image = ability.get("m_strAbilityImage", "") if isinstance(ability, dict) else ""
+    match = re.fullmatch(r"file://\{images\}/hud/abilities/([A-Za-z0-9_/-]+)\.psd", image)
+    if not match:
+        return None
+    relative = match.group(1)
+    if any(word in relative.lower() for word in ("default", "placeholder", "missing", "generic")):
+        return None
+    filename = relative.replace("/", "__") + ".webp"
+    return filename, ICON_CDN + relative + ".webp", image
+
+
+def icon_for_change(change: dict, manifest: dict | None = None) -> str | None:
+    parts = change["path"].split(".")
+    if len(parts) < 2 or parts[0] != "abilities":
+        return None
+    known = ABILITY_ICONS.get(parts[1])
+    spec = game_icon_spec(manifest, change) if manifest else None
+    if known and (ROOT / "assets" / "icons" / known).exists() and (
+        not manifest or not manifest.get("files", {}).get("abilities") or
+        spec and spec[2] == KNOWN_ICON_GAME_PATHS[parts[1]]
+    ):
+        return known
+    return spec[0] if spec and (ROOT / "assets" / "icons" / spec[0]).exists() else None
+
+
+def ensure_icon_for_change(manifest: dict, change: dict | None) -> None:
+    """Cache an exact game icon when possible; icon failures never block a build."""
+    if not change or icon_for_change(change, manifest):
+        return
+    spec = game_icon_spec(manifest, change)
+    if not spec:
+        return
+    filename, url, game_path = spec
+    try:
+        request = Request(url, headers={"User-Agent": USER_AGENT, "Accept": "image/webp"})
+        with urlopen(request, timeout=15) as response:
+            if not response.headers.get("Content-Type", "").startswith("image/webp"):
+                return
+            body = response.read(1_000_001)
+        if len(body) > 1_000_000 or not body.startswith(b"RIFF") or body[8:12] != b"WEBP":
+            return
+        folder = ROOT / "assets" / "icons"
+        write_atomic(folder / filename, body)
+        sources_path = folder / "auto-sources.json"
+        sources = json.loads(sources_path.read_text(encoding="utf-8")) if sources_path.exists() else {}
+        sources[filename] = {"ability": change["path"].split(".")[1],
+                             "game_image": game_path, "source": url,
+                             "sha256": hashlib.sha256(body).hexdigest(),
+                             "first_seen_build": manifest["build"]}
+        write_atomic(sources_path, json_bytes(sources))
+    except (HTTPError, URLError, OSError, TimeoutError, ValueError) as exc:
+        print(f"Icon unavailable for {change['path']}: {exc}", file=sys.stderr)
+
+
+def featured_change(manifest: dict, changes: list[dict]) -> dict | None:
+    scalar = [change for change in changes
+              if not isinstance(change["old"], (dict, list))
+              and not isinstance(change["new"], (dict, list))]
+    illustrated = [change for change in scalar
+                   if icon_for_change(change, manifest) or game_icon_spec(manifest, change)]
+    return next(iter(illustrated or scalar or changes), None)
 
 
 def change_card(manifest: dict, prior: dict | None, change: dict | None, total: int) -> str:
@@ -398,7 +470,7 @@ def change_card(manifest: dict, prior: dict | None, change: dict | None, total: 
     number = manifest["build"]
     stamp = datetime.fromisoformat(manifest["upstream_time"].replace("Z", "+00:00"))
     when = stamp.strftime("%b %d, %Y %H:%M UTC")
-    icon = icon_for_change(change) if change else None
+    icon = icon_for_change(change, manifest) if change else None
     icon_markup = ""
     if icon:
         binary = (ROOT / "assets" / "icons" / icon).read_bytes()
@@ -593,10 +665,13 @@ def run(max_builds: int | None = None):
         posts = community(number)
         write_atomic(target, json_bytes(manifest))
         report(manifest, last, changes, posts)
+        ensure_icon_for_change(manifest, featured_change(manifest, changes))
         infographic(manifest, last, changes)
         update_summaries(manifest, changes)
         print(f"Archived {number}: {len(changes)} exact data changes", flush=True)
         last = manifest
+    for entry in recent_change_entries():
+        ensure_icon_for_change(entry["manifest"], entry["change"])
     update_recent_gallery()
 
 
