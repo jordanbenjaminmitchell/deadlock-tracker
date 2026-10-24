@@ -2,7 +2,7 @@
 
 Browse the builds we have archived, newest first. Dates show when SteamTracking recorded each build (UTC).
 
-[See the latest five readable changes](recent-changes.md) · [Latest report](latest.md) · [Street Brawl](street-brawl.md)
+[See the latest five verified comparisons](recent-changes.md) · [Latest report](latest.md) · [Street Brawl](street-brawl.md)
 
 ![One change from the latest build](infographics/latest.svg)
 

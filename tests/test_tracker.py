@@ -82,7 +82,7 @@ class PublicPresentationTests(unittest.TestCase):
         change = {"path": "abilities.ability_artist_pullbrush.m_flMinStrokeDistance",
                   "kind": "added", "old": None, "new": 15.0}
         self.assertEqual(tracker.public_change(change),
-                         ("Violet · Living Ink", "Minimum stroke distance", "Not listed", "15.0", ""))
+                         ("Violet · Living Ink", "Minimum stroke distance", "No earlier value", "15.0", ""))
 
     def test_markdown_source_text_is_escaped(self):
         self.assertEqual(tracker.markdown_text("<script>*change*"), "&lt;script&gt;\\*change\\*")
@@ -149,6 +149,25 @@ class ReliabilityTests(unittest.TestCase):
                  patch.object(tracker, "diff_manifests", return_value=[added, changed]):
                 entries = tracker.recent_change_entries(limit=1)
         self.assertEqual(entries[0]["change"]["path"], changed["path"])
+
+    def test_gallery_skips_new_fields_without_an_earlier_value(self):
+        added = {"path": "abilities.ability_artist_pullbrush.m_flMinStrokeDistance",
+                 "category": "abilities", "kind": "added", "old": None, "new": 15.0}
+        changed = {"path": "heroes.hero_nurse.m_mapStartingStats.EMaxHealth",
+                   "category": "heroes", "kind": "changed", "old": 780, "new": 730, "delta": -50}
+        with tempfile.TemporaryDirectory(dir=Path(__file__).parent) as folder:
+            builds = Path(folder)
+            for number in (6998, 6999, 7000):
+                target = builds / str(number) / "snapshot.json"
+                target.parent.mkdir()
+                target.write_text(json.dumps({"build": number,
+                    "upstream_time": f"2026-10-24T{number - 6998:02d}:00:00Z"}), encoding="utf-8")
+            with patch.object(tracker, "BUILDS", builds), \
+                 patch.object(tracker, "diff_manifests",
+                              side_effect=lambda old, new: [added] if new["build"] == 7000 else [changed]):
+                entries = tracker.recent_change_entries(limit=1)
+        self.assertEqual(entries[0]["manifest"]["build"], 6999)
+        self.assertEqual(entries[0]["change"], changed)
 
     def test_validator_rejects_tampered_archived_data(self):
         with tempfile.TemporaryDirectory(dir=Path(__file__).parent) as folder:
@@ -263,7 +282,8 @@ class PipelineTests(unittest.TestCase):
         svg = tracker.change_card(manifest, {"build": 6817}, change, 1)
         root = ET.fromstring(svg)
         self.assertEqual(len(root.findall("{http://www.w3.org/2000/svg}image")), 1)
-        self.assertIn("Not listed → 15.0", svg)
+        self.assertIn("New setting: 15.0", svg)
+        self.assertNotIn("No earlier value →", svg)
         self.assertIn("Oct 22, 2026 23:53 UTC", svg)
         self.assertNotIn("<rect x=\"220\"", svg)
 
@@ -295,6 +315,20 @@ class PipelineTests(unittest.TestCase):
         self.assertEqual(exact["changes"], [change])
         self.assertNotIn("## Heroes", page)
         self.assertNotIn("No exact-build discussion retrieved", page)
+
+    def test_new_field_report_does_not_claim_a_previous_number(self):
+        change = {"path": "abilities.ability_artist_pullbrush.m_flMinStrokeDistance",
+                  "category": "abilities", "kind": "added", "old": None, "new": 15.0}
+        manifest = {"build": 6819, "upstream_time": "2026-10-22T23:53:52Z",
+                    "source": "https://example.test/commit", "source_revision": "123",
+                    "files": {}, "changed_files": []}
+        with tempfile.TemporaryDirectory(dir=Path(__file__).parent) as folder:
+            with patch.object(tracker, "REPORTS", Path(folder)):
+                tracker.report(manifest, {"build": 6817}, [change], [])
+                page = (Path(folder) / "builds" / "6819.md").read_text(encoding="utf-8")
+        self.assertIn("new setting **15.0**", page)
+        self.assertIn("earlier in-game behavior cannot be verified", page)
+        self.assertNotIn("No earlier value →", page)
 
     def test_discovery_deduplicates_and_orders(self):
         def row(number, sha):

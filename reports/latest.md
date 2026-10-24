@@ -6,9 +6,11 @@ Recorded Oct 22, 2026 at 23:53 UTC. Compared with build 6817.
 
 These are values found in extracted game data. They do not confirm how a change felt in a match.
 
+New settings have no earlier value in the saved files. Their earlier in-game behavior cannot be verified from these data sources.
+
 ## Abilities and items (1)
 
-- **Violet · Living Ink — Minimum stroke distance**: Not listed → **15.0**
+- **Violet · Living Ink — Minimum stroke distance**: new setting **15.0**
 
 [See the source commit](https://github.com/SteamTracking/GameTracking-Deadlock/commit/17462b250a0ca80e7f80102f2c83cc3eecff5f12)
 

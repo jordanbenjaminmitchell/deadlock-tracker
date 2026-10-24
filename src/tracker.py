@@ -245,6 +245,9 @@ def report(manifest: dict, prior: dict | None, changes: list[dict], posts: list[
     if prior and not changes:
         lines += ["No value changed in the game data we track for this build.", ""]
     lines += ["These are values found in extracted game data. They do not confirm how a change felt in a match.", ""]
+    if any(change["kind"] == "added" for change in changes):
+        lines += ["New settings have no earlier value in the saved files. Their earlier in-game behavior "
+                  "cannot be verified from these data sources.", ""]
     sections = [("Street Brawl", "street-brawl"), ("Heroes", "heroes"),
                 ("Abilities and items", "abilities"), ("Map and NPC data", "map-and-npcs"),
                 ("Modifiers", "modifiers"), ("Other data", "other-data")]
@@ -257,10 +260,7 @@ def report(manifest: dict, prior: dict | None, changes: list[dict], posts: list[
             if view in seen:
                 continue
             seen.add(view)
-            context, field, before, after, note = view
-            lines.append(f"- **{markdown_text(context)} — {markdown_text(field)}**: "
-                         f"{markdown_text(before)} → **{markdown_text(after)}**"
-                         + (f" ({markdown_text(note)})" if note else ""))
+            lines.append("- " + public_change_summary(change))
             if len(seen) == 5:
                 break
         lines.append("")
@@ -271,13 +271,11 @@ def report(manifest: dict, prior: dict | None, changes: list[dict], posts: list[
             continue
         groups = {}
         for change in selected:
-            view = public_change(change)
-            groups[view] = groups.get(view, 0) + 1
+            key = (change["kind"], public_change(change))
+            groups[key] = groups.get(key, 0) + 1
         lines += [f"## {title} ({len(selected)})", ""]
-        for (context, field, before, after, note), count in groups.items():
-            lines.append(f"- **{markdown_text(context)} — {markdown_text(field)}**: "
-                         f"{markdown_text(before)} → **{markdown_text(after)}**"
-                         + (f" ({markdown_text(note)})" if note else "")
+        for (kind, view), count in groups.items():
+            lines.append("- " + public_change_summary_parts(kind, view)
                          + (f" · {count} matching values" if count > 1 else ""))
         lines.append("")
         shown += len(selected)
@@ -353,10 +351,7 @@ def update_summaries(manifest: dict, changes: list[dict]):
                   f"[Read the build report](builds/{source['build']}.md) or "
                   f"[check the source commit]({source['source']}).", ""]
         for change in found:
-            context, field, before, after, note = public_change(change)
-            lines.append(f"- **{markdown_text(context)} — {markdown_text(field)}**: "
-                         f"{markdown_text(before)} → **{markdown_text(after)}**"
-                         + (f" ({markdown_text(note)})" if note else ""))
+            lines.append("- " + public_change_summary(change))
     else:
         lines.append("No Street Brawl value change appears in the archived comparisons yet.")
     lines += ["", "[Browse all builds](index.md) · [See the latest change card](infographics/latest.svg)", ""]
@@ -387,7 +382,7 @@ def change_priority(change: dict) -> tuple[int, str]:
 
 
 def recent_change_entries(limit: int = 5) -> list[dict]:
-    """Select recent readable values; prefer true before/after changes within a build."""
+    """Only show changes with two recorded values in the before-and-after gallery."""
     manifests = [json.loads(path.read_text(encoding="utf-8")) for path in
                  sorted(BUILDS.glob("*/snapshot.json"), key=lambda path: int(path.parent.name))]
     comparisons = [(manifests[position], manifests[position - 1])
@@ -397,7 +392,8 @@ def recent_change_entries(limit: int = 5) -> list[dict]:
     for manifest, prior in comparisons:
         changes = diff_manifests(prior, manifest)
         scalar = (change for change in changes
-                  if not isinstance(change["old"], (dict, list))
+                  if change["kind"] == "changed"
+                  and not isinstance(change["old"], (dict, list))
                   and not isinstance(change["new"], (dict, list))
                   and is_public_change(change))
         for change in sorted(scalar, key=change_priority):
@@ -489,7 +485,7 @@ def public_change(change: dict) -> tuple[str, str, str, str, str]:
         new_flags = set(new.split(" | "))
         if new_flags - old_flags == {flag} and not old_flags - new_flags:
             field = field.replace(" state flags", " fear immunity")
-            before = "Not listed" if change["kind"] == "added" else "Off"
+            before = "No earlier value" if change["kind"] == "added" else "Off"
             return context, field, before, "On", "Fear immunity added"
 
     def value(item):
@@ -514,12 +510,28 @@ def public_change(change: dict) -> tuple[str, str, str, str, str]:
             return item
         return fmt(item)
 
-    before = "Not listed" if change["kind"] == "added" else value(old)
+    before = "No earlier value" if change["kind"] == "added" else value(old)
     after = "Removed" if change["kind"] == "removed" else value(new)
     note = f"Change {change['delta']:+g}" if "delta" in change else ""
     if note and "percent" in change:
         note += f" · {change['percent']:+.2f}%"
     return context, field, before, after, note
+
+
+def public_change_summary_parts(kind: str, view: tuple[str, str, str, str, str]) -> str:
+    """Use an arrow only when both values were recorded in saved builds."""
+    context, field, before, after, note = view
+    title = f"**{markdown_text(context)} — {markdown_text(field)}**"
+    if kind == "added":
+        return f"{title}: new setting **{markdown_text(after)}**"
+    if kind == "removed":
+        return f"{title}: setting removed (previously {markdown_text(before)})"
+    return (f"{title}: {markdown_text(before)} → **{markdown_text(after)}**"
+            + (f" ({markdown_text(note)})" if note else ""))
+
+
+def public_change_summary(change: dict) -> str:
+    return public_change_summary_parts(change["kind"], public_change(change))
 
 
 def is_public_change(change: dict) -> bool:
@@ -627,11 +639,21 @@ def change_card(manifest: dict, prior: dict | None, change: dict | None, total: 
 
     if change:
         context, field, before, after, note = public_change(change)
-        main = f"{before} → {after}"
-        detail = note or "Before and after from saved game data"
+        if change["kind"] == "added":
+            main = f"New setting: {after}"
+            detail = "Earlier behavior unverified"
+            description = f"Build {number}, {context}, {field}: newly recorded as {after}."
+        elif change["kind"] == "removed":
+            main = "Setting removed"
+            detail = f"Previously {before}"
+            description = f"Build {number}, {context}, {field}: setting removed; previously {before}."
+        else:
+            main = f"{before} → {after}"
+            detail = note or "Before and after from saved game data"
+            description = f"Build {number}, {context}, {field}: before {before}; now {after}."
         footer = (f"1 of {total} changes · See the full build report" if total > 1
+                  else "First recorded in this build" if change["kind"] == "added"
                   else f"Compared with build {prior['build']}" if prior else "First archived build")
-        description = f"Build {number}, {context}, {field}: before {before}; now {after}."
     else:
         context = ("No simple value change" if total else "No tracked change") if prior else "First archived build"
         field = "Game data checked" if not total else f"{total} data changes found"
@@ -677,10 +699,17 @@ def recent_card_filename(entry: dict) -> str:
 
 
 def gallery_markup(entries: list[dict], prefix: str) -> str:
-    lines = ["## The latest five readable changes", "",
-             "Each card shows one value before and after the update. The date is when SteamTracking recorded that build (UTC). "
-             "Changes within one build share the same recorded time; we show measured value changes first. "
-             "‘Not listed’ means the previous saved build had no value for that field.", ""]
+    latest = latest_manifest()
+    lines = ["## The latest five verified comparisons", ""]
+    if latest:
+        stamp = datetime.fromisoformat(latest["upstream_time"].replace("Z", "+00:00"))
+        lines += [f"Latest archived build: [{latest['build']}]({prefix}builds/{latest['build']}.md), "
+                  f"recorded {stamp.strftime('%b %d, %Y %H:%M UTC')}. "
+                  "This page changes when SteamTracking records a newer client build; "
+                  "[check the latest scheduled run](https://github.com/jordanbenjaminmitchell/deadlock-tracker/actions/workflows/track.yml).", ""]
+    lines += ["Each card uses a field recorded in both saved builds, with its earlier and new value. "
+              "The date is when SteamTracking recorded the newer build (UTC). "
+              "Newly introduced settings appear in their build reports without an invented previous value.", ""]
     if not entries:
         return "\n".join(lines + ["No comparable changes are saved yet.", ""])
     lines += ["<table>", "<tr>"]
@@ -741,7 +770,7 @@ def update_recent_gallery():
                  sorted(BUILDS.glob("*/snapshot.json"), key=lambda path: int(path.parent.name))]
     index = ["# Deadlock build history", "", "Browse the builds we have archived, newest first. "
              "Dates show when SteamTracking recorded each build (UTC).", "",
-             "[See the latest five readable changes](recent-changes.md) · [Latest report](latest.md) · "
+             "[See the latest five verified comparisons](recent-changes.md) · [Latest report](latest.md) · "
              "[Street Brawl](street-brawl.md)", "",
              "![One change from the latest build](infographics/latest.svg)", "",
              "| Build | Recorded (UTC) | Readable values | All tracked changes | Report | Card |",
