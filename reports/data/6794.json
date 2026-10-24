@@ -1,0 +1,1 @@
+{"build":6794,"changes":[{"category":"street-brawl","delta":-15,"kind":"changed","new":50,"old":65,"path":"generic_data.m_StreetBrawl.m_vecBuyTime[4]","percent":-23.076923076923077}],"compared_with":6793,"recorded_at":"2026-10-17T21:32:52Z","source":"https://github.com/SteamTracking/GameTracking-Deadlock/commit/df1192043fd269aee7edf4dffdfb4cfc03d05f64"}

@@ -16,8 +16,9 @@ import re
 import sys
 import tempfile
 import time
+import xml.etree.ElementTree as ET
 from urllib.error import HTTPError, URLError
-from urllib.parse import quote, urlencode
+from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
 from diff import category, compare
@@ -44,7 +45,11 @@ class SourceError(RuntimeError):
 
 
 def fetch(url: str, *, retries: int = 3, timeout: int = 30) -> bytes:
-    request = Request(url, headers={"User-Agent": USER_AGENT, "Accept": "application/json"})
+    headers = {"User-Agent": USER_AGENT, "Accept": "application/json"}
+    token = os.environ.get("GITHUB_TOKEN")
+    if token and url.startswith(API + "/"):
+        headers["Authorization"] = f"Bearer {token}"
+    request = Request(url, headers=headers)
     for attempt in range(retries):
         try:
             with urlopen(request, timeout=timeout) as response:
@@ -66,9 +71,10 @@ def fetch_json(url: str):
         raise SourceError(f"Invalid JSON from {url}: {exc}") from exc
 
 
-def discover(limit_pages: int = 5) -> list[dict]:
-    """List distinct client builds from commits that changed steam.inf."""
+def discover(limit_pages: int = 25, stop_at_build: int = FIRST_BUILD) -> list[dict]:
+    """Find every build back to the saved anchor; fail if pagination cannot reach it."""
     found = {}
+    reached_end = False
     for page in range(1, limit_pages + 1):
         query = urlencode({"path": "game/citadel/steam.inf", "per_page": 100, "page": page})
         payload = fetch_json(f"{API}/commits?{query}")
@@ -87,10 +93,17 @@ def discover(limit_pages: int = 5) -> list[dict]:
                                      "changed_files": [{"status": status, "path": path}
                                                        for status, path in changed_files],
                                      "steamdb_url": steamdb.group() if steamdb else None}
-        if len(payload) < 100 or (found and min(found) <= FIRST_BUILD):
+        if stop_at_build in found:
+            break
+        if len(payload) < 100:
+            reached_end = True
             break
     if not found:
         raise SourceError("No client builds found in SteamTracking commit history")
+    if not reached_end and stop_at_build not in found:
+        raise SourceError(f"Could not reach saved build {stop_at_build} within {limit_pages} history pages")
+    if stop_at_build not in found and stop_at_build != FIRST_BUILD:
+        raise SourceError(f"Saved build {stop_at_build} was not found in upstream history")
     return [found[key] for key in sorted(found)]
 
 
@@ -121,23 +134,35 @@ def json_bytes(value) -> bytes:
     return (json.dumps(value, sort_keys=True, ensure_ascii=False, separators=(",", ":")) + "\n").encode("utf-8")
 
 
+def read_json_file(path: Path):
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, ValueError) as exc:
+        raise SourceError(f"Could not read saved JSON at {path}: {exc}") from exc
+
+
 def latest_manifest():
     paths = sorted(BUILDS.glob("*/snapshot.json"), key=lambda path: int(path.parent.name))
-    return json.loads(paths[-1].read_text(encoding="utf-8")) if paths else None
+    return read_json_file(paths[-1]) if paths else None
 
 
 def collect(entry: dict) -> dict:
     number, commit = entry["build"], entry["commit"]
     inf_path = "game/citadel/steam.inf"
-    inf = fetch(raw_url(commit, inf_path)).decode("utf-8")
+    try:
+        inf = fetch(raw_url(commit, inf_path)).decode("utf-8-sig")
+    except UnicodeError as exc:
+        raise SourceError(f"Cannot decode {inf_path} at {commit}: {exc}") from exc
     props = dict(re.findall(r"^([^=\r\n]+)=([^\r\n]*)", inf, flags=re.MULTILINE))
     if props.get("ClientVersion") != str(number) or props.get("appID") != "1422450":
         raise SourceError(f"ClientVersion/appID mismatch for commit {commit}")
+    if not props.get("SourceRevision"):
+        raise SourceError(f"SourceRevision is missing from {inf_path} at {commit}")
     parsed = {}
     for name in FILES:
         path = f"{SCRIPTS}/{name}.vdata"
-        body = fetch(raw_url(commit, path)).decode("utf-8-sig")
         try:
+            body = fetch(raw_url(commit, path)).decode("utf-8-sig")
             parsed[name] = loads(body)
         except (KV3Error, UnicodeError) as exc:
             raise SourceError(f"Cannot parse {path} at {commit}: {exc}") from exc
@@ -202,6 +227,12 @@ def fmt(value):
     return json.dumps(value, ensure_ascii=False)
 
 
+def markdown_text(value: str) -> str:
+    """Keep source-provided words from turning into Markdown or HTML markup."""
+    escaped = html.escape(str(value), quote=False)
+    return re.sub(r"([\\`*_{}\[\]()#+!|])", r"\\\1", escaped)
+
+
 def report(manifest: dict, prior: dict | None, changes: list[dict], posts: list[dict]):
     number = manifest["build"]
     stamp = datetime.fromisoformat(manifest["upstream_time"].replace("Z", "+00:00"))
@@ -217,6 +248,22 @@ def report(manifest: dict, prior: dict | None, changes: list[dict], posts: list[
     sections = [("Street Brawl", "street-brawl"), ("Heroes", "heroes"),
                 ("Abilities and items", "abilities"), ("Map and NPC data", "map-and-npcs"),
                 ("Modifiers", "modifiers"), ("Other data", "other-data")]
+    readable = [change for change in changes if is_public_change(change)]
+    if len(readable) > 10:
+        lines += ["## At a glance", ""]
+        seen = set()
+        for change in sorted(readable, key=change_priority):
+            view = public_change(change)
+            if view in seen:
+                continue
+            seen.add(view)
+            context, field, before, after, note = view
+            lines.append(f"- **{markdown_text(context)} — {markdown_text(field)}**: "
+                         f"{markdown_text(before)} → **{markdown_text(after)}**"
+                         + (f" ({markdown_text(note)})" if note else ""))
+            if len(seen) == 5:
+                break
+        lines.append("")
     shown = 0
     for title, key in sections:
         selected = [change for change in changes if change["category"] == key and is_public_change(change)]
@@ -228,8 +275,9 @@ def report(manifest: dict, prior: dict | None, changes: list[dict], posts: list[
             groups[view] = groups.get(view, 0) + 1
         lines += [f"## {title} ({len(selected)})", ""]
         for (context, field, before, after, note), count in groups.items():
-            lines.append(f"- **{context} — {field}**: {before} → **{after}**"
-                         + (f" ({note})" if note else "")
+            lines.append(f"- **{markdown_text(context)} — {markdown_text(field)}**: "
+                         f"{markdown_text(before)} → **{markdown_text(after)}**"
+                         + (f" ({markdown_text(note)})" if note else "")
                          + (f" · {count} matching values" if count > 1 else ""))
         lines.append("")
         shown += len(selected)
@@ -240,14 +288,18 @@ def report(manifest: dict, prior: dict | None, changes: list[dict], posts: list[
     if posts:
         lines += ["## Community discussion", "",
                   "These posts may add context; the values above come from game data.", ""]
-        lines += [f"- [{post['title']}]({post['url']})" for post in posts]
+        lines += [f'- <a href="{html.escape(post["url"], quote=True)}">'
+                  f'{html.escape(post["title"])}</a>' for post in posts]
         lines.append("")
+    write_atomic(REPORTS / "data" / f"{number}.json",
+                 json_bytes({"build": number, "compared_with": prior["build"] if prior else None,
+                             "recorded_at": manifest["upstream_time"], "source": manifest["source"],
+                             "changes": changes}))
     lines += ["[See the source commit](" + manifest["source"] + ")", "",
               "<details>", "<summary>Check the exact source values</summary>", "",
-              f"Client build `{number}` · Source revision `{manifest['source_revision']}`", "",
-              "The lines below preserve the original field names and values used for this comparison.", ""]
-    for change in changes:
-        lines.append(f"- `{change['path']}`: `{fmt(change['old'])}` → `{fmt(change['new'])}`")
+              f"[Download every original before and after value](../data/{number}.json). "
+              "This file includes all tracked changes, including those summarized above.", "",
+              f"Client build `{number}` · Source revision `{manifest['source_revision']}`", ""]
     ignored = {"game/citadel/steam.inf", *(f"{SCRIPTS}/{name}.vdata" for name in FILES)}
     other_files = [item for item in manifest.get("changed_files", [])
                    if item["path"] not in ignored and not item["path"].startswith("manifests/")]
@@ -275,7 +327,8 @@ def update_summaries(manifest: dict, changes: list[dict]):
     number = manifest["build"]
     path = REPORTS / "builds" / f"{number}.md"
     write_atomic(REPORTS / "latest.md",
-                 path.read_text(encoding="utf-8").replace("../../data/", "../data/").encode("utf-8"))
+                 path.read_text(encoding="utf-8").replace(f"](../data/{number}.json)",
+                    f"](data/{number}.json)").replace("../../data/", "../data/").encode("utf-8"))
     write_atomic(REPORTS / "infographics" / "latest.svg",
                  (REPORTS / "infographics" / f"{number}.svg").read_bytes())
     brawl = [change for change in changes if change["category"] == "street-brawl"]
@@ -301,8 +354,9 @@ def update_summaries(manifest: dict, changes: list[dict]):
                   f"[check the source commit]({source['source']}).", ""]
         for change in found:
             context, field, before, after, note = public_change(change)
-            lines.append(f"- **{context} — {field}**: {before} → **{after}**"
-                         + (f" ({note})" if note else ""))
+            lines.append(f"- **{markdown_text(context)} — {markdown_text(field)}**: "
+                         f"{markdown_text(before)} → **{markdown_text(after)}**"
+                         + (f" ({markdown_text(note)})" if note else ""))
     else:
         lines.append("No Street Brawl value change appears in the archived comparisons yet.")
     lines += ["", "[Browse all builds](index.md) · [See the latest change card](infographics/latest.svg)", ""]
@@ -310,8 +364,30 @@ def update_summaries(manifest: dict, changes: list[dict]):
     write_atomic(DATA / "state.json", json_bytes({"latest_build": number, "latest_commit": manifest["commit"]}))
 
 
+def change_priority(change: dict) -> tuple[int, str]:
+    """Prefer actual value changes over newly listed settings at the same build time."""
+    path = change["path"]
+    score = 10 if change["kind"] == "changed" else 0
+    if "delta" in change:
+        score += 5
+    if ".m_mapStartingStats." in path:
+        score += 5
+        for name, bonus in (("EMaxHealth", 5), ("ESprintSpeed", 4),
+                            ("EMaxMoveSpeed", 3), ("EBaseHealthRegen", 2)):
+            if path.endswith("." + name):
+                score += bonus
+                break
+    if change.get("category") == "street-brawl":
+        score += 4
+    if any(part in ABILITY_LABELS for part in path.split(".")):
+        score += 2
+    if "m_mapItemDraftBucketing" in path or "m_colorUI" in path:
+        score -= 10
+    return -score, path
+
+
 def recent_change_entries(limit: int = 5) -> list[dict]:
-    """Select the newest scalar VData changes; field paths break ties within a build."""
+    """Select recent readable values; prefer true before/after changes within a build."""
     manifests = [json.loads(path.read_text(encoding="utf-8")) for path in
                  sorted(BUILDS.glob("*/snapshot.json"), key=lambda path: int(path.parent.name))]
     comparisons = [(manifests[position], manifests[position - 1])
@@ -324,7 +400,7 @@ def recent_change_entries(limit: int = 5) -> list[dict]:
                   if not isinstance(change["old"], (dict, list))
                   and not isinstance(change["new"], (dict, list))
                   and is_public_change(change))
-        for change in sorted(scalar, key=lambda item: item["path"]):
+        for change in sorted(scalar, key=change_priority):
             entries.append({"manifest": manifest, "prior": prior, "change": change})
             if len(entries) == limit:
                 return entries
@@ -411,93 +487,7 @@ def public_change(change: dict) -> tuple[str, str, str, str, str]:
         flag = "MODIFIER_STATE_FEAR_IMMUNE"
         old_flags = set(old.split(" | ")) if isinstance(old, str) else set()
         new_flags = set(new.split(" | "))
-        if flag in new_flags and flag not in old_flags:
-            field = field.replace(" state flags", " fear immunity")
-            before = "Not listed" if change["kind"] == "added" else "Off"
-            return context, field, before, "On", "Fear immunity added"
-
-    def value(item):
-        if item is True:
-            return "On"
-        if item is False:
-            return "Off"
-        if isinstance(item, (dict, list)):
-            return "Structured data"
-        if isinstance(item, str):
-            states = {"EHeroDevState_PreRelease": "Pre-release",
-                      "EHeroDevState_Release": "Released"}
-            if item in states:
-                return states[item]
-            if item.startswith("E") and "_" in item:
-                parts = item.split(" | ")
-                if all(re.fullmatch(r"E[A-Za-z]+_[A-Za-z0-9_]+", part) for part in parts):
-                    return ", ".join(readable_words(part.split("_", 1)[1]) for part in parts)
-            if (item.startswith(("MODIFIER_STATE_", "ability_", "citadel_", "#"))
-                    or "/" in item or ".vdata" in item or "_" in item or "." in item):
-                return "Game data reference"
-            return item
-        return fmt(item)
-
-    before = "Not listed" if change["kind"] == "added" else value(old)
-    after = "Removed" if change["kind"] == "removed" else value(new)
-    note = f"Change {change['delta']:+g}" if "delta" in change else ""
-    if note and "percent" in change:
-        note += f" · {change['percent']:+.2f}%"
-    return context, field, before, after, note
-
-
-def public_change(change: dict) -> tuple[str, str, str, str, str]:
-    """Show archived before/after values without exposing internal field names."""
-    context, field, _ = readable_change(change)
-    old, new = change["old"], change["new"]
-    if change["path"].endswith("m_nEnabledStateMask") and isinstance(new, str):
-        flag = "MODIFIER_STATE_FEAR_IMMUNE"
-        old_flags = set(old.split(" | ")) if isinstance(old, str) else set()
-        new_flags = set(new.split(" | "))
-        if flag in new_flags and flag not in old_flags:
-            field = field.replace(" state flags", " fear immunity")
-            before = "Not listed" if change["kind"] == "added" else "Off"
-            return context, field, before, "On", "Fear immunity added"
-
-    def value(item):
-        if item is True:
-            return "On"
-        if item is False:
-            return "Off"
-        if isinstance(item, (dict, list)):
-            return "Structured data"
-        if isinstance(item, str):
-            states = {"EHeroDevState_PreRelease": "Pre-release",
-                      "EHeroDevState_Release": "Released"}
-            if item in states:
-                return states[item]
-            if item.startswith("E") and "_" in item:
-                parts = item.split(" | ")
-                if all(re.fullmatch(r"E[A-Za-z]+_[A-Za-z0-9_]+", part) for part in parts):
-                    return ", ".join(readable_words(part.split("_", 1)[1]) for part in parts)
-            if (item.startswith(("MODIFIER_STATE_", "ability_", "citadel_", "#"))
-                    or "/" in item or ".vdata" in item or "_" in item or "." in item):
-                return "Game data reference"
-            return item
-        return fmt(item)
-
-    before = "Not listed" if change["kind"] == "added" else value(old)
-    after = "Removed" if change["kind"] == "removed" else value(new)
-    note = f"Change {change['delta']:+g}" if "delta" in change else ""
-    if note and "percent" in change:
-        note += f" · {change['percent']:+.2f}%"
-    return context, field, before, after, note
-
-
-def public_change(change: dict) -> tuple[str, str, str, str, str]:
-    """Show archived before/after values without exposing internal field names."""
-    context, field, _ = readable_change(change)
-    old, new = change["old"], change["new"]
-    if change["path"].endswith("m_nEnabledStateMask") and isinstance(new, str):
-        flag = "MODIFIER_STATE_FEAR_IMMUNE"
-        old_flags = set(old.split(" | ")) if isinstance(old, str) else set()
-        new_flags = set(new.split(" | "))
-        if flag in new_flags and flag not in old_flags:
+        if new_flags - old_flags == {flag} and not old_flags - new_flags:
             field = field.replace(" state flags", " fear immunity")
             before = "Not listed" if change["kind"] == "added" else "Off"
             return context, field, before, "On", "Fear immunity added"
@@ -570,7 +560,21 @@ def icon_for_change(change: dict, manifest: dict | None = None) -> str | None:
         spec and spec[2] == KNOWN_ICON_GAME_PATHS[parts[1]]
     ):
         return known
-    return spec[0] if spec and (ROOT / "assets" / "icons" / spec[0]).exists() else None
+    if not spec:
+        return None
+    filename, url, game_path = spec
+    icon_path = ROOT / "assets" / "icons" / filename
+    sources_path = icon_path.parent / "auto-sources.json"
+    if not icon_path.exists() or not sources_path.exists():
+        return None
+    try:
+        record = json.loads(sources_path.read_text(encoding="utf-8")).get(filename, {})
+        if (record.get("game_image") == game_path and record.get("source") == url and
+                record.get("sha256") == hashlib.sha256(icon_path.read_bytes()).hexdigest()):
+            return filename
+    except (OSError, ValueError, AttributeError):
+        pass
+    return None
 
 
 def ensure_icon_for_change(manifest: dict, change: dict | None) -> None:
@@ -604,9 +608,7 @@ def ensure_icon_for_change(manifest: dict, change: dict | None) -> None:
 
 def featured_change(manifest: dict, changes: list[dict]) -> dict | None:
     scalar = [change for change in changes if is_public_change(change)]
-    illustrated = [change for change in scalar
-                   if icon_for_change(change, manifest) or game_icon_spec(manifest, change)]
-    return next(iter(illustrated or scalar), None)
+    return min(scalar, key=change_priority) if scalar else None
 
 
 def change_card(manifest: dict, prior: dict | None, change: dict | None, total: int) -> str:
@@ -675,9 +677,10 @@ def recent_card_filename(entry: dict) -> str:
 
 
 def gallery_markup(entries: list[dict], prefix: str) -> str:
-    lines = ["## The latest five changes", "",
+    lines = ["## The latest five readable changes", "",
              "Each card shows one value before and after the update. The date is when SteamTracking recorded that build (UTC). "
-             "If a value was added, ‘Not listed’ means the previous saved build had no value for that field.", ""]
+             "Changes within one build share the same recorded time; we show measured value changes first. "
+             "‘Not listed’ means the previous saved build had no value for that field.", ""]
     if not entries:
         return "\n".join(lines + ["No comparable changes are saved yet.", ""])
     lines += ["<table>", "<tr>"]
@@ -734,55 +737,157 @@ def update_recent_gallery():
     readme = before + start + "\n" + gallery_markup(entries, "reports/") + end + after
     write_atomic(readme_path, readme.encode("utf-8"))
 
-    all_builds = sorted((int(p.parent.name) for p in BUILDS.glob("*/snapshot.json")), reverse=True)
+    manifests = [read_json_file(path) for path in
+                 sorted(BUILDS.glob("*/snapshot.json"), key=lambda path: int(path.parent.name))]
     index = ["# Deadlock build history", "", "Browse the builds we have archived, newest first. "
              "Dates show when SteamTracking recorded each build (UTC).", "",
-             "[See the latest five changes](recent-changes.md) · [Latest report](latest.md) · "
+             "[See the latest five readable changes](recent-changes.md) · [Latest report](latest.md) · "
              "[Street Brawl](street-brawl.md)", "",
              "![One change from the latest build](infographics/latest.svg)", "",
-             "| Build | Recorded (UTC) | Changes | Report | Card |", "|---:|---|---:|---|---|"]
-    for build in all_builds:
-        manifest = json.loads((BUILDS / str(build) / "snapshot.json").read_text(encoding="utf-8"))
-        prior_builds = [older for older in all_builds if older < build]
-        count = "Baseline" if not prior_builds else str(len(diff_manifests(
-            json.loads((BUILDS / str(max(prior_builds)) / "snapshot.json").read_text(encoding="utf-8")), manifest)))
+             "| Build | Recorded (UTC) | Readable values | All tracked changes | Report | Card |",
+             "|---:|---|---:|---:|---|---|"]
+    for position in range(len(manifests) - 1, -1, -1):
+        manifest = manifests[position]
+        build = manifest["build"]
+        prior = manifests[position - 1] if position else None
+        changes = diff_manifests(prior, manifest)
+        readable = str(sum(is_public_change(change) for change in changes)) if prior else "Baseline"
+        count = str(len(changes)) if prior else "Baseline"
         stamp = datetime.fromisoformat(manifest["upstream_time"].replace("Z", "+00:00"))
-        index.append(f"| {build} | {stamp.strftime('%b %d, %Y %H:%M')} | {count} | "
+        index.append(f"| {build} | {stamp.strftime('%b %d, %Y %H:%M')} | {readable} | {count} | "
                      f"[Read](builds/{build}.md) | [View](infographics/{build}.svg) |")
     index.append("")
     write_atomic(REPORTS / "index.md", "\n".join(index).encode("utf-8"))
 
 
 def refresh_presentation():
-    """Rewrite public pages and graphics from the existing archive, without fetching data."""
+    """Rebuild every public page from saved snapshots, including after an interrupted run."""
     manifests = [json.loads(path.read_text(encoding="utf-8")) for path in
                  sorted(BUILDS.glob("*/snapshot.json"), key=lambda path: int(path.parent.name))]
     for position, manifest in enumerate(manifests):
         prior = manifests[position - 1] if position else None
         changes = diff_manifests(prior, manifest)
-        report(manifest, prior, changes, [])
+        ensure_icon_for_change(manifest, featured_change(manifest, changes))
+        report(manifest, prior, changes, manifest.get("community_posts", []))
         infographic(manifest, prior, changes)
     if manifests:
         latest = manifests[-1]
         update_summaries(latest, diff_manifests(manifests[-2], latest) if len(manifests) > 1 else [])
+    for entry in recent_change_entries():
+        ensure_icon_for_change(entry["manifest"], entry["change"])
     update_recent_gallery()
 
 
+def validate_archive() -> tuple[int, int]:
+    """Verify saved source hashes and that every public comparison matches its snapshots."""
+    paths = sorted(BUILDS.glob("*/snapshot.json"), key=lambda path: int(path.parent.name))
+    if not paths:
+        raise SourceError("No archived builds to validate")
+    seen_hashes = set()
+    prior = None
+    total_changes = 0
+    for path in paths:
+        manifest = read_json_file(path)
+        number = manifest["build"]
+        if str(number) != path.parent.name or prior and number <= prior["build"]:
+            raise SourceError(f"Invalid build order or directory for {path}")
+        if not re.fullmatch(r"[0-9a-f]{40}", manifest["commit"]):
+            raise SourceError(f"Build {number} has an invalid source commit")
+        if manifest.get("source") != f"https://github.com/{UPSTREAM}/commit/{manifest['commit']}":
+            raise SourceError(f"Build {number} has an incorrect source link")
+        if set(manifest["files"]) != set(FILES):
+            raise SourceError(f"Build {number} has an incomplete tracked file set")
+        for name in FILES:
+            record = manifest["files"][name]
+            digest = record["sha256"]
+            if not re.fullmatch(r"[0-9a-f]{64}", digest):
+                raise SourceError(f"Build {number} has an invalid data hash for {name}")
+            if record.get("url") != raw_url(manifest["commit"], f"{SCRIPTS}/{name}.vdata"):
+                raise SourceError(f"Build {number} has an incorrect data source for {name}")
+            if digest in seen_hashes:
+                continue
+            blob_path = BLOBS / f"{digest}.json.gz"
+            try:
+                with gzip.open(blob_path, "rb") as stream:
+                    body = stream.read()
+            except (OSError, EOFError) as exc:
+                raise SourceError(f"Missing or damaged archived data for build {number}: {name}") from exc
+            if hashlib.sha256(body).hexdigest() != digest:
+                raise SourceError(f"Archived data hash mismatch for build {number}: {name}")
+            seen_hashes.add(digest)
+        changes = diff_manifests(prior, manifest)
+        total_changes += len(changes)
+        exact_path = REPORTS / "data" / f"{number}.json"
+        if not exact_path.exists():
+            raise SourceError(f"Missing exact comparison for build {number}")
+        exact = read_json_file(exact_path)
+        if (exact.get("changes") != changes or exact.get("compared_with") !=
+                (prior["build"] if prior else None) or exact.get("build") != number or
+                exact.get("recorded_at") != manifest["upstream_time"] or
+                exact.get("source") != manifest["source"]):
+            raise SourceError(f"Exact comparison does not match saved builds: {number}")
+        if not (REPORTS / "builds" / f"{number}.md").exists():
+            raise SourceError(f"Missing report for build {number}")
+        card_path = REPORTS / "infographics" / f"{number}.svg"
+        try:
+            svg_root = ET.parse(card_path).getroot()
+            card_bytes = card_path.read_bytes()
+        except (OSError, ET.ParseError) as exc:
+            raise SourceError(f"Missing or invalid change card for build {number}") from exc
+        if svg_root.tag != "{http://www.w3.org/2000/svg}svg":
+            raise SourceError(f"Change card is not an SVG for build {number}")
+        images = svg_root.findall("{http://www.w3.org/2000/svg}image")
+        if len(images) > 1 or any(not image.get("href", "").startswith("data:image/webp;base64,")
+                                  for image in images):
+            raise SourceError(f"Change card uses an unexpected image for build {number}")
+        if card_bytes != change_card(manifest, prior, featured_change(manifest, changes),
+                                     len(changes)).encode("utf-8"):
+            raise SourceError(f"Change card is out of date for build {number}")
+        prior = manifest
+    state = read_json_file(DATA / "state.json")
+    if state != {"latest_build": prior["build"], "latest_commit": prior["commit"]}:
+        raise SourceError("Latest-build state disagrees with the archive")
+    latest_report = (REPORTS / "builds" / f"{prior['build']}.md").read_text(encoding="utf-8")
+    expected_latest = latest_report.replace(f"](../data/{prior['build']}.json)",
+                                            f"](data/{prior['build']}.json)").replace("../../data/", "../data/")
+    if (REPORTS / "latest.md").read_text(encoding="utf-8") != expected_latest:
+        raise SourceError("Latest report is out of date")
+    if ((REPORTS / "infographics" / "latest.svg").read_bytes() !=
+            (REPORTS / "infographics" / f"{prior['build']}.svg").read_bytes()):
+        raise SourceError("Latest change card is out of date")
+    entries = recent_change_entries()
+    if (REPORTS / "recent-changes.md").read_text(encoding="utf-8") != gallery_markup(entries, ""):
+        raise SourceError("Recent-change page is out of date")
+    for entry in entries:
+        card_path = REPORTS / "infographics" / "recent" / recent_card_filename(entry)
+        if not card_path.exists() or card_path.read_text(encoding="utf-8") != recent_card(entry):
+            raise SourceError("A recent-change card is missing or out of date")
+    readme = (ROOT / "README.md").read_text(encoding="utf-8")
+    start, end = "<!-- RECENT_CHANGES_START -->", "<!-- RECENT_CHANGES_END -->"
+    if (readme.count(start) != 1 or readme.count(end) != 1 or
+            readme.split(start, 1)[1].split(end, 1)[0] != "\n" + gallery_markup(entries, "reports/")):
+        raise SourceError("README change cards are out of date")
+    index = (REPORTS / "index.md").read_text(encoding="utf-8")
+    for path in paths:
+        number = path.parent.name
+        if (f"[Read](builds/{number}.md)" not in index or
+                f"[View](infographics/{number}.svg)" not in index):
+            raise SourceError(f"Build {number} is missing from the history page")
+    if not (REPORTS / "street-brawl.md").exists():
+        raise SourceError("Street Brawl summary is missing")
+    return len(paths), total_changes
+
+
 def run(max_builds: int | None = None):
-    available = discover()
     last = latest_manifest()
+    available = discover(stop_at_build=last["build"] if last else FIRST_BUILD)
     for entry in available:
         archived = BUILDS / str(entry["build"]) / "snapshot.json"
         if archived.exists() and json.loads(archived.read_text(encoding="utf-8"))["commit"] != entry["commit"]:
             raise SourceError(f"Upstream rewrote archived build {entry['build']}; investigate before proceeding")
-    if last and last["build"] not in {entry["build"] for entry in available} and available[0]["build"] > last["build"]:
-        raise SourceError("Known build has fallen outside the fetched history window; increase limit_pages")
     pending = [entry for entry in available if last is None or entry["build"] > last["build"]]
     if max_builds is not None:
         pending = pending[:max_builds]
-    if not pending:
-        print("No new client build; repository unchanged.")
-        return
     for entry in pending:
         number = entry["build"]
         target = BUILDS / str(number) / "snapshot.json"
@@ -790,18 +895,13 @@ def run(max_builds: int | None = None):
             raise SourceError(f"Refusing to overwrite historical build {number}")
         print(f"Collecting build {number} from {entry['commit'][:12]}", flush=True)
         manifest = collect(entry)
-        changes = diff_manifests(last, manifest)
-        posts = community(number)
+        manifest["community_posts"] = community(number)
         write_atomic(target, json_bytes(manifest))
-        report(manifest, last, changes, posts)
-        ensure_icon_for_change(manifest, featured_change(manifest, changes))
-        infographic(manifest, last, changes)
-        update_summaries(manifest, changes)
-        print(f"Archived {number}: {len(changes)} exact data changes", flush=True)
+        print(f"Archived {number}: {len(diff_manifests(last, manifest))} exact data changes", flush=True)
         last = manifest
-    for entry in recent_change_entries():
-        ensure_icon_for_change(entry["manifest"], entry["change"])
-    update_recent_gallery()
+    refresh_presentation()
+    count, changed = validate_archive()
+    print(f"Validated {count} saved builds and {changed} exact changes.", flush=True)
 
 
 if __name__ == "__main__":
@@ -809,10 +909,16 @@ if __name__ == "__main__":
     parser.add_argument("--max-builds", type=int, default=None, help="Bound work for local smoke runs")
     parser.add_argument("--refresh-gallery", action="store_true", help="Rebuild the recent-change gallery from archived data without network access")
     parser.add_argument("--refresh-presentation", action="store_true", help="Rebuild all public reports and graphics from archived data without network access")
+    parser.add_argument("--validate", action="store_true", help="Check saved build hashes, comparisons, and cards offline")
     args = parser.parse_args()
     try:
         if args.refresh_presentation:
             refresh_presentation()
+            count, changed = validate_archive()
+            print(f"Validated {count} saved builds and {changed} exact changes.")
+        elif args.validate:
+            count, changed = validate_archive()
+            print(f"Validated {count} saved builds and {changed} exact changes.")
         elif args.refresh_gallery:
             update_recent_gallery()
         else:

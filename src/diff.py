@@ -31,7 +31,7 @@ def compare(old, new, path=""):
         if kind == "changed" and _number(old) and _number(new):
             delta = Decimal(str(new)) - Decimal(str(old))
             change["delta"] = float(delta) if isinstance(old, float) or isinstance(new, float) else int(delta)
-            if old != 0:
+            if old > 0:
                 change["percent"] = float(delta / Decimal(str(old)) * 100)
         changes.append(change)
     return changes

@@ -1,6 +1,6 @@
 # How this tracker works
 
-Every three hours, the [GitHub Actions workflow](../.github/workflows/track.yml) checks SteamTracking for new Deadlock client builds. It confirms the build number in `steam.inf`, compares six extracted game data files with the previous archived build, and writes a report and a single-change card. If a build has more than one change, its card shows one example and links to the complete report. You can also run it manually. If there is no new build, it leaves the archive alone.
+About once an hour, the [GitHub Actions workflow](../.github/workflows/track.yml) checks SteamTracking for new Deadlock client builds. It confirms the build number in `steam.inf`, compares six extracted game data files with the previous archived build, and writes a report and a single-change card. If a build has more than one change, its card shows one example and links to the complete report. You can also run it manually. If there is no new build, it leaves the archive alone.
 
 The reports show before and after values, including the numerical difference and percentage where those make sense. Each one links back to the source commit and files. Cards use [Deadlock ability icons](../assets/icons/SOURCES.md) matched to the image path in the archived game data. The workflow saves newly needed icons automatically; if an icon is unavailable, the card stays text-only. Snapshots live in `data/builds/`, and identical file content is stored once in `data/blobs/`. A game data download or parsing failure stops the run before it saves a partial build.
 
@@ -11,11 +11,12 @@ Python 3.12+ and the standard library are sufficient.
 ```sh
 python -m unittest discover -s tests -v
 python src/tracker.py
+python src/tracker.py --validate
 python src/compare_builds.py 6793 6794
 python src/compare_builds.py 6793 6819 --json
 ```
 
-The comparison command uses saved snapshots, so it also works offline. To rebuild the public reports and graphics from the archive after a copy change, run `python src/tracker.py --refresh-presentation`. This archive starts at build 6793. To collect earlier history, lower `FIRST_BUILD` in `src/tracker.py` and run the tracker in a fresh archive.
+The comparison and validation commands use saved snapshots, so they also work offline. Every build report links to a complete JSON comparison with the original before and after values. To rebuild the public reports and graphics from the archive after a copy change, run `python src/tracker.py --refresh-presentation`. This archive starts at build 6793. To collect earlier history, lower `FIRST_BUILD` in `src/tracker.py` and run the tracker in a fresh archive.
 
 ## Where the information comes from
 

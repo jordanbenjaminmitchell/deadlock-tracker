@@ -1,4 +1,7 @@
 import io
+import gzip
+import hashlib
+import os
 import json
 from pathlib import Path
 import sys
@@ -42,6 +45,11 @@ class ComparisonTests(unittest.TestCase):
         self.assertAlmostEqual(changes[0]["percent"], -23.076923, places=5)
         self.assertEqual(category(changes[0]["path"]), "street-brawl")
 
+    def test_negative_baseline_does_not_claim_a_percentage(self):
+        change = compare({"x": -10}, {"x": -5})[0]
+        self.assertEqual(change["delta"], 5)
+        self.assertNotIn("percent", change)
+
     def test_add_remove_type_and_bool(self):
         changes = compare({"a": 1, "b": False, "c": [1, 2]},
                           {"a": 2, "b": True, "c": [1], "d": 3})
@@ -76,12 +84,131 @@ class PublicPresentationTests(unittest.TestCase):
         self.assertEqual(tracker.public_change(change),
                          ("Violet · Living Ink", "Minimum stroke distance", "Not listed", "15.0", ""))
 
+    def test_markdown_source_text_is_escaped(self):
+        self.assertEqual(tracker.markdown_text("<script>*change*"), "&lt;script&gt;\\*change\\*")
+
+    def test_other_flag_changes_are_not_hidden_by_fear_summary(self):
+        change = {"path": "abilities.ability_warden_riot_protocol.m_nEnabledStateMask",
+                  "kind": "changed", "old": "MODIFIER_STATE_OTHER",
+                  "new": "MODIFIER_STATE_FEAR_IMMUNE | MODIFIER_STATE_NEW"}
+        self.assertFalse(tracker.is_public_change(change))
+
     def test_fear_flag_is_plain_language_and_keeps_prior_state(self):
         change = {"path": "abilities.ability_warden_riot_protocol.m_WardenBuffModifier.m_nEnabledStateMask",
                   "kind": "changed", "old": "MODIFIER_STATE_OTHER",
                   "new": "MODIFIER_STATE_OTHER | MODIFIER_STATE_FEAR_IMMUNE"}
         self.assertEqual(tracker.public_change(change),
                          ("Warden · Last Stand", "Warden buff fear immunity", "Off", "On", "Fear immunity added"))
+
+
+class ReliabilityTests(unittest.TestCase):
+    def test_discovery_pages_until_the_saved_build(self):
+        def row(number):
+            return {"sha": str(number), "commit": {"message": f"{number} | files",
+                     "committer": {"date": "2026-10-24T00:00:00Z"}}}
+        filler = [{"sha": f"f{i}", "commit": {"message": "unrelated"}}
+                  for i in range(99)]
+        with patch.object(tracker, "fetch_json", side_effect=[[row(7001), *filler], [row(7000)]]) as fetch:
+            found = tracker.discover(limit_pages=2, stop_at_build=7000)
+        self.assertEqual([entry["build"] for entry in found], [7000, 7001])
+        self.assertEqual(fetch.call_count, 2)
+
+    def test_discovery_fails_if_page_limit_hides_saved_build(self):
+        payload = [{"sha": "new", "commit": {"message": "7001 | files",
+                   "committer": {"date": "2026-10-24T00:00:00Z"}}}]
+        payload += [{"sha": str(i), "commit": {"message": "unrelated"}} for i in range(99)]
+        with patch.object(tracker, "fetch_json", return_value=payload):
+            with self.assertRaisesRegex(tracker.SourceError, "Could not reach saved build"):
+                tracker.discover(limit_pages=1, stop_at_build=7000)
+
+    def test_only_github_api_receives_workflow_token(self):
+        requests = []
+        def response(request, timeout):
+            requests.append(request)
+            return io.BytesIO(b"{}")
+        with patch.dict(os.environ, {"GITHUB_TOKEN": "test-token"}), \
+             patch.object(tracker, "urlopen", side_effect=response):
+            tracker.fetch(tracker.API + "/commits")
+            tracker.fetch("https://raw.githubusercontent.com/example/file")
+        self.assertEqual(requests[0].get_header("Authorization"), "Bearer test-token")
+        self.assertIsNone(requests[1].get_header("Authorization"))
+
+    def test_recent_cards_prefer_an_existing_value_change_within_a_build(self):
+        added = {"path": "abilities.ability_artist_pullbrush.m_flMinStrokeDistance",
+                 "category": "abilities", "kind": "added", "old": None, "new": 15.0}
+        changed = {"path": "heroes.hero_nurse.m_mapStartingStats.EMaxHealth",
+                   "category": "heroes", "kind": "changed", "old": 780, "new": 730, "delta": -50}
+        with tempfile.TemporaryDirectory(dir=Path(__file__).parent) as folder:
+            builds = Path(folder)
+            for number in (6999, 7000):
+                path = builds / str(number) / "snapshot.json"
+                path.parent.mkdir()
+                path.write_text(json.dumps({"build": number,
+                    "upstream_time": f"2026-10-24T{number - 6999:02d}:00:00Z"}), encoding="utf-8")
+            with patch.object(tracker, "BUILDS", builds), \
+                 patch.object(tracker, "diff_manifests", return_value=[added, changed]):
+                entries = tracker.recent_change_entries(limit=1)
+        self.assertEqual(entries[0]["change"]["path"], changed["path"])
+
+    def test_validator_rejects_tampered_archived_data(self):
+        with tempfile.TemporaryDirectory(dir=Path(__file__).parent) as folder:
+            root = Path(folder)
+            digest = hashlib.sha256(b'{"expected":true}').hexdigest()
+            blob = root / "blobs" / f"{digest}.json.gz"
+            blob.parent.mkdir()
+            blob.write_bytes(gzip.compress(b'{"tampered":true}'))
+            commit = "a" * 40
+            manifest = {"build": 7000, "commit": commit,
+                        "source": f"https://github.com/{tracker.UPSTREAM}/commit/{commit}",
+                        "files": {name: {"sha256": digest,
+                                   "url": tracker.raw_url(commit, f"{tracker.SCRIPTS}/{name}.vdata")}
+                                  for name in tracker.FILES}}
+            snapshot = root / "builds" / "7000" / "snapshot.json"
+            snapshot.parent.mkdir(parents=True)
+            snapshot.write_text(json.dumps(manifest), encoding="utf-8")
+            with patch.object(tracker, "BUILDS", root / "builds"), \
+                 patch.object(tracker, "BLOBS", root / "blobs"):
+                with self.assertRaisesRegex(tracker.SourceError, "hash mismatch"):
+                    tracker.validate_archive()
+
+    def test_refresh_uses_saved_community_posts(self):
+        with tempfile.TemporaryDirectory(dir=Path(__file__).parent) as folder:
+            root = Path(folder)
+            snapshot = root / "builds" / "7000" / "snapshot.json"
+            snapshot.parent.mkdir(parents=True)
+            manifest = {"build": 7000, "community_posts": [{"title": "Build chat", "url": "https://example.test"}]}
+            snapshot.write_text(json.dumps(manifest), encoding="utf-8")
+            with patch.object(tracker, "BUILDS", root / "builds"), \
+                 patch.object(tracker, "diff_manifests", return_value=[]), \
+                 patch.object(tracker, "report") as report, \
+                 patch.object(tracker, "infographic"), \
+                 patch.object(tracker, "update_summaries"), \
+                 patch.object(tracker, "recent_change_entries", return_value=[]), \
+                 patch.object(tracker, "update_recent_gallery"):
+                tracker.refresh_presentation()
+            self.assertEqual(report.call_args.args[3], manifest["community_posts"])
+
+
+class CollectionSafetyTests(unittest.TestCase):
+    def test_missing_source_revision_stops_before_snapshot(self):
+        entry = {"build": 7000, "commit": "a" * 40, "upstream_time": "2026-10-24T00:00:00Z"}
+        with patch.object(tracker, "fetch", return_value=b"ClientVersion=7000\nappID=1422450\n") as fetch:
+            with self.assertRaisesRegex(tracker.SourceError, "SourceRevision is missing"):
+                tracker.collect(entry)
+        self.assertEqual(fetch.call_count, 1)
+
+    def test_invalid_source_encoding_has_clear_error(self):
+        entry = {"build": 7000, "commit": "a" * 40, "upstream_time": "2026-10-24T00:00:00Z"}
+        with patch.object(tracker, "fetch", return_value=b"\xff"):
+            with self.assertRaisesRegex(tracker.SourceError, "Cannot decode"):
+                tracker.collect(entry)
+
+    def test_feature_card_prefers_measured_change(self):
+        added = {"path": "abilities.ability_artist_pullbrush.m_flMinStrokeDistance",
+                 "category": "abilities", "kind": "added", "old": None, "new": 15.0}
+        changed = {"path": "heroes.hero_nurse.m_mapStartingStats.EMaxHealth",
+                   "category": "heroes", "kind": "changed", "old": 780, "new": 730, "delta": -50}
+        self.assertEqual(tracker.featured_change({}, [added, changed]), changed)
 
 
 class PipelineTests(unittest.TestCase):
@@ -104,6 +231,8 @@ class PipelineTests(unittest.TestCase):
                 self.assertIn("newhero__new_dash.webp", sources)
                 self.assertEqual(tracker.icon_for_change(change, manifest), icon.name)
                 self.assertIn("newhero/new_dash.webp", fetch_icon.call_args.args[0].full_url)
+                icon.write_bytes(b"tampered")
+                self.assertIsNone(tracker.icon_for_change(change, manifest))
 
     def test_missing_new_icon_keeps_card_text_only(self):
         manifest = {"build": 7000, "files": {"abilities": {"sha256": "example"}}}
@@ -159,9 +288,11 @@ class PipelineTests(unittest.TestCase):
             with patch.object(tracker, "REPORTS", Path(folder)):
                 tracker.report(manifest, {"build": 6793}, [change], [])
                 page = (Path(folder) / "builds" / "6794.md").read_text(encoding="utf-8")
+                exact = json.loads((Path(folder) / "data" / "6794.json").read_text(encoding="utf-8"))
         self.assertIn("Street Brawl — Buy time, fifth value**: 65 → **50** (Change -15 · -23.08%)", page)
         self.assertIn("<summary>Check the exact source values</summary>", page)
-        self.assertIn("`generic_data.m_StreetBrawl.m_vecBuyTime[4]`: `65` → `50`", page)
+        self.assertIn("[Download every original before and after value](../data/6794.json)", page)
+        self.assertEqual(exact["changes"], [change])
         self.assertNotIn("## Heroes", page)
         self.assertNotIn("No exact-build discussion retrieved", page)
 
@@ -195,9 +326,12 @@ class PipelineTests(unittest.TestCase):
             target.write_text(json.dumps({"build": 6819, "commit": "abc"}), encoding="utf-8")
             with patch.object(tracker, "BUILDS", root / "builds"), \
                  patch.object(tracker, "discover", return_value=[{"build": 6819, "commit": "abc"}]), \
-                 patch.object(tracker, "collect") as collect:
+                 patch.object(tracker, "collect") as collect, \
+                 patch.object(tracker, "refresh_presentation") as refresh, \
+                 patch.object(tracker, "validate_archive", return_value=(1, 0)):
                 tracker.run()
                 collect.assert_not_called()
+                refresh.assert_called_once_with()
 
     def test_rewritten_history_rejected(self):
         with tempfile.TemporaryDirectory(dir=Path(__file__).parent) as folder:
