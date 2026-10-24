@@ -1,17 +1,23 @@
 # Deadlock build tracker
 
-See what changed between Deadlock builds with clear before and after values. This tracker reads public game data from [SteamTracking](https://github.com/SteamTracking/GameTracking-Deadlock) and saves a report for every build it finds. The cards below show the five most recent changes with verified earlier and new values; the [build history](reports/index.md) has the full archive.
+See what changed between Deadlock builds with clear before and after values. This tracker reads public game data from [SteamTracking](https://github.com/SteamTracking/GameTracking-Deadlock) and saves a report for every build it finds. The newest build has its own card; the next five cards show recent changes with verified earlier and new values. The [build history](reports/index.md) has the full archive.
 
 These are changes in extracted files. A value changing in a file does not, on its own, tell us how it felt or worked in a match.
-
-![One change from the latest build](reports/infographics/latest.svg)
 
 **[Latest report](reports/latest.md) · [Recent changes](reports/recent-changes.md) · [Street Brawl](reports/street-brawl.md) · [Build history](reports/index.md)**
 
 <!-- RECENT_CHANGES_START -->
-## The latest five verified comparisons
+## Recent Deadlock changes
 
 Latest archived build: [6819](reports/builds/6819.md), recorded Oct 22, 2026 23:53 UTC. This page changes when SteamTracking records a newer client build; [check the latest scheduled run](https://github.com/jordanbenjaminmitchell/deadlock-tracker/actions/workflows/track.yml).
+
+### Newest build at a glance
+
+<a href="reports/infographics/latest.svg"><img src="reports/infographics/latest.svg" width="320" alt="One recorded change from Deadlock build 6819"></a>
+
+[Read every tracked change in build 6819](reports/builds/6819.md).
+
+### Five recent before-and-after changes
 
 Each card uses a field recorded in both saved builds, with its earlier and new value. The date is when SteamTracking recorded the newer build (UTC). Newly introduced settings appear in their build reports without an invented previous value.
 

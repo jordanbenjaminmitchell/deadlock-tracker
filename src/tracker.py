@@ -85,14 +85,27 @@ def discover(limit_pages: int = 25, stop_at_build: int = FIRST_BUILD) -> list[di
             match = re.match(r"^(\d{4,7})\s*\|", message)
             if match:
                 number = int(match.group(1))
-                if number >= FIRST_BUILD and number not in found:
-                    changed_files = re.findall(r"([MAD])\t([^,\n]+)", message)
-                    steamdb = re.search(r"https://steamdb\.info/patchnotes/\d+/", message)
-                    found[number] = {"build": number, "commit": commit["sha"],
-                                     "upstream_time": commit["commit"]["committer"]["date"],
-                                     "changed_files": [{"status": status, "path": path}
-                                                       for status, path in changed_files],
-                                     "steamdb_url": steamdb.group() if steamdb else None}
+            elif re.fullmatch(r"[0-9a-f]{40}", commit.get("sha", "")):
+                # A changed commit-title format must not silently hide a new build.
+                inf_path = "game/citadel/steam.inf"
+                try:
+                    inf = fetch(raw_url(commit["sha"], inf_path)).decode("utf-8-sig")
+                except UnicodeError as exc:
+                    raise SourceError(f"Cannot decode {inf_path} at {commit['sha']}: {exc}") from exc
+                props = dict(re.findall(r"^([^=\r\n]+)=([^\r\n]*)", inf, flags=re.MULTILINE))
+                if props.get("appID") != "1422450" or not props.get("ClientVersion", "").isdigit():
+                    raise SourceError(f"Cannot identify client build from {inf_path} at {commit['sha']}")
+                number = int(props["ClientVersion"])
+            else:
+                continue
+            if number >= FIRST_BUILD and number not in found:
+                changed_files = re.findall(r"([MAD])\t([^,\n]+)", message)
+                steamdb = re.search(r"https://steamdb\.info/patchnotes/\d+/", message)
+                found[number] = {"build": number, "commit": commit["sha"],
+                                 "upstream_time": commit["commit"]["committer"]["date"],
+                                 "changed_files": [{"status": status, "path": path}
+                                                   for status, path in changed_files],
+                                 "steamdb_url": steamdb.group() if steamdb else None}
         if stop_at_build in found:
             break
         if len(payload) < 100:
@@ -264,6 +277,9 @@ def report(manifest: dict, prior: dict | None, changes: list[dict], posts: list[
             if len(seen) == 5:
                 break
         lines.append("")
+    fold_long_list = len(readable) > 50
+    if fold_long_list:
+        lines += ["<details>", f"<summary>See all {len(readable)} readable values</summary>", ""]
     shown = 0
     for title, key in sections:
         selected = [change for change in changes if change["category"] == key and is_public_change(change)]
@@ -283,6 +299,8 @@ def report(manifest: dict, prior: dict | None, changes: list[dict], posts: list[
         lines += [f"**{shown} readable value changes are shown above.** The other {len(changes) - shown} "
                   "changes involve game data references or structures. Their exact before and after values "
                   "are under ‘Check the exact source values’ below.", ""]
+    if fold_long_list:
+        lines += ["</details>", ""]
     if posts:
         lines += ["## Community discussion", "",
                   "These posts may add context; the values above come from game data.", ""]
@@ -700,14 +718,20 @@ def recent_card_filename(entry: dict) -> str:
 
 def gallery_markup(entries: list[dict], prefix: str) -> str:
     latest = latest_manifest()
-    lines = ["## The latest five verified comparisons", ""]
+    lines = ["## Recent Deadlock changes", ""]
     if latest:
         stamp = datetime.fromisoformat(latest["upstream_time"].replace("Z", "+00:00"))
         lines += [f"Latest archived build: [{latest['build']}]({prefix}builds/{latest['build']}.md), "
                   f"recorded {stamp.strftime('%b %d, %Y %H:%M UTC')}. "
                   "This page changes when SteamTracking records a newer client build; "
                   "[check the latest scheduled run](https://github.com/jordanbenjaminmitchell/deadlock-tracker/actions/workflows/track.yml).", ""]
-    lines += ["Each card uses a field recorded in both saved builds, with its earlier and new value. "
+        latest_card = f"{prefix}infographics/latest.svg"
+        lines += ["### Newest build at a glance", "",
+                  f'<a href="{latest_card}"><img src="{latest_card}" width="320" '
+                  f'alt="One recorded change from Deadlock build {latest["build"]}"></a>', "",
+                  f"[Read every tracked change in build {latest['build']}]({prefix}builds/{latest['build']}.md).", ""]
+    lines += ["### Five recent before-and-after changes", "",
+              "Each card uses a field recorded in both saved builds, with its earlier and new value. "
               "The date is when SteamTracking recorded the newer build (UTC). "
               "Newly introduced settings appear in their build reports without an invented previous value.", ""]
     if not entries:

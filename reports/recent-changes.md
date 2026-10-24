@@ -1,6 +1,14 @@
-## The latest five verified comparisons
+## Recent Deadlock changes
 
 Latest archived build: [6819](builds/6819.md), recorded Oct 22, 2026 23:53 UTC. This page changes when SteamTracking records a newer client build; [check the latest scheduled run](https://github.com/jordanbenjaminmitchell/deadlock-tracker/actions/workflows/track.yml).
+
+### Newest build at a glance
+
+<a href="infographics/latest.svg"><img src="infographics/latest.svg" width="320" alt="One recorded change from Deadlock build 6819"></a>
+
+[Read every tracked change in build 6819](builds/6819.md).
+
+### Five recent before-and-after changes
 
 Each card uses a field recorded in both saved builds, with its earlier and new value. The date is when SteamTracking recorded the newer build (UTC). Newly introduced settings appear in their build reports without an invented previous value.
 

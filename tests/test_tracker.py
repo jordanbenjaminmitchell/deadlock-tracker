@@ -102,6 +102,14 @@ class PublicPresentationTests(unittest.TestCase):
 
 
 class ReliabilityTests(unittest.TestCase):
+    def test_latest_build_card_remains_visible_without_a_verified_pair(self):
+        latest = {"build": 7000, "upstream_time": "2026-10-24T12:00:00Z"}
+        with patch.object(tracker, "latest_manifest", return_value=latest):
+            page = tracker.gallery_markup([], "")
+        self.assertIn('src="infographics/latest.svg"', page)
+        self.assertIn("[Read every tracked change in build 7000](builds/7000.md)", page)
+        self.assertIn("No comparable changes are saved yet.", page)
+
     def test_discovery_pages_until_the_saved_build(self):
         def row(number):
             return {"sha": str(number), "commit": {"message": f"{number} | files",
@@ -112,6 +120,16 @@ class ReliabilityTests(unittest.TestCase):
             found = tracker.discover(limit_pages=2, stop_at_build=7000)
         self.assertEqual([entry["build"] for entry in found], [7000, 7001])
         self.assertEqual(fetch.call_count, 2)
+
+    def test_discovery_reads_steam_inf_when_commit_title_changes(self):
+        sha = "a" * 40
+        payload = [{"sha": sha, "commit": {"message": "Client update",
+                    "committer": {"date": "2026-10-24T12:00:00Z"}}}]
+        with patch.object(tracker, "fetch_json", return_value=payload), \
+             patch.object(tracker, "fetch", return_value=b"ClientVersion=7000\nappID=1422450\n") as fetch:
+            found = tracker.discover(stop_at_build=7000)
+        self.assertEqual([(entry["build"], entry["commit"]) for entry in found], [(7000, sha)])
+        fetch.assert_called_once_with(tracker.raw_url(sha, "game/citadel/steam.inf"))
 
     def test_discovery_fails_if_page_limit_hides_saved_build(self):
         payload = [{"sha": "new", "commit": {"message": "7001 | files",

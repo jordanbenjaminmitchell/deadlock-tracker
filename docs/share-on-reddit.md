@@ -6,7 +6,7 @@ Deadlock build tracker with clear before-and-after changes
 
 ## Body
 
-I made a small tracker for anyone who wants to see what changed between Deadlock builds without reading a file diff. It shows the five latest changes with verified before-and-after values as cards, plus when each build was recorded.
+I made a small tracker for anyone who wants to see what changed between Deadlock builds without reading a file diff. It shows the newest build on a card, then five recent changes with verified before-and-after values. Each card says when the build was recorded.
 
 For example, one saved Street Brawl value went from **65 to 50**. A later build introduced a **15.0** minimum stroke-distance setting for Violet's Living Ink. The earlier build and its schema had no such field, so the tracker marks it as a new setting rather than claiming a previous number.
 
