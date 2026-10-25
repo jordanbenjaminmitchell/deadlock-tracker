@@ -118,15 +118,47 @@ class PublicPresentationTests(unittest.TestCase):
                   "kind": "changed", "old": 780.0, "new": 730, "delta": -50.0}
         self.assertEqual(tracker.public_change(change)[0], "Nurse Harrow")
 
+    def test_release_status_is_the_headline_before_pre_release_stats(self):
+        release = {"path": "heroes.hero_nurse.m_eHeroDevelopmentState",
+                   "category": "heroes", "kind": "changed",
+                   "old": "EHeroDevState_PreRelease", "new": "EHeroDevState_Release"}
+        health = {"path": "heroes.hero_nurse.m_mapStartingStats.EMaxHealth",
+                  "category": "heroes", "kind": "changed", "old": 780, "new": 730,
+                  "delta": -50}
+        self.assertEqual(tracker.featured_change({}, [health, release]), release)
+        self.assertEqual(tracker.public_change(release)[1:4],
+                         ("Release status", "Pre-release", "Released"))
+        self.assertIn("in the game data", tracker.plain_change_sentence(release))
+
 
 class ReliabilityTests(unittest.TestCase):
     def test_latest_build_card_remains_visible_without_a_verified_pair(self):
         latest = {"build": 7000, "upstream_time": "2026-10-24T12:00:00Z"}
-        with patch.object(tracker, "latest_manifest", return_value=latest):
+        with patch.object(tracker, "latest_manifest", return_value=latest), \
+             patch.object(tracker, "recent_update_entries", return_value=[]):
             page = tracker.gallery_markup([], "")
         self.assertIn('src="infographics/latest.svg"', page)
         self.assertIn("[See everything found in build 7000](builds/7000.md)", page)
-        self.assertIn("No comparable changes are saved yet.", page)
+        self.assertIn("No earlier update with a change", page)
+        self.assertIn("most recent check and its time", page)
+
+    def test_gallery_groups_values_under_one_build_card(self):
+        latest = {"build": 7000, "upstream_time": "2026-10-24T12:00:00Z"}
+        older = {"build": 6999, "upstream_time": "2026-10-23T12:00:00Z"}
+        release = {"path": "heroes.hero_nurse.m_eHeroDevelopmentState",
+                   "category": "heroes", "kind": "changed",
+                   "old": "EHeroDevState_PreRelease", "new": "EHeroDevState_Release"}
+        health = {"path": "heroes.hero_nurse.m_mapStartingStats.EMaxHealth",
+                  "category": "heroes", "kind": "changed", "old": 780, "new": 730,
+                  "delta": -50}
+        update = {"manifest": older, "prior": {"build": 6998},
+                  "changes": [release, health], "highlights": [release, health]}
+        with patch.object(tracker, "latest_manifest", return_value=latest), \
+             patch.object(tracker, "recent_update_entries", return_value=[update]):
+            page = tracker.gallery_markup([], "")
+        self.assertEqual(page.count('src="infographics/6999.svg"'), 1)
+        self.assertIn("Nurse Harrow changed from **Pre-release** to **Released**", page)
+        self.assertIn("780 → **730**", page)
 
     def test_discovery_pages_until_the_saved_build(self):
         def row(number):
