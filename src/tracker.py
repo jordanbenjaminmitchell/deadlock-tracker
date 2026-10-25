@@ -915,8 +915,7 @@ def gallery_markup(entries: list[dict], prefix: str) -> str:
                   f"{source_link}.", ""]
     updates = recent_update_entries()
     earlier = [entry for entry in updates if not latest or entry["manifest"]["build"] != latest["build"]]
-    lines += ["### Earlier updates with changes in the files we follow", "",
-              "Each build gets one card. The key numbers sit below it, with the previous and new value shown when both are known.", ""]
+    lines += ["### Previous updates", ""]
     if not earlier:
         lines += ["No earlier update with a change in the watched files is saved yet.", ""]
     for entry in earlier:

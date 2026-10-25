@@ -14,9 +14,7 @@ Violet · Living Ink — Minimum stroke distance is now listed as **15.0**. Ther
 
 [See everything found in build 6819](builds/6819.md) · [Check the source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/17462b250a0ca80e7f80102f2c83cc3eecff5f12).
 
-### Earlier updates with changes in the files we follow
-
-Each build gets one card. The key numbers sit below it, with the previous and new value shown when both are known.
+### Previous updates
 
 #### Build 6813 · Oct 22, 2026 04:14 UTC
 
