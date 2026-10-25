@@ -1,0 +1,1 @@
+{"build":6212,"changes":[{"category":"abilities","kind":"added","new":["CITADEL_DAMAGETYPE_ABILITY"],"old":null,"path":"abilities.upgrade_tech_bleed.m_AutoIntrinsicModifiers[0].m_vecProcDamageTypes"}],"compared_with":6211,"recorded_at":"2026-01-31T01:01:37Z","source":"https://github.com/SteamTracking/GameTracking-Deadlock/commit/e908ad117b73abca003c736928bd784f2db6fece"}

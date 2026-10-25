@@ -1,0 +1,1 @@
+{"build":6237,"changes":[{"category":"abilities","kind":"changed","new":"-35","old":"-25","path":"abilities.ability_werewolf_kickflip.m_vecAbilityUpgrades[2].m_vecPropertyUpgrades[0].m_strBonus"}],"compared_with":6236,"recorded_at":"2026-02-05T06:12:52Z","source":"https://github.com/SteamTracking/GameTracking-Deadlock/commit/618c4a0dec41cef522efecdaa1425dc29c37ffbb"}

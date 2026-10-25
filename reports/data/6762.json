@@ -1,0 +1,1 @@
+{"build":6762,"changes":[{"category":"abilities","kind":"added","new":10,"old":null,"path":"abilities.ability_baba_ultimate_2.m_TargetModifier.m_ImpactModifier.m_HexModifier.m_CursedModel.m_nPriority"}],"compared_with":6759,"recorded_at":"2026-10-07T22:26:39Z","source":"https://github.com/SteamTracking/GameTracking-Deadlock/commit/4e8c1bd8065d0f53272f687c01e554da737b1113"}

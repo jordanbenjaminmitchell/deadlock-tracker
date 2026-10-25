@@ -1,0 +1,1 @@
+{"build":6135,"changes":[{"category":"abilities","kind":"changed","new":"-70","old":"-90","path":"abilities.upgrade_eternal_gift.m_mapAbilityProperties.RespawnTime.m_strValue"}],"compared_with":6134,"recorded_at":"2026-01-23T03:06:15Z","source":"https://github.com/SteamTracking/GameTracking-Deadlock/commit/4d0faf7f1fb3393aba1dc626148b8a55b477ad6c"}

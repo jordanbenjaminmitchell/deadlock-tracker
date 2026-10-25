@@ -1,0 +1,1 @@
+{"build":6020,"changes":[{"category":"modifiers","kind":"added","new":"MODIFIER_ATTRIBUTE_CANNOT_BE_PURGED","old":null,"path":"modifiers.modifier_combat_status_bullet_hit.m_nAttributes"}],"compared_with":6018,"recorded_at":"2025-12-04T03:00:59Z","source":"https://github.com/SteamTracking/GameTracking-Deadlock/commit/ec99de1ce995c43b0d9578db26e2eef512fa9f24"}

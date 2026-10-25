@@ -1,0 +1,1 @@
+{"build":5961,"changes":[{"category":"abilities","kind":"changed","new":"60","old":"50","path":"abilities.upgrade_capacitor.m_mapAbilityProperties.AbilityCooldown.m_strValue"}],"compared_with":5960,"recorded_at":"2025-10-26T22:37:15Z","source":"https://github.com/SteamTracking/GameTracking-Deadlock/commit/cab7d45d0c5ba6ae3fb04dd5f40b65dfd07023d0"}

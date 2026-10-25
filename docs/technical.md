@@ -12,11 +12,12 @@ Python 3.12+ and the standard library are sufficient.
 python -m unittest discover -s tests -v
 python src/tracker.py
 python src/tracker.py --validate
+python src/tracker.py --backfill
 python src/compare_builds.py 6793 6794
 python src/compare_builds.py 6793 6819 --json
 ```
 
-The comparison and validation commands use saved snapshots, so they also work offline. Every build report links to a complete JSON comparison with the original before and after values. To rebuild the public reports and graphics from the archive after a copy change, run `python src/tracker.py --refresh-presentation`. This archive starts at build 6793. To collect earlier history, lower `FIRST_BUILD` in `src/tracker.py` and run the tracker in a fresh archive.
+The comparison and validation commands use saved snapshots, so they also work offline. Every build report links to a complete JSON comparison with the original before and after values. To rebuild the public reports and graphics from the archive after a copy change, run `python src/tracker.py --refresh-presentation`. This archive starts at build 5959 on October 25, 2025. `--backfill` resumes the one-year import if it was interrupted; the normal five-minute workflow only checks forward for new builds. For backfill, the importer reuses a previous file only when SteamTracking's commit file list has the advertised number of entries and does not list that file as changed. Otherwise it downloads and parses the file again.
 
 ## Where the information comes from
 
@@ -30,6 +31,8 @@ The comparison and validation commands use saved snapshots, so they also work of
 | [r/DeadlockTheGame](https://www.reddit.com/r/DeadlockTheGame/) | Sometimes provides a discussion for an exact build. Any such link is optional context, not proof of a data change. |
 
 The tracker reads `abilities.vdata`, `generic_data.vdata`, `heroes.vdata`, `misc.vdata`, `modifiers.vdata`, and `npc_units.vdata`. Those files contain Street Brawl settings, heroes, abilities, items, NPCs, and other values. The tracker does not archive map geometry, executable code, assets, localization, or VData files outside that group. A report with zero tracked changes does not mean the whole game stayed the same.
+
+Browse pages use the [pinned display-name reference](../assets/display-names.json) derived from Deadlock Wiki's game-data extraction. This affects names only; numeric comparisons come from the archived SteamTracking files. Older reports may use a character's current public name for a historical source identifier. The browse pages only highlight characters marked Released in each saved build.
 
 The code in this repository is offered under the MIT license. Game data and game artwork remain the property of their respective owners; this repository does not grant rights to those materials. Reports cite the source commit and each extracted file.
 

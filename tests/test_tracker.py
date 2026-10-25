@@ -118,6 +118,41 @@ class PublicPresentationTests(unittest.TestCase):
                   "kind": "changed", "old": 780.0, "new": 730, "delta": -50.0}
         self.assertEqual(tracker.public_change(change)[0], "Nurse Harrow")
 
+    def test_archived_hero_uses_player_facing_name(self):
+        change = {"path": "heroes.hero_astro.m_mapStartingStats.EMaxHealth",
+                  "kind": "changed", "old": 600, "new": 650, "delta": 50}
+        self.assertEqual(tracker.public_change(change)[0], "Holliday")
+
+    def test_pre_release_stats_are_not_front_page_headlines(self):
+        manifest = {"files": {"heroes": {"sha256": "example"}}}
+        health = {"path": "heroes.hero_nurse.m_mapStartingStats.EMaxHealth",
+                  "category": "heroes", "kind": "changed", "old": 780, "new": 730,
+                  "delta": -50}
+        with patch.object(tracker, "hero_blob", return_value={"hero_nurse": {
+                "m_eHeroDevelopmentState": "EHeroDevState_PreRelease"}}):
+            self.assertIsNone(tracker.featured_change(manifest, [health]))
+        with patch.object(tracker, "hero_blob", return_value={"hero_nurse": {}}):
+            self.assertEqual(tracker.featured_change(manifest, [health]), health)
+
+    def test_item_value_uses_the_stat_name(self):
+        change = {"path": "abilities.upgrade_active_reload.m_mapAbilityProperties.BulletLifestealPercent.m_strValue",
+                  "category": "abilities", "kind": "changed", "old": "14", "new": "16"}
+        self.assertEqual(tracker.public_change(change)[:4],
+                         ("Active Reload", "Bullet lifesteal percent", "14", "16"))
+
+    def test_level_gold_label_keeps_the_level_number(self):
+        change = {"path": "heroes.hero_astro.m_mapLevelInfo.10.m_unRequiredGold",
+                  "category": "heroes", "kind": "changed", "old": 5400, "new": 4600,
+                  "delta": -800}
+        self.assertEqual(tracker.public_change(change)[1], "Gold required for level 10")
+
+    def test_display_and_disable_metadata_stay_out_of_highlights(self):
+        for path in ("heroes.hero_astro.m_heroStatsDisplay.m_vecDisplayStats[1]",
+                     "abilities.upgrade_active_reload.m_mapAbilityProperties.AbilityCharges.m_strDisableValue"):
+            change = {"path": path, "category": "heroes" if path.startswith("heroes") else "abilities",
+                      "kind": "changed", "old": 0, "new": 1}
+            self.assertFalse(tracker.is_highlight_change(change))
+
     def test_release_status_is_the_headline_before_pre_release_stats(self):
         release = {"path": "heroes.hero_nurse.m_eHeroDevelopmentState",
                    "category": "heroes", "kind": "changed",
@@ -132,6 +167,18 @@ class PublicPresentationTests(unittest.TestCase):
 
 
 class ReliabilityTests(unittest.TestCase):
+    def test_browse_link_validator_catches_missing_local_page(self):
+        with tempfile.TemporaryDirectory(dir=Path(__file__).parent) as folder:
+            root = Path(folder)
+            reports = root / "reports"
+            reports.mkdir()
+            (root / "README.md").write_text("[Missing](reports/missing.md)", encoding="utf-8")
+            for name in ("index.md", "recent-changes.md", "street-brawl.md"):
+                (reports / name).write_text("# Page", encoding="utf-8")
+            with patch.object(tracker, "ROOT", root), patch.object(tracker, "REPORTS", reports):
+                with self.assertRaisesRegex(tracker.SourceError, "Broken local link"):
+                    tracker.validate_browse_links()
+
     def test_latest_build_card_remains_visible_without_a_verified_pair(self):
         latest = {"build": 7000, "upstream_time": "2026-10-24T12:00:00Z"}
         with patch.object(tracker, "latest_manifest", return_value=latest), \
@@ -277,6 +324,25 @@ class ReliabilityTests(unittest.TestCase):
 
 
 class CollectionSafetyTests(unittest.TestCase):
+    def test_old_commit_file_list_is_trusted_only_when_complete(self):
+        files, complete = tracker.commit_file_list(
+            "5959 | 2 files | M game/citadel/pak01_dir.txt,  M game/citadel/steam.inf\n\nsource")
+        self.assertTrue(complete)
+        self.assertEqual(files[1], {"status": "M", "path": "game/citadel/steam.inf"})
+        self.assertFalse(tracker.commit_file_list("5959 | 3 files | M game/citadel/steam.inf")[1])
+
+    def test_backfill_reuses_files_only_with_a_complete_commit_list(self):
+        entry = {"build": 5959, "commit": "a" * 40,
+                 "upstream_time": "2025-10-25T01:05:33Z", "complete_file_list": True,
+                 "changed_files": [{"status": "M", "path": "game/citadel/steam.inf"}]}
+        prior = {"files": {name: {"sha256": name} for name in tracker.FILES}}
+        inf = b"ClientVersion=5959\nappID=1422450\nSourceRevision=123\n"
+        with patch.object(tracker, "fetch", return_value=inf) as fetch:
+            manifest = tracker.collect(entry, prior)
+        self.assertEqual(fetch.call_count, 1)
+        self.assertEqual({name: record["sha256"] for name, record in manifest["files"].items()},
+                         {name: name for name in tracker.FILES})
+
     def test_missing_source_revision_stops_before_snapshot(self):
         entry = {"build": 7000, "commit": "a" * 40, "upstream_time": "2026-10-24T00:00:00Z"}
         with patch.object(tracker, "fetch", return_value=b"ClientVersion=7000\nappID=1422450\n") as fetch:

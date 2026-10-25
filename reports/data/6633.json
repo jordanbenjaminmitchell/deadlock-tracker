@@ -1,0 +1,1 @@
+{"build":6633,"changes":[{"category":"abilities","kind":"changed","new":"Drifter.Terror.Hit","old":"","path":"abilities.drifter_darkness.m_HitConfirmSound"}],"compared_with":6629,"recorded_at":"2026-07-13T22:38:55Z","source":"https://github.com/SteamTracking/GameTracking-Deadlock/commit/b973109b5b86ea3b56fa31f2ad6ea580c9847579"}

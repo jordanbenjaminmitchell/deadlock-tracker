@@ -1,0 +1,1 @@
+{"build":6624,"changes":[{"category":"abilities","kind":"added","new":"PBF_TouchAllEntitiesEachTick","old":null,"path":"abilities.ability_doorman_luggage_cart.m_projectileInfo.m_nBehaviors"}],"compared_with":6618,"recorded_at":"2026-07-08T15:37:37Z","source":"https://github.com/SteamTracking/GameTracking-Deadlock/commit/3b1b18d38684b00b4bf06c432569f96911aa89cd"}

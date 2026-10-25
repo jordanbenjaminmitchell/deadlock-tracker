@@ -1,0 +1,1 @@
+{"build":6106,"changes":[{"category":"abilities","kind":"changed","new":"0.1","old":"2","path":"abilities.ability_golden_idol.m_mapAbilityProperties.DropOffTimer.m_strValue"}],"compared_with":6104,"recorded_at":"2026-01-20T22:44:27Z","source":"https://github.com/SteamTracking/GameTracking-Deadlock/commit/65fa05a67fd462c02792e572845cce512673f9f0"}

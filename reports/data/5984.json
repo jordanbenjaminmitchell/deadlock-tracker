@@ -1,0 +1,1 @@
+{"build":5984,"changes":[{"category":"abilities","kind":"changed","new":"110","old":"120","path":"abilities.upgrade_critshot.m_mapAbilityProperties.CritDamagePercent.m_strValue"}],"compared_with":5983,"recorded_at":"2025-11-21T23:51:17Z","source":"https://github.com/SteamTracking/GameTracking-Deadlock/commit/3bbd5e3b579ce8362d76d12e207060c45029251d"}

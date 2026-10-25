@@ -1,0 +1,1 @@
+{"build":6415,"changes":[{"category":"abilities","kind":"removed","new":null,"old":{"m_strParamName":"astro_bouncepad_stomp"},"path":"abilities.ability_bounce_pad.m_BounceModifier.m_AG2HeroState"}],"compared_with":6414,"recorded_at":"2026-03-26T01:46:53Z","source":"https://github.com/SteamTracking/GameTracking-Deadlock/commit/8788b221e754eb6756b0ebb9ec7239a6ef5e690d"}

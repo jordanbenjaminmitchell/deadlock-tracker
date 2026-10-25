@@ -1,0 +1,1 @@
+{"build":6606,"changes":[{"category":"abilities","kind":"added","new":"particles/generic/idol_expire.vpcf","old":null,"path":"abilities.ability_golden_idol.m_OnExpireParticle"}],"compared_with":6603,"recorded_at":"2026-06-30T21:32:55Z","source":"https://github.com/SteamTracking/GameTracking-Deadlock/commit/606d869f7a3da365d1e5b256bb7e348c4e4e9dfd"}

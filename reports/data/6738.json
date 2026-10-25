@@ -1,0 +1,1 @@
+{"build":6738,"changes":[{"category":"heroes","kind":"added","new":"Generated.Ratking.Hero.Reveal.VO","old":null,"path":"heroes.hero_ratking.m_strHeroDebutSound"}],"compared_with":6736,"recorded_at":"2026-10-02T21:25:26Z","source":"https://github.com/SteamTracking/GameTracking-Deadlock/commit/86c1ed69fbccaa417824428c6d9407461b550c70"}

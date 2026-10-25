@@ -1,0 +1,1 @@
+{"build":6437,"changes":[{"category":"modifiers","kind":"added","new":"modifier_citadel_stunned","old":null,"path":"modifiers.modifier_citadel_stunned_no_cc_diminish.m_sLocalizationName"}],"compared_with":6436,"recorded_at":"2026-04-09T02:43:55Z","source":"https://github.com/SteamTracking/GameTracking-Deadlock/commit/7916e8294e6cadc3eb55733e27737be9f3b87bf2"}

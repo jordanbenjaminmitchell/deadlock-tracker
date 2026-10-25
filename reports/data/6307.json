@@ -1,0 +1,1 @@
+{"build":6307,"changes":[{"category":"abilities","kind":"changed","new":"7m","old":"6.5m","path":"abilities.ability_priest_knockback.m_mapAbilityProperties.WallStunDistance.m_strValue"}],"compared_with":6306,"recorded_at":"2026-02-15T17:02:24Z","source":"https://github.com/SteamTracking/GameTracking-Deadlock/commit/8f0e21bca8349fcb05dcac453a7ecade274f3d4b"}

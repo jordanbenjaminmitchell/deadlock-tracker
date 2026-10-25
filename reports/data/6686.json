@@ -1,0 +1,1 @@
+{"build":6686,"changes":[{"category":"abilities","delta":0.15,"kind":"changed","new":0.0,"old":-0.15,"path":"abilities.ability_werewolf_maulingleap.m_flVelocityCarryoverOnHit"}],"compared_with":6684,"recorded_at":"2026-09-07T19:09:16Z","source":"https://github.com/SteamTracking/GameTracking-Deadlock/commit/70a264134418d4546776e3a993245fdb12138200"}

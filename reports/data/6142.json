@@ -1,0 +1,1 @@
+{"build":6142,"changes":[{"category":"abilities","kind":"changed","new":"EArea_Active","old":"EArea_Passive","path":"abilities.upgrade_nullification_aura.m_vecTooltipSectionInfo[1].m_eAbilitySectionType"}],"compared_with":6140,"recorded_at":"2026-01-23T16:41:00Z","source":"https://github.com/SteamTracking/GameTracking-Deadlock/commit/b0df7213df97e377f3d7039dd702ffeab8212661"}

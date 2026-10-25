@@ -1,0 +1,1 @@
+{"build":6478,"changes":[{"category":"abilities","kind":"added","new":"#upgrade_auto_cleanse","old":null,"path":"abilities.upgrade_auto_cleanse.m_BarrierModifier.m_strHudMessageText"}],"compared_with":6476,"recorded_at":"2026-05-01T17:23:27Z","source":"https://github.com/SteamTracking/GameTracking-Deadlock/commit/5d0a7ce9230b56fcb1b95bc7cfc030708c8b3dc9"}

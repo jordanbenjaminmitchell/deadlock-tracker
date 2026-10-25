@@ -1,0 +1,1 @@
+{"build":6447,"changes":[{"category":"abilities","kind":"added","new":false,"old":null,"path":"abilities.ability_doorman_luggage_cart.m_ModifierDrag.m_bDurationReducibleByCrowdControlDiminish"}],"compared_with":6446,"recorded_at":"2026-04-11T12:03:23Z","source":"https://github.com/SteamTracking/GameTracking-Deadlock/commit/533f6b7068247571f85907821a7692558767b408"}

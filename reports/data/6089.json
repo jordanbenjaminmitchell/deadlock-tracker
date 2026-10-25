@@ -1,0 +1,1 @@
+{"build":6089,"changes":[{"category":"abilities","kind":"changed","new":"CITADEL_UNIT_TARGET_FLAG_PENETRATE_INVULNERABLE","old":"","path":"abilities.ability_magician_magicbolt.m_nAbilityTargetFlags"}],"compared_with":6084,"recorded_at":"2026-01-09T22:07:46Z","source":"https://github.com/SteamTracking/GameTracking-Deadlock/commit/9bb01639d1d6eb5dc6ea65fd40f2e1c84874c54f"}
