@@ -2,11 +2,15 @@
 
 Recorded Oct 22, 2026 at 23:53 UTC. Compared with build 6817.
 
-**1 tracked change.**
+**1 change found in the game data we follow.**
 
-These are values found in extracted game data. They do not confirm how a change felt in a match.
+These numbers come from game data. They may not describe how a change feels in a match.
 
 New settings have no earlier value in the saved files. Their earlier in-game behavior cannot be verified from these data sources.
+
+## Quick read
+
+Violet · Living Ink — Minimum stroke distance is now listed as **15.0**. There is no confirmed earlier value.
 
 ## Abilities and items (1)
 

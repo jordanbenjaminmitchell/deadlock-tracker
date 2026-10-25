@@ -78,6 +78,19 @@ class ComparisonTests(unittest.TestCase):
 
 
 class PublicPresentationTests(unittest.TestCase):
+    def test_latest_update_explains_a_new_setting_without_guessing(self):
+        change = {"path": "abilities.ability_artist_pullbrush.m_flMinStrokeDistance",
+                  "category": "abilities", "kind": "added", "old": None, "new": 15.0}
+        with tempfile.TemporaryDirectory(dir=Path(__file__).parent) as folder:
+            data = Path(folder) / "data"
+            data.mkdir()
+            (data / "6819.json").write_text(json.dumps({"changes": [change]}), encoding="utf-8")
+            with patch.object(tracker, "REPORTS", Path(folder)):
+                sentence = tracker.latest_change_sentence({"build": 6819})
+        self.assertIn("Violet · Living Ink", sentence)
+        self.assertIn("15.0", sentence)
+        self.assertIn("no confirmed earlier value", sentence)
+
     def test_added_value_is_not_misreported_as_increase(self):
         change = {"path": "abilities.ability_artist_pullbrush.m_flMinStrokeDistance",
                   "kind": "added", "old": None, "new": 15.0}
@@ -98,7 +111,12 @@ class PublicPresentationTests(unittest.TestCase):
                   "kind": "changed", "old": "MODIFIER_STATE_OTHER",
                   "new": "MODIFIER_STATE_OTHER | MODIFIER_STATE_FEAR_IMMUNE"}
         self.assertEqual(tracker.public_change(change),
-                         ("Warden · Last Stand", "Warden buff fear immunity", "Off", "On", "Fear immunity added"))
+                         ("Warden · Last Stand", "Fear immunity", "Off", "On", "Fear immunity added"))
+
+    def test_hero_code_name_uses_public_name(self):
+        change = {"path": "heroes.hero_nurse.m_mapStartingStats.EMaxHealth",
+                  "kind": "changed", "old": 780.0, "new": 730, "delta": -50.0}
+        self.assertEqual(tracker.public_change(change)[0], "Nurse Harrow")
 
 
 class ReliabilityTests(unittest.TestCase):
@@ -107,7 +125,7 @@ class ReliabilityTests(unittest.TestCase):
         with patch.object(tracker, "latest_manifest", return_value=latest):
             page = tracker.gallery_markup([], "")
         self.assertIn('src="infographics/latest.svg"', page)
-        self.assertIn("[Read every tracked change in build 7000](builds/7000.md)", page)
+        self.assertIn("[See everything found in build 7000](builds/7000.md)", page)
         self.assertIn("No comparable changes are saved yet.", page)
 
     def test_discovery_pages_until_the_saved_build(self):
@@ -249,6 +267,23 @@ class CollectionSafetyTests(unittest.TestCase):
 
 
 class PipelineTests(unittest.TestCase):
+    def test_hero_card_uses_only_its_game_icon(self):
+        class IconResponse(io.BytesIO):
+            headers = {"Content-Type": "image/webp"}
+
+        manifest = {"build": 7000, "files": {"heroes": {"sha256": "example"}}}
+        change = {"path": "heroes.hero_nurse.m_mapStartingStats.EMaxHealth"}
+        data = {"hero_nurse": {"m_strIconImageSmall": "file://{images}/heroes/nurse_sm.psd"}}
+        with tempfile.TemporaryDirectory(dir=Path(__file__).parent) as folder:
+            with patch.object(tracker, "ROOT", Path(folder)), \
+                 patch.object(tracker, "hero_blob", return_value=data), \
+                 patch.object(tracker, "urlopen", return_value=IconResponse(b"RIFF0000WEBPicon")) as fetch_icon:
+                tracker.ensure_icon_for_change(manifest, change)
+                icon = Path(folder) / "assets" / "icons" / "heroes__nurse_sm.webp"
+                self.assertEqual(icon.read_bytes(), b"RIFF0000WEBPicon")
+                self.assertEqual(tracker.icon_for_change(change, manifest), icon.name)
+                self.assertIn("/images/heroes/nurse_sm.webp", fetch_icon.call_args.args[0].full_url)
+
     def test_new_ability_icon_is_cached_from_its_game_image_path(self):
         class IconResponse(io.BytesIO):
             headers = {"Content-Type": "image/webp"}
@@ -327,7 +362,7 @@ class PipelineTests(unittest.TestCase):
                 tracker.report(manifest, {"build": 6793}, [change], [])
                 page = (Path(folder) / "builds" / "6794.md").read_text(encoding="utf-8")
                 exact = json.loads((Path(folder) / "data" / "6794.json").read_text(encoding="utf-8"))
-        self.assertIn("Street Brawl — Buy time, fifth value**: 65 → **50** (Change -15 · -23.08%)", page)
+        self.assertIn("Street Brawl — Buy time, fifth value**: 65 → **50** (Down 15 · 23.08%)", page)
         self.assertIn("<summary>Check the exact source values</summary>", page)
         self.assertIn("[Download every original before and after value](../data/6794.json)", page)
         self.assertEqual(exact["changes"], [change])
@@ -383,7 +418,22 @@ class PipelineTests(unittest.TestCase):
                  patch.object(tracker, "validate_archive", return_value=(1, 0)):
                 tracker.run()
                 collect.assert_not_called()
-                refresh.assert_called_once_with()
+                refresh.assert_not_called()
+
+    def test_unchanged_build_repairs_stale_presentation(self):
+        with tempfile.TemporaryDirectory(dir=Path(__file__).parent) as folder:
+            builds = Path(folder) / "builds"
+            target = builds / "6819" / "snapshot.json"
+            target.parent.mkdir(parents=True)
+            target.write_text(json.dumps({"build": 6819, "commit": "abc"}), encoding="utf-8")
+            with patch.object(tracker, "BUILDS", builds), \
+                 patch.object(tracker, "discover", return_value=[{"build": 6819, "commit": "abc"}]), \
+                 patch.object(tracker, "refresh_presentation") as refresh, \
+                 patch.object(tracker, "validate_archive",
+                              side_effect=[tracker.SourceError("stale page"), (1, 0)]) as validate:
+                tracker.run()
+            refresh.assert_called_once_with()
+            self.assertEqual(validate.call_count, 2)
 
     def test_rewritten_history_rejected(self):
         with tempfile.TemporaryDirectory(dir=Path(__file__).parent) as folder:

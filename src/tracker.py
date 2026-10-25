@@ -38,6 +38,7 @@ REPORTS = ROOT / "reports"
 FIRST_BUILD = 6793
 USER_AGENT = "deadlock-tracker/1.0 (+https://github.com/jordanbenjaminmitchell/deadlock-tracker)"
 ICON_CDN = "https://assets-bucket.deadlock-api.com/assets-api-res/images/abilities/"
+HERO_ICON_CDN = "https://assets-bucket.deadlock-api.com/assets-api-res/images/heroes/"
 
 
 class SourceError(RuntimeError):
@@ -132,6 +133,11 @@ def load_blob(digest: str):
 
 @lru_cache(maxsize=32)
 def ability_blob(digest: str):
+    return load_blob(digest)
+
+
+@lru_cache(maxsize=32)
+def hero_blob(digest: str):
     return load_blob(digest)
 
 
@@ -254,13 +260,17 @@ def report(manifest: dict, prior: dict | None, changes: list[dict], posts: list[
              f"Recorded {when}. " + (f"Compared with build {prior['build']}." if prior else
                                      "This is the first saved build, so there is no earlier value to compare."), ""]
     if prior:
-        lines += [f"**{len(changes)} tracked {'change' if len(changes) == 1 else 'changes'}.**", ""]
+        lines += [f"**{len(changes)} {'change' if len(changes) == 1 else 'changes'} found "
+                  "in the game data we follow.**", ""]
     if prior and not changes:
         lines += ["No value changed in the game data we track for this build.", ""]
-    lines += ["These are values found in extracted game data. They do not confirm how a change felt in a match.", ""]
+    lines += ["These numbers come from game data. They may not describe how a change feels in a match.", ""]
     if any(change["kind"] == "added" for change in changes):
         lines += ["New settings have no earlier value in the saved files. Their earlier in-game behavior "
                   "cannot be verified from these data sources.", ""]
+    highlight = featured_change(manifest, changes)
+    if highlight:
+        lines += ["## Quick read", "", plain_change_sentence(highlight), ""]
     sections = [("Street Brawl", "street-brawl"), ("Heroes", "heroes"),
                 ("Abilities and items", "abilities"), ("Map and NPC data", "map-and-npcs"),
                 ("Modifiers", "modifiers"), ("Other data", "other-data")]
@@ -427,6 +437,7 @@ ABILITY_LABELS = {
     "ability_artist_homingbrush": "Violet · Living Ink",
     "ability_warden_riot_protocol": "Warden · Last Stand",
 }
+HERO_LABELS = {"hero_nurse": "Nurse Harrow"}
 ABILITY_ICONS = {
     "ability_artist_pullbrush": "living-ink.webp",
     "ability_artist_homingbrush": "living-ink.webp",
@@ -463,6 +474,8 @@ def readable_change(change: dict) -> tuple[str, str, str]:
     parts = change["path"].split(".")
     if parts[0] == "abilities" and len(parts) > 1:
         context = ABILITY_LABELS.get(parts[1], readable_words(parts[1]))
+    elif parts[0] == "heroes" and len(parts) > 1:
+        context = HERO_LABELS.get(parts[1], readable_words(parts[1]))
     elif len(parts) > 1:
         context = "Street Brawl" if parts[1] == "m_StreetBrawl" else readable_words(parts[1])
     else:
@@ -502,7 +515,8 @@ def public_change(change: dict) -> tuple[str, str, str, str, str]:
         old_flags = set(old.split(" | ")) if isinstance(old, str) else set()
         new_flags = set(new.split(" | "))
         if new_flags - old_flags == {flag} and not old_flags - new_flags:
-            field = field.replace(" state flags", " fear immunity")
+            field = ("Fear immunity during auto-cast delay"
+                     if ".m_AutoCastDelayModifier." in change["path"] else "Fear immunity")
             before = "No earlier value" if change["kind"] == "added" else "Off"
             return context, field, before, "On", "Fear immunity added"
 
@@ -530,9 +544,11 @@ def public_change(change: dict) -> tuple[str, str, str, str, str]:
 
     before = "No earlier value" if change["kind"] == "added" else value(old)
     after = "Removed" if change["kind"] == "removed" else value(new)
-    note = f"Change {change['delta']:+g}" if "delta" in change else ""
-    if note and "percent" in change:
-        note += f" · {change['percent']:+.2f}%"
+    note = ""
+    if "delta" in change and change["delta"]:
+        note = f"{'Up' if change['delta'] > 0 else 'Down'} {abs(change['delta']):g}"
+        if "percent" in change:
+            note += f" · {abs(change['percent']):.2f}%"
     return context, field, before, after, note
 
 
@@ -562,26 +578,37 @@ def is_public_change(change: dict) -> bool:
 
 
 def game_icon_spec(manifest: dict, change: dict) -> tuple[str, str, str] | None:
-    """Resolve an ability's own image path from its archived game data."""
+    """Resolve matching ability or hero art from its archived game image path."""
     parts = change["path"].split(".")
-    record = manifest.get("files", {}).get("abilities")
-    if len(parts) < 2 or parts[0] != "abilities" or not record:
+    if len(parts) < 2:
         return None
-    ability = ability_blob(record["sha256"]).get(parts[1], {})
-    image = ability.get("m_strAbilityImage", "") if isinstance(ability, dict) else ""
-    match = re.fullmatch(r"file://\{images\}/hud/abilities/([A-Za-z0-9_/-]+)\.psd", image)
+    section = parts[0]
+    if section == "abilities":
+        record = manifest.get("files", {}).get("abilities")
+        item = ability_blob(record["sha256"]).get(parts[1], {}) if record else {}
+        image = item.get("m_strAbilityImage", "") if isinstance(item, dict) else ""
+        match = re.fullmatch(r"file://\{images\}/hud/abilities/([A-Za-z0-9_/-]+)\.psd", image)
+        cdn, filename_prefix = ICON_CDN, ""
+    elif section == "heroes":
+        record = manifest.get("files", {}).get("heroes")
+        item = hero_blob(record["sha256"]).get(parts[1], {}) if record else {}
+        image = item.get("m_strIconImageSmall", "") if isinstance(item, dict) else ""
+        match = re.fullmatch(r"file://\{images\}/heroes/([A-Za-z0-9_/-]+)\.psd", image)
+        cdn, filename_prefix = HERO_ICON_CDN, "heroes__"
+    else:
+        return None
     if not match:
         return None
     relative = match.group(1)
     if any(word in relative.lower() for word in ("default", "placeholder", "missing", "generic")):
         return None
-    filename = relative.replace("/", "__") + ".webp"
-    return filename, ICON_CDN + relative + ".webp", image
+    filename = filename_prefix + relative.replace("/", "__") + ".webp"
+    return filename, cdn + relative + ".webp", image
 
 
 def icon_for_change(change: dict, manifest: dict | None = None) -> str | None:
     parts = change["path"].split(".")
-    if len(parts) < 2 or parts[0] != "abilities":
+    if len(parts) < 2 or parts[0] not in ("abilities", "heroes"):
         return None
     known = ABILITY_ICONS.get(parts[1])
     spec = game_icon_spec(manifest, change) if manifest else None
@@ -627,7 +654,7 @@ def ensure_icon_for_change(manifest: dict, change: dict | None) -> None:
         write_atomic(folder / filename, body)
         sources_path = folder / "auto-sources.json"
         sources = json.loads(sources_path.read_text(encoding="utf-8")) if sources_path.exists() else {}
-        sources[filename] = {"ability": change["path"].split(".")[1],
+        sources[filename] = {"game_entity": change["path"].split(".")[1],
                              "game_image": game_path, "source": url,
                              "sha256": hashlib.sha256(body).hexdigest(),
                              "first_seen_build": manifest["build"]}
@@ -716,24 +743,49 @@ def recent_card_filename(entry: dict) -> str:
     return f'{entry["manifest"]["build"]}-{digest}.svg'
 
 
+def plain_change_sentence(change: dict) -> str:
+    """Summarize one measured change without turning an addition into a comparison."""
+    context, field, before, after, _ = public_change(change)
+    subject = f"{markdown_text(context)} — {markdown_text(field)}"
+    if change["kind"] == "added":
+        return (f"{subject} is now listed as **{markdown_text(after)}**. "
+                "There is no confirmed earlier value.")
+    if change["kind"] == "removed":
+        return (f"{subject} is no longer listed. It was **{markdown_text(before)}** "
+                "in the previous build.")
+    return f"{subject} changed from **{markdown_text(before)}** to **{markdown_text(after)}**."
+
+
+def latest_change_sentence(manifest: dict) -> str:
+    """Describe the newest build from its saved exact comparison."""
+    exact_path = REPORTS / "data" / f"{manifest['build']}.json"
+    if not exact_path.exists():
+        return "This is the first saved build, so there is no earlier one to compare."
+    changes = read_json_file(exact_path)["changes"]
+    change = featured_change(manifest, changes)
+    if change is None:
+        return ("No value changed in the game data this tracker watches." if not changes else
+                "This build changed game data, but there is no simple before-and-after value to highlight.")
+    return plain_change_sentence(change)
+
+
 def gallery_markup(entries: list[dict], prefix: str) -> str:
     latest = latest_manifest()
-    lines = ["## Recent Deadlock changes", ""]
+    lines = ["## What changed in Deadlock?", ""]
     if latest:
         stamp = datetime.fromisoformat(latest["upstream_time"].replace("Z", "+00:00"))
-        lines += [f"Latest archived build: [{latest['build']}]({prefix}builds/{latest['build']}.md), "
-                  f"recorded {stamp.strftime('%b %d, %Y %H:%M UTC')}. "
-                  "This page changes when SteamTracking records a newer client build; "
-                  "[check the latest scheduled run](https://github.com/jordanbenjaminmitchell/deadlock-tracker/actions/workflows/track.yml).", ""]
+        lines += [f"Latest build found: [{latest['build']}]({prefix}builds/{latest['build']}.md) "
+                  f"on {stamp.strftime('%b %d, %Y at %H:%M UTC')}. "
+                  "Checks are scheduled every five minutes. "
+                  "[See when the tracker last checked](https://github.com/jordanbenjaminmitchell/deadlock-tracker/actions/workflows/track.yml).", ""]
         latest_card = f"{prefix}infographics/latest.svg"
-        lines += ["### Newest build at a glance", "",
+        lines += ["### Latest update", "", latest_change_sentence(latest), "",
                   f'<a href="{latest_card}"><img src="{latest_card}" width="320" '
-                  f'alt="One recorded change from Deadlock build {latest["build"]}"></a>', "",
-                  f"[Read every tracked change in build {latest['build']}]({prefix}builds/{latest['build']}.md).", ""]
-    lines += ["### Five recent before-and-after changes", "",
-              "Each card uses a field recorded in both saved builds, with its earlier and new value. "
-              "The date is when SteamTracking recorded the newer build (UTC). "
-              "Newly introduced settings appear in their build reports without an invented previous value.", ""]
+                  f'alt="Deadlock build {latest["build"]} change card"></a>', "",
+                  f"[See everything found in build {latest['build']}]({prefix}builds/{latest['build']}.md).", ""]
+    lines += ["### Five recent changes with a known before and after", "",
+              "Each card shows a value recorded in both builds. New settings are labeled separately "
+              "because we cannot verify what their earlier value was.", ""]
     if not entries:
         return "\n".join(lines + ["No comparable changes are saved yet.", ""])
     lines += ["<table>", "<tr>"]
@@ -746,19 +798,18 @@ def gallery_markup(entries: list[dict], prefix: str) -> str:
         lines += ["<td width=\"20%\">",
                   f'<a href="{image_path}"><img src="{image_path}" width="185" alt="{alt}"></a>',
                   "</td>"]
-    lines += ["</tr>", "</table>", "", "### What changed, and when", "", "<ol>"]
+    lines += ["</tr>", "</table>", "", "### The changes in words", "", "<ol>"]
     for entry in entries:
         manifest, change = entry["manifest"], entry["change"]
         build = manifest["build"]
         stamp = datetime.fromisoformat(manifest["upstream_time"].replace("Z", "+00:00"))
         when = stamp.strftime("%b %d, %Y %H:%M UTC")
-        context, field, before, after, note = public_change(change)
+        context, field, before, after, _ = public_change(change)
         report_path = f"{prefix}builds/{build}.md"
         image_path = f"{prefix}infographics/recent/{recent_card_filename(entry)}"
         line = (f'<li><strong>{html.escape(context)} — {html.escape(field)}</strong><br>'
                 f'{html.escape(before)} → <strong>{html.escape(after)}</strong>'
-                + (f' ({html.escape(note)})' if note else '')
-                + f'<br>Recorded {html.escape(when)} · Build {build} '
+                + f'<br>{html.escape(when)} · Build {build} '
                 f'(<a href="{image_path}">view card</a>; <a href="{report_path}">all changes</a>)</li>')
         lines.append(line)
     lines += ["</ol>", ""]
@@ -941,6 +992,15 @@ def run(max_builds: int | None = None):
     pending = [entry for entry in available if last is None or entry["build"] > last["build"]]
     if max_builds is not None:
         pending = pending[:max_builds]
+    if not pending and last and max_builds is None:
+        try:
+            count, changed = validate_archive()
+        except SourceError:
+            refresh_presentation()
+            count, changed = validate_archive()
+        print(f"No new client build. Latest: {last['build']}. "
+              f"Validated {count} saved builds and {changed} exact changes.", flush=True)
+        return
     for entry in pending:
         number = entry["build"]
         target = BUILDS / str(number) / "snapshot.json"
