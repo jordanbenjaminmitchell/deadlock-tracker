@@ -1,0 +1,1 @@
+{"build":6821,"changes":[{"category":"abilities","kind":"added","new":"Nurse.Fear.Debuff.Start.NPC","old":null,"path":"abilities.ability_nurse_fear.m_DebuffModifier.m_strFearAppliedNPCSound"}],"compared_with":6819,"recorded_at":"2026-10-26T20:03:09Z","source":"https://github.com/SteamTracking/GameTracking-Deadlock/commit/d251cf9d9a796061c90f58724230b7e17b97121b"}

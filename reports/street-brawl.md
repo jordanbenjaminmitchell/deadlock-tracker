@@ -1,6 +1,6 @@
 # Street Brawl changes
 
-The latest archived build is [6819](builds/6819.md). It has no confirmed Street Brawl value change.
+The latest archived build is [6821](builds/6821.md). It has no confirmed Street Brawl value change.
 
 ## Most recent confirmed change: build 6794
 

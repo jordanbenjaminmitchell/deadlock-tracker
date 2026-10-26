@@ -62,7 +62,7 @@ The first number counts builds with a change in the files we follow. The second 
 
 | Month | Changes found | Other builds |
 |---|---:|---:|
-| [October 2026](#october-2026) | 19 | 21 |
+| [October 2026](#october-2026) | 20 | 21 |
 | [September 2026](#september-2026) | 6 | 8 |
 | [August 2026](#august-2026) | 7 | 7 |
 | [July 2026](#july-2026) | 8 | 21 |
@@ -80,6 +80,7 @@ The first number counts builds with a change in the files we follow. The second 
 
 | Build | Recorded (UTC) | What stood out | Card |
 |---:|---|---|---|
+| [6821](builds/6821.md) | Oct 26, 2026 20:03 | Game data changed; see the report for exact values. | [Card](infographics/6821.svg) |
 | [6819](builds/6819.md) | Oct 22, 2026 23:53 | Violet · Living Ink — Minimum stroke distance is now listed as 15.0. There is no confirmed earlier value. | [Card](infographics/6819.svg) |
 | [6813](builds/6813.md) | Oct 22, 2026 04:14 | Warden · Last Stand — Fear immunity changed from Off to On. | [Card](infographics/6813.svg) |
 | [6801](builds/6801.md) | Oct 20, 2026 21:02 | Nurse Harrow changed from Pre-release to Released in the game data. | [Card](infographics/6801.svg) |
