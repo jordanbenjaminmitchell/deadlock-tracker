@@ -1,0 +1,1 @@
+{"build":6831,"changes":[{"category":"abilities","kind":"changed","new":"15","old":"13","path":"abilities.upgrade_tech_overflow.m_mapAbilityProperties.AbilityLifestealPercentHero.m_strValue"}],"compared_with":6829,"recorded_at":"2026-10-30T22:00:56Z","source":"https://github.com/SteamTracking/GameTracking-Deadlock/commit/f6be4e77c8be192a904a22de58adf3e66a26104f"}

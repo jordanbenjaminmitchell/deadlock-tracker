@@ -62,7 +62,7 @@ The first number counts builds with a change in the files we follow. The second 
 
 | Month | Changes found | Other builds |
 |---|---:|---:|
-| [October 2026](#october-2026) | 22 | 23 |
+| [October 2026](#october-2026) | 24 | 23 |
 | [September 2026](#september-2026) | 6 | 8 |
 | [August 2026](#august-2026) | 7 | 7 |
 | [July 2026](#july-2026) | 8 | 21 |
@@ -80,6 +80,8 @@ The first number counts builds with a change in the files we follow. The second 
 
 | Build | Recorded (UTC) | What stood out | Card |
 |---:|---|---|---|
+| [6833](builds/6833.md) | Oct 30, 2026 22:20 | Baba bench melee — Cooldown on miss changed from 1.6 to 1.5. | [Card](infographics/6833.svg) |
+| [6831](builds/6831.md) | Oct 30, 2026 22:00 | Spiritual Overflow — Ability lifesteal percent hero changed from 13 to 15. | [Card](infographics/6831.svg) |
 | [6827](builds/6827.md) | Oct 30, 2026 21:05 | Game data changed; see the report for exact values. | [Card](infographics/6827.svg) |
 | [6826](builds/6826.md) | Oct 30, 2026 20:54 | Graves — Maximum move speed changed from 7.0 to 6.7. | [Card](infographics/6826.svg) |
 | [6821](builds/6821.md) | Oct 26, 2026 20:03 | Game data changed; see the report for exact values. | [Card](infographics/6821.svg) |

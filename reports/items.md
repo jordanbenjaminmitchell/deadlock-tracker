@@ -917,6 +917,7 @@ Items with a recorded value in both saved builds. Names come from game data and 
 
 ## Spiritual Overflow
 
+- **Spiritual Overflow — Ability lifesteal percent hero**: 13 → **15** · Oct 30, 2026 · [build 6831](builds/6831.md)
 - **Spiritual Overflow — Tech power**: 6 → **8** · Oct 30, 2026 · [build 6826](builds/6826.md)
 - **Spiritual Overflow — Bonus fire rate**: 30 → **25** · Sep 16, 2026 · [build 6694](builds/6694.md)
 - **Spiritual Overflow — Bonus spirit**: 40 → **30** · Sep 16, 2026 · [build 6694](builds/6694.md)

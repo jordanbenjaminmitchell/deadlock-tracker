@@ -9,21 +9,31 @@ These are changes in extracted files. A value changing in a file does not, on it
 <!-- RECENT_CHANGES_START -->
 ## What changed in Deadlock?
 
-**Latest build recorded:** [6829](reports/builds/6829.md) on Oct 30, 2026 at 21:45 UTC.
+**Latest build recorded:** [6833](reports/builds/6833.md) on Oct 30, 2026 at 22:20 UTC.
 
 **Tracker check:** Scheduled every five minutes. [See the most recent check and its time](https://github.com/jordanbenjaminmitchell/deadlock-tracker/actions/workflows/track.yml). GitHub may start a check late.
 
-**History covered:** Oct 25, 2025–Oct 30, 2026 across 390 saved builds. [Browse by month](reports/index.md#updates-by-month).
+**History covered:** Oct 25, 2025–Oct 30, 2026 across 392 saved builds. [Browse by month](reports/index.md#updates-by-month).
 
 ### Latest update
 
-No value changed in the game data this tracker watches.
+Baba bench melee — Cooldown on miss changed from **1.6** to **1.5**.
 
-<a href="reports/infographics/latest.svg"><img src="reports/infographics/latest.svg" width="320" alt="No value changed in the game data this tracker watches. Build 6829."></a>
+<a href="reports/infographics/latest.svg"><img src="reports/infographics/latest.svg" width="320" alt="Baba bench melee — Cooldown on miss changed from 1.6 to 1.5. Build 6833."></a>
 
-[See everything found in build 6829](reports/builds/6829.md) · [Check the source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/8cea76cc5321d75935eee75c85605f098f795fda).
+[See everything found in build 6833](reports/builds/6833.md) · [Check the source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/b18c406df07927fc6041d5d010241e7e88b8323b).
 
 ### Previous updates
+
+#### Build 6831 · Oct 30, 2026 22:00 UTC
+
+Spiritual Overflow — Ability lifesteal percent hero changed from **13** to **15**.
+
+<a href="reports/infographics/6831.svg"><img src="reports/infographics/6831.svg" width="280" alt="Spiritual Overflow — Ability lifesteal percent hero changed from 13 to 15. Build 6831."></a>
+
+- **Spiritual Overflow — Ability lifesteal percent hero**: 13 → **15**
+
+[See all changes in build 6831](reports/builds/6831.md) · [Check the source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/f6be4e77c8be192a904a22de58adf3e66a26104f).
 
 #### Build 6827 · Oct 30, 2026 21:05 UTC
 
@@ -57,39 +67,16 @@ This build changed data without a simple value to highlight.
 
 [See all changes in build 6821](reports/builds/6821.md) · [Check the source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/d251cf9d9a796061c90f58724230b7e17b97121b).
 
-#### Build 6819 · Oct 22, 2026 23:53 UTC
-
-Violet · Living Ink — Minimum stroke distance is now listed as **15.0**. There is no confirmed earlier value.
-
-<a href="reports/infographics/6819.svg"><img src="reports/infographics/6819.svg" width="280" alt="Violet · Living Ink — Minimum stroke distance is now listed as 15.0. There is no confirmed earlier value. Build 6819."></a>
-
-- **Violet · Living Ink — Minimum stroke distance**: new setting **15.0**
-
-[See all changes in build 6819](reports/builds/6819.md) · [Check the source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/17462b250a0ca80e7f80102f2c83cc3eecff5f12).
-
-#### Build 6813 · Oct 22, 2026 04:14 UTC
-
-Warden · Last Stand — Fear immunity changed from **Off** to **On**.
-
-<a href="reports/infographics/6813.svg"><img src="reports/infographics/6813.svg" width="280" alt="Warden · Last Stand — Fear immunity changed from Off to On. Build 6813."></a>
-
-Key values in this update:
-
-- **Warden · Last Stand — Fear immunity**: Off → **On** (Fear immunity added)
-- **Warden · Last Stand — Fear immunity during auto-cast delay**: new setting **On**
-
-[See all changes in build 6813](reports/builds/6813.md) · [Check the source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/a94d8b455203f12b176de75a5598dd8e6e8a94d4).
-
 <details>
 <summary>Last five changes with a verified before and after</summary>
 
 These are individual values, so several can come from one build.
 
+- **Baba bench melee — Cooldown on miss**: 1.6 → **1.5** (Down 0.1 · 6.25%) · Oct 30, 2026 22:20 UTC · Build 6833 ([card](reports/infographics/recent/6833-92649cebfee9.svg); [full update](reports/builds/6833.md))
+- **Spiritual Overflow — Ability lifesteal percent hero**: 13 → **15** · Oct 30, 2026 22:00 UTC · Build 6831 ([card](reports/infographics/recent/6831-7cc198ac25c7.svg); [full update](reports/builds/6831.md))
 - **Graves — Maximum move speed**: 7.0 → **6.7** (Down 0.3 · 4.29%) · Oct 30, 2026 20:54 UTC · Build 6826 ([card](reports/infographics/recent/6826-69584e8a99e9.svg); [full update](reports/builds/6826.md))
 - **Silver — Base health regen**: 2.5 → **3** (Up 0.5 · 20.00%) · Oct 30, 2026 20:54 UTC · Build 6826 ([card](reports/infographics/recent/6826-3aa2124330ab.svg); [full update](reports/builds/6826.md))
 - **Solomon — Crit damage bonus scale**: 1.0 → **0.8** (Down 0.2 · 20.00%) · Oct 30, 2026 20:54 UTC · Build 6826 ([card](reports/infographics/recent/6826-708b0c701052.svg); [full update](reports/builds/6826.md))
-- **Violet · Abstract Landscape — Immune duration**: 0.5 → **0.75** (Up 0.25 · 50.00%) · Oct 30, 2026 20:54 UTC · Build 6826 ([card](reports/infographics/recent/6826-b8fae3106743.svg); [full update](reports/builds/6826.md))
-- **Violet · Still Life — Buildup grace period**: 0.3 → **0.45** (Up 0.15 · 50.00%) · Oct 30, 2026 20:54 UTC · Build 6826 ([card](reports/infographics/recent/6826-29d1601b2634.svg); [full update](reports/builds/6826.md))
 
 </details>
 <!-- RECENT_CHANGES_END -->
