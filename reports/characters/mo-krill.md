@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6826 · Oct 30, 2026
+
+- **Mo &amp; Krill · Burrow — Dps**: 75 → **65** (Down 10 · 13.33%)
+- **Mo &amp; Krill · Scorn — Damage**: 50 → **45** (Down 5 · 10.00%)
+- **Mo &amp; Krill · Combo — Dps**: 40 → **35** (Down 5 · 12.50%)
+- **Mo &amp; Krill — Modifier value base bullet damage from level**: 0.0847 → **0.0881** (Up 0.0034 · 4.01%)
+- **Mo &amp; Krill — Modifier value tech power**: 1.1 → **0.6** (Down 0.5 · 45.45%)
+- 1 more values in the full report
+
+[Full update](../builds/6826.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/fd21313e755aaac0a1625e0851b8d5c3f03ff46d)
+
 ## Build 6711 · Sep 29, 2026
 
 - **Mo &amp; Krill · Combo — Required upgrade bits**: new setting ****

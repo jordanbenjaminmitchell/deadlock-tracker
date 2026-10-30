@@ -4,6 +4,15 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6826 · Oct 30, 2026
+
+- **Grey Talon · Guided Owl — Arrow initial pitch**: -45 → **89** (Up 134)
+- **Grey Talon — Hero type**: Marksman → **Mystic**
+- **Grey Talon · Charged Shot — Wall ricochet maximum normal z**: new setting **1.0**
+- **Grey Talon · Charged Shot — Wall ricochet speed scale**: new setting **0.5**
+
+[Full update](../builds/6826.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/fd21313e755aaac0a1625e0851b8d5c3f03ff46d)
+
 ## Build 6711 · Sep 29, 2026
 
 - **Grey Talon · Guided Owl — Required upgrade bits**: new setting ****

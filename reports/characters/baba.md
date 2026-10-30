@@ -4,6 +4,15 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6826 · Oct 30, 2026
+
+- **Baba — Fl scale**: 0.1 → **0.07** (Down 0.03 · 30.00%)
+- **Baba · Granny Long Legs — Heavy melee slow duration**: 4 → **2**
+- **Baba · Granny Long Legs — Light kick knockback distance**: 10m → **8m**
+- **Baba · Threadsap — Debuff duration**: 22 → **16**
+
+[Full update](../builds/6826.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/fd21313e755aaac0a1625e0851b8d5c3f03ff46d)
+
 ## Build 6785 · Oct 15, 2026
 
 - **Baba · Threadsap — Ability cooldown**: 26.0 → **28.0** (Up 2 · 7.69%)

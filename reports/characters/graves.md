@@ -4,6 +4,13 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6826 · Oct 30, 2026
+
+- **Graves — Maximum move speed**: 7.0 → **6.7** (Down 0.3 · 4.29%)
+- **Graves — Modifier value base bullet damage from level**: 0.054 → **0.052** (Down 0.002 · 3.70%)
+
+[Full update](../builds/6826.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/fd21313e755aaac0a1625e0851b8d5c3f03ff46d)
+
 ## Build 6736 · Oct 02, 2026
 
 - **Graves — Hero type**: Marksman → **Mystic**

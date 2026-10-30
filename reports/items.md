@@ -33,6 +33,7 @@ Items with a recorded value in both saved builds. Names come from game data and 
 
 ## Armor Piercer
 
+- **Armor Piercer — Proc chance**: 55 → **60** · Oct 30, 2026 · [build 6826](builds/6826.md)
 - **Armor Piercer — Proc chance**: 50 → **55** · Apr 11, 2026 · [build 6444](builds/6444.md)
 - **Armor Piercer — Bonus bullet speed percent**: 50 → **60** · Mar 06, 2026 · [build 6359](builds/6359.md)
 - **Armor Piercer — Bonus bullet speed percent**: 45 → **50** · Nov 21, 2025 · [build 5983](builds/5983.md)
@@ -52,6 +53,7 @@ Items with a recorded value in both saved builds. Names come from game data and 
 
 ## Battle Vest
 
+- **Battle Vest — Base attack damage percent**: 18 → **22** · Oct 30, 2026 · [build 6826](builds/6826.md)
 - **Battle Vest — Base attack damage percent**: 15 → **18** · May 22, 2026 · [build 6514](builds/6514.md)
 - **Battle Vest — Bonus fire rate**: 8 → **7** · Jan 30, 2026 · [build 6211](builds/6211.md)
 
@@ -72,10 +74,14 @@ Items with a recorded value in both saved builds. Names come from game data and 
 
 ## Bullet Lifesteal
 
+- **Bullet Lifesteal — Base attack damage percent**: 6 → **10** · Oct 30, 2026 · [build 6826](builds/6826.md)
+- **Bullet Lifesteal — Bullet lifesteal percent**: 13 → **15** · Oct 30, 2026 · [build 6826](builds/6826.md)
 - **Bullet Lifesteal — Bullet lifesteal percent**: 16 → **13** · Apr 30, 2026 · [build 6468](builds/6468.md)
 
 ## Bullet Resilience
 
+- **Bullet Resilience — Bullet resist**: 30 → **35** · Oct 30, 2026 · [build 6826](builds/6826.md)
+- **Bullet Resilience — Out of combat health regen**: 3 → **5** · Oct 30, 2026 · [build 6826](builds/6826.md)
 - **Bullet Resilience — Bullet resist below threshold**: 22 → **15** · Mar 06, 2026 · [build 6359](builds/6359.md)
 - **Bullet Resilience — Health threshold**: 40 → **50** · Mar 06, 2026 · [build 6359](builds/6359.md)
 - **Bullet Resilience — Bullet resist below threshold**: 30 → **22** · Feb 05, 2026 · [build 6236](builds/6236.md)
@@ -152,6 +158,8 @@ Items with a recorded value in both saved builds. Names come from game data and 
 
 ## Crippling Headshot
 
+- **Crippling Headshot — Heal amp receive penalty percent**: -35 → **-40** · Oct 30, 2026 · [build 6826](builds/6826.md)
+- **Crippling Headshot — Heal amp regen penalty percent**: -35 → **-40** · Oct 30, 2026 · [build 6826](builds/6826.md)
 - **Crippling Headshot — Bonus health**: 150 → **125** · Dec 16, 2025 · [build 6044](builds/6044.md)
 - **Crippling Headshot — Bullet resist reduction**: -18 → **-16** · Dec 16, 2025 · [build 6044](builds/6044.md)
 - **Crippling Headshot — Magic resist reduction**: -18 → **-16** · Dec 16, 2025 · [build 6044](builds/6044.md)
@@ -194,6 +202,8 @@ Items with a recorded value in both saved builds. Names come from game data and 
 
 ## Decay
 
+- **Decay — Heal amp receive penalty percent**: -50 → **-55** · Oct 30, 2026 · [build 6826](builds/6826.md)
+- **Decay — Heal amp regen penalty percent**: -50 → **-55** · Oct 30, 2026 · [build 6826](builds/6826.md)
 - **Decay — Ability duration**: 10 → **12** · Sep 16, 2026 · [build 6694](builds/6694.md)
 - **Decay — Ability cooldown**: 32.0 → **30.0** (Down 2 · 6.25%) · May 22, 2026 · [build 6514](builds/6514.md)
 - **Decay — Heal amp receive penalty percent**: -45 → **-50** · Mar 06, 2026 · [build 6359](builds/6359.md)
@@ -217,6 +227,7 @@ Items with a recorded value in both saved builds. Names come from game data and 
 
 ## Divine Barrier
 
+- **Divine Barrier — Ability cooldown**: 45 → **55** · Oct 30, 2026 · [build 6826](builds/6826.md)
 - **Divine Barrier — Tech radius multiplier**: 15 → **10** · Mar 21, 2026 · [build 6403](builds/6403.md)
 - **Divine Barrier — Tech range multiplier**: 15 → **10** · Mar 21, 2026 · [build 6403](builds/6403.md)
 
@@ -269,6 +280,7 @@ Items with a recorded value in both saved builds. Names come from game data and 
 
 ## Express Shot
 
+- **Express Shot — Proc base attack damage percent alt fire**: 40 → **38** · Oct 30, 2026 · [build 6826](builds/6826.md)
 - **Express Shot — Proc base attack damage percent alt fire**: 35 → **40** · Apr 11, 2026 · [build 6444](builds/6444.md)
 - **Express Shot — Bonus bullet speed percent**: 50 → **60** · Mar 06, 2026 · [build 6359](builds/6359.md)
 - **Express Shot — Proc ammo consumed**: 30 → **2** · Mar 06, 2026 · [build 6359](builds/6359.md)
@@ -297,6 +309,7 @@ Items with a recorded value in both saved builds. Names come from game data and 
 
 ## Focus Lens
 
+- **Focus Lens — Ability cooldown**: 45 → **40** · Oct 30, 2026 · [build 6826](builds/6826.md)
 - **Focus Lens — Important property**: AbilityDuration → **StatusEffectEMP** · Sep 29, 2026 · [build 6711](builds/6711.md)
 - **Focus Lens — Ability cast range**: 20m → **25m** · Sep 16, 2026 · [build 6694](builds/6694.md)
 - **Focus Lens — Percent damage**: 30 → **35** · Sep 16, 2026 · [build 6694](builds/6694.md)
@@ -339,6 +352,8 @@ Items with a recorded value in both saved builds. Names come from game data and 
 
 ## Fury Trance
 
+- **Fury Trance — Base attack damage percent**: 6 → **10** · Oct 30, 2026 · [build 6826](builds/6826.md)
+- **Fury Trance — Bullet lifesteal percent**: 14 → **15** · Oct 30, 2026 · [build 6826](builds/6826.md)
 - **Fury Trance — Important property**: TechResist → **ActiveBonusMoveSpeed** · Jul 28, 2026 · [build 6642](builds/6642.md)
 - **Fury Trance — Active bonus fire rate**: 30 → **32** · May 22, 2026 · [build 6514](builds/6514.md)
 - **Fury Trance — Bullet lifesteal percent**: 18 → **14** · Apr 30, 2026 · [build 6468](builds/6468.md)
@@ -348,6 +363,7 @@ Items with a recorded value in both saved builds. Names come from game data and 
 
 ## Glass Cannon
 
+- **Glass Cannon — Base attack damage percent**: 80 → **85** · Oct 30, 2026 · [build 6826](builds/6826.md)
 - **Glass Cannon — Maximum health loss percent**: -15 → **-13** · May 22, 2026 · [build 6514](builds/6514.md)
 - **Glass Cannon — Fire rate per kill**: 8 → **7** · Jan 30, 2026 · [build 6211](builds/6211.md)
 - **Glass Cannon — Maximum health loss percent**: -13 → **-15** · Jan 30, 2026 · [build 6211](builds/6211.md)
@@ -355,6 +371,7 @@ Items with a recorded value in both saved builds. Names come from game data and 
 
 ## Golden Goose Egg
 
+- **Golden Goose Egg — Outgoing damage penalty percent**: -15 → **-12** · Oct 30, 2026 · [build 6826](builds/6826.md)
 - **Golden Goose Egg — Bonus gold per minute**: 90 → **80** · Sep 16, 2026 · [build 6694](builds/6694.md)
 - **Golden Goose Egg — Outgoing damage penalty percent**: -10 → **-15** · Sep 16, 2026 · [build 6694](builds/6694.md)
 - **Golden Goose Egg — Bonus buffs per gold**: 100 → **80** · May 22, 2026 · [build 6514](builds/6514.md)
@@ -391,6 +408,14 @@ Items with a recorded value in both saved builds. Names come from game data and 
 - **Headshot Booster — Bonus health**: 40 → **30** · Dec 16, 2025 · [build 6044](builds/6044.md)
 - **Headshot Booster — Ability cooldown**: 8 → **9** (Up 1 · 12.50%) · Nov 21, 2025 · [build 5983](builds/5983.md)
 
+## Healbane
+
+- **Healbane — Heal on kill**: 275 → **170** · Oct 30, 2026 · [build 6826](builds/6826.md)
+
+## Healing Booster
+
+- **Healing Booster — Out of combat health regen**: 1 → **2** · Oct 30, 2026 · [build 6826](builds/6826.md)
+
 ## Healing Nova
 
 - **Healing Nova — Tech radius multiplier**: 6 → **5** · Mar 21, 2026 · [build 6403](builds/6403.md)
@@ -410,6 +435,7 @@ Items with a recorded value in both saved builds. Names come from game data and 
 
 ## High-Velocity Rounds
 
+- **High-Velocity Rounds — Bonus bullet speed percent**: 60 → **45** · Oct 30, 2026 · [build 6826](builds/6826.md)
 - **High-Velocity Rounds — Bonus bullet speed percent**: 50 → **60** · Mar 06, 2026 · [build 6359](builds/6359.md)
 - **High-Velocity Rounds — Bonus bullet speed percent**: 45 → **50** · Nov 21, 2025 · [build 5983](builds/5983.md)
 
@@ -443,6 +469,9 @@ Items with a recorded value in both saved builds. Names come from game data and 
 
 ## Infuser
 
+- **Infuser — Ability lifesteal percent hero**: 70 → **75** · Oct 30, 2026 · [build 6826](builds/6826.md)
+- **Infuser — Ability lifesteal percent hero passive**: 13 → **15** · Oct 30, 2026 · [build 6826](builds/6826.md)
+- **Infuser — Tech power**: 6 → **8** · Oct 30, 2026 · [build 6826](builds/6826.md)
 - **Infuser — Ability duration**: 6 → **7** · May 22, 2026 · [build 6514](builds/6514.md)
 - **Infuser — Tech power**: 0 → **6** · May 22, 2026 · [build 6514](builds/6514.md)
 - **Infuser — Ability lifesteal percent hero**: 80 → **70** · Apr 30, 2026 · [build 6468](builds/6468.md)
@@ -461,6 +490,7 @@ Items with a recorded value in both saved builds. Names come from game data and 
 
 ## Juggernaut
 
+- **Juggernaut — Bonus health regen**: 8 → **15** · Oct 30, 2026 · [build 6826](builds/6826.md)
 - **Juggernaut — Fire rate slow**: 36 → **40** · May 22, 2026 · [build 6514](builds/6514.md)
 - **Juggernaut — Fire rate slow**: 40 → **36** · Jan 30, 2026 · [build 6211](builds/6211.md)
 
@@ -478,6 +508,8 @@ Items with a recorded value in both saved builds. Names come from game data and 
 
 ## Leech
 
+- **Leech — Ability lifesteal percent hero**: 28 → **30** · Oct 30, 2026 · [build 6826](builds/6826.md)
+- **Leech — Bullet lifesteal percent**: 28 → **30** · Oct 30, 2026 · [build 6826](builds/6826.md)
 - **Leech — Ability lifesteal percent hero**: 25 → **28** · Sep 16, 2026 · [build 6694](builds/6694.md)
 - **Leech — Bullet lifesteal percent**: 25 → **28** · Sep 16, 2026 · [build 6694](builds/6694.md)
 - **Leech — Bonus health**: 160 → **180** · May 22, 2026 · [build 6514](builds/6514.md)
@@ -495,6 +527,7 @@ Items with a recorded value in both saved builds. Names come from game data and 
 
 ## Lightning Scroll
 
+- **Lightning Scroll — Ground dash reduction percent**: -10 → **-12** · Oct 30, 2026 · [build 6826](builds/6826.md)
 - **Lightning Scroll — Important property**: StunDuration → **Damage** · Sep 29, 2026 · [build 6711](builds/6711.md)
 - **Lightning Scroll — Ground dash reduction percent**: -12 → **-10** · Sep 16, 2026 · [build 6694](builds/6694.md)
 - **Lightning Scroll — Movement speed slow**: 30 → **24** · Sep 16, 2026 · [build 6694](builds/6694.md)
@@ -569,6 +602,7 @@ Items with a recorded value in both saved builds. Names come from game data and 
 
 ## Mystic Slow
 
+- **Mystic Slow — Ground dash reduction percent**: -10 → **-12** · Oct 30, 2026 · [build 6826](builds/6826.md)
 - **Mystic Slow — Ground dash reduction percent**: -12 → **-10** · Sep 16, 2026 · [build 6694](builds/6694.md)
 - **Mystic Slow — Movement speed slow**: 30 → **24** · Sep 16, 2026 · [build 6694](builds/6694.md)
 - **Mystic Slow — Bonus health**: 30 → **50** · May 22, 2026 · [build 6514](builds/6514.md)
@@ -620,6 +654,7 @@ Items with a recorded value in both saved builds. Names come from game data and 
 
 ## Radiant Regeneration
 
+- **Radiant Regeneration — Healing per cast**: 65 → **40** · Oct 30, 2026 · [build 6826](builds/6826.md)
 - **Radiant Regeneration — Healing per cast**: 70 → **65** · Aug 22, 2026 · [build 6684](builds/6684.md)
 - **Radiant Regeneration — Regeneration duration**: 6 → **7** · May 22, 2026 · [build 6514](builds/6514.md)
 - **Radiant Regeneration — Bonus health**: 65 → **90** · Mar 06, 2026 · [build 6359](builds/6359.md)
@@ -684,6 +719,7 @@ Items with a recorded value in both saved builds. Names come from game data and 
 
 ## Return Fire
 
+- **Return Fire — Ability section type**: Active → **Innate** · Oct 30, 2026 · [build 6826](builds/6826.md)
 - **Return Fire — Ability section type**: Innate → **Active** · Sep 29, 2026 · [build 6711](builds/6711.md)
 - **Return Fire — Bullet damage reflected pct**: 60 → **65** · Apr 30, 2026 · [build 6468](builds/6468.md)
 - **Return Fire — Bullet resist**: 8 → **10** · Apr 30, 2026 · [build 6468](builds/6468.md)
@@ -734,6 +770,7 @@ Items with a recorded value in both saved builds. Names come from game data and 
 
 ## Shadow Weave
 
+- **Shadow Weave — Important property**: AmbushBonusFireRate → **AmbushBonusWeaponDamage** · Oct 30, 2026 · [build 6826](builds/6826.md)
 - **Shadow Weave — Ability cooldown**: 45.0 → **37.0** (Down 8 · 17.78%) · Sep 16, 2026 · [build 6694](builds/6694.md)
 - **Shadow Weave — Ability duration**: 10 → **13** · May 22, 2026 · [build 6514](builds/6514.md)
 - **Shadow Weave — Ambush bonus fire rate**: 20 → **25** · May 22, 2026 · [build 6514](builds/6514.md)
@@ -758,6 +795,7 @@ Items with a recorded value in both saved builds. Names come from game data and 
 
 ## Silence Wave
 
+- **Silence Wave — Bonus health**: 50 → **90** · Oct 30, 2026 · [build 6826](builds/6826.md)
 - **Silence Wave — Ability cooldown**: 30.0 → **42.0** (Up 12 · 40.00%) · Apr 11, 2026 · [build 6444](builds/6444.md)
 - **Silence Wave — Damage**: 100 → **75** · Apr 11, 2026 · [build 6444](builds/6444.md)
 - **Silence Wave — Ability cooldown**: 35.0 → **30.0** (Down 5 · 14.29%) · Mar 06, 2026 · [build 6359](builds/6359.md)
@@ -822,6 +860,8 @@ Items with a recorded value in both saved builds. Names come from game data and 
 
 ## Spirit Lifesteal
 
+- **Spirit Lifesteal — Ability lifesteal percent hero**: 13 → **15** · Oct 30, 2026 · [build 6826](builds/6826.md)
+- **Spirit Lifesteal — Tech power**: 6 → **8** · Oct 30, 2026 · [build 6826](builds/6826.md)
 - **Spirit Lifesteal — Bonus health**: 70 → **90** · May 22, 2026 · [build 6514](builds/6514.md)
 - **Spirit Lifesteal — Ability lifesteal percent hero**: 16 → **13** · Apr 30, 2026 · [build 6468](builds/6468.md)
 
@@ -842,6 +882,8 @@ Items with a recorded value in both saved builds. Names come from game data and 
 
 ## Spirit Sap
 
+- **Spirit Sap — Ability cast range**: 40m → **35m** · Oct 30, 2026 · [build 6826](builds/6826.md)
+- **Spirit Sap — Ability cooldown**: 18 → **22** · Oct 30, 2026 · [build 6826](builds/6826.md)
 - **Spirit Sap — Ability cooldown**: 32 → **18** · Mar 06, 2026 · [build 6359](builds/6359.md)
 - **Spirit Sap — Tech power reduction**: -24 → **-30** · Mar 06, 2026 · [build 6359](builds/6359.md)
 - **Spirit Sap — Bonus health**: 75 → **50** · Dec 16, 2025 · [build 6044](builds/6044.md)
@@ -851,6 +893,7 @@ Items with a recorded value in both saved builds. Names come from game data and 
 
 ## Spirit Shielding
 
+- **Spirit Shielding — Tech resist**: 18 → **15** · Oct 30, 2026 · [build 6826](builds/6826.md)
 - **Spirit Shielding — Important property**: BonusMoveSpeed → **TechResist** · May 22, 2026 · [build 6514](builds/6514.md)
 - **Spirit Shielding — Barrier duration**: 7 → **8** · Apr 11, 2026 · [build 6444](builds/6444.md)
 - **Spirit Shielding — Ability cooldown**: 35 → **45** · Nov 21, 2025 · [build 5983](builds/5983.md)
@@ -874,6 +917,7 @@ Items with a recorded value in both saved builds. Names come from game data and 
 
 ## Spiritual Overflow
 
+- **Spiritual Overflow — Tech power**: 6 → **8** · Oct 30, 2026 · [build 6826](builds/6826.md)
 - **Spiritual Overflow — Bonus fire rate**: 30 → **25** · Sep 16, 2026 · [build 6694](builds/6694.md)
 - **Spiritual Overflow — Bonus spirit**: 40 → **30** · Sep 16, 2026 · [build 6694](builds/6694.md)
 - **Spiritual Overflow — Bonus ability duration percent**: 15 → **13** · Jul 28, 2026 · [build 6643](builds/6643.md)
@@ -956,12 +1000,15 @@ Items with a recorded value in both saved builds. Names come from game data and 
 
 ## Torment Pulse
 
+- **Torment Pulse — Melee resist percent**: 18 → **22** · Oct 30, 2026 · [build 6826](builds/6826.md)
 - **Torment Pulse — Melee resist percent**: 15 → **18** · May 22, 2026 · [build 6514](builds/6514.md)
 - **Torment Pulse — Damage pulse amount**: 27 → **25** · Mar 08, 2026 · [build 6373](builds/6373.md)
 - **Torment Pulse — Bonus health**: 125 → **100** · Dec 16, 2025 · [build 6044](builds/6044.md)
 
 ## Toxic Bullets
 
+- **Toxic Bullets — Heal amp receive penalty percent**: -35 → **-40** · Oct 30, 2026 · [build 6826](builds/6826.md)
+- **Toxic Bullets — Heal amp regen penalty percent**: -35 → **-40** · Oct 30, 2026 · [build 6826](builds/6826.md)
 - **Toxic Bullets — Heal amp receive penalty percent**: -30 → **-35** · Apr 11, 2026 · [build 6444](builds/6444.md)
 - **Toxic Bullets — Heal amp regen penalty percent**: -30 → **-35** · Apr 11, 2026 · [build 6444](builds/6444.md)
 - **Toxic Bullets — Dot duration**: 3 → **4** · Nov 21, 2025 · [build 5983](builds/5983.md)
@@ -997,6 +1044,9 @@ Items with a recorded value in both saved builds. Names come from game data and 
 
 ## Vampiric Burst
 
+- **Vampiric Burst — Active bonus lifesteal**: 70 → **75** · Oct 30, 2026 · [build 6826](builds/6826.md)
+- **Vampiric Burst — Base attack damage percent**: 6 → **10** · Oct 30, 2026 · [build 6826](builds/6826.md)
+- **Vampiric Burst — Bullet lifesteal percent**: 13 → **15** · Oct 30, 2026 · [build 6826](builds/6826.md)
 - **Vampiric Burst — Active bonus lifesteal**: 80 → **70** · Apr 30, 2026 · [build 6468](builds/6468.md)
 - **Vampiric Burst — Bullet lifesteal percent**: 16 → **13** · Apr 30, 2026 · [build 6468](builds/6468.md)
 - **Vampiric Burst — Active bonus fire rate**: 40 → **34** · Jan 30, 2026 · [build 6211](builds/6211.md)

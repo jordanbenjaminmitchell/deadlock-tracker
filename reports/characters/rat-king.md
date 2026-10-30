@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6826 · Oct 30, 2026
+
+- **Rat King — Modifier value base bullet damage from level**: 0.18 → **0.144** (Down 0.036 · 20.00%)
+- **Rat King · Scrap Grenade — Damage per shrapnel**: 70 → **60**
+- **Rat King · Rule, Ratannia\! — Ability cooldown**: 160 → **180**
+- **Rat King · Scrap Grenade — Additional bounce detonate timer**: new setting **0.8**
+- **Rat King · Scrap Grenade — Final bounce detonate timer**: new setting **1.6**
+- 3 more values in the full report
+
+[Full update](../builds/6826.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/fd21313e755aaac0a1625e0851b8d5c3f03ff46d)
+
 ## Build 6757 · Oct 06, 2026
 
 - **Rat King — Pick pct**: 23.913044 → **28.40314** (Up 4.4901 · 18.78%)

@@ -4,6 +4,13 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6826 · Oct 30, 2026
+
+- **Yamato · Shadow Transformation — Ability cooldown**: 150.0 → **160.0** (Up 10 · 6.67%)
+- **Yamato · Flying Slash — Ability cast range**: 26m → **23m**
+
+[Full update](../builds/6826.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/fd21313e755aaac0a1625e0851b8d5c3f03ff46d)
+
 ## Build 6711 · Sep 29, 2026
 
 - **Yamato — Release status**: new setting **Released**

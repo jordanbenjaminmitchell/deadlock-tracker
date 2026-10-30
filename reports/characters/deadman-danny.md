@@ -4,6 +4,14 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6826 · Oct 30, 2026
+
+- **Deadman Danny · Chimera Mk1 — Slow effectiveness lateral**: 0.7 → **0.8** (Up 0.1 · 14.29%)
+- **Deadman Danny · Chimera Mk1 — Slow effectiveness vertical**: 0.35 → **0.8** (Up 0.45 · 128.57%)
+- **Deadman Danny · Chimera Mk1 — Slow effectiveness movement ability silence frac**: new setting **4.0**
+
+[Full update](../builds/6826.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/fd21313e755aaac0a1625e0851b8d5c3f03ff46d)
+
 ## Build 6785 · Oct 15, 2026
 
 - **Deadman Danny — Maximum health**: 680.0 → **730.0** (Up 50 · 7.35%)

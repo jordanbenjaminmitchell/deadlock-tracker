@@ -4,6 +4,16 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6826 · Oct 30, 2026
+
+- **Warden · Alchemical Flask — Speed**: 700.0 → **980.0** (Up 280 · 40.00%)
+- **Warden · Alchemical Flask — Up speed**: 275.0 → **385.0** (Up 110 · 40.00%)
+- **Warden · Alchemical Flask — Weapon power debuff**: -25 → **-30**
+- **Warden · Willpower — Move speed bonus pct**: 15 → **20**
+- **Warden · Alchemical Flask — Gravity scale**: new setting **1.96**
+
+[Full update](../builds/6826.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/fd21313e755aaac0a1625e0851b8d5c3f03ff46d)
+
 ## Build 6813 · Oct 22, 2026
 
 - **Warden · Last Stand — Fear immunity**: Off → **On** (Fear immunity added)

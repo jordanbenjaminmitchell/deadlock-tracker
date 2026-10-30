@@ -4,6 +4,13 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6826 · Oct 30, 2026
+
+- **Paige — Modifier value base bullet damage from level**: 0.52 → **0.61** (Up 0.09 · 17.31%)
+- **Paige — Hero type**: Mystic → **Healer**
+
+[Full update](../builds/6826.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/fd21313e755aaac0a1625e0851b8d5c3f03ff46d)
+
 ## Build 6711 · Sep 29, 2026
 
 - **Paige · Rallying Charge — Ally height**: 20m → **10m**

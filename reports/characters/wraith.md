@@ -4,6 +4,14 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6826 · Oct 30, 2026
+
+- **Wraith · Project Mind — Ability cooldown**: 46.0 → **50.0** (Up 4 · 8.70%)
+- **Wraith · Card Trick — Heart heal**: 60 → **45**
+- **Wraith · Card Trick — Maximum scale decimals displayed**: new setting **2**
+
+[Full update](../builds/6826.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/fd21313e755aaac0a1625e0851b8d5c3f03ff46d)
+
 ## Build 6711 · Sep 29, 2026
 
 - **Wraith · Telekinesis — Particle effect**: new setting ****

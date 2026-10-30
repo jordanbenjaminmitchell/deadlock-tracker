@@ -1,46 +1,47 @@
-# Deadlock build 6821
+# Deadlock build 6827
 
-Recorded Oct 26, 2026 at 20:03 UTC. Compared with build 6819.
+Recorded Oct 30, 2026 at 21:05 UTC. Compared with build 6826.
 
-**1 change found in the game data we follow.**
+**2 changes found in the game data we follow.**
 
 These numbers come from game data. They may not describe how a change feels in a match.
 
-New settings have no earlier value in the saved files. Their earlier in-game behavior cannot be verified from these data sources.
+## Abilities and items (1)
 
-**0 readable value changes are shown above.** The other 1 changes involve game data references or structures. Their exact before and after values are under ‘Check the exact source values’ below.
+- **Healing Nova — Stat scale**: 1.2 → **1.1** (Down 0.1 · 8.33%)
 
-[See the source commit](https://github.com/SteamTracking/GameTracking-Deadlock/commit/d251cf9d9a796061c90f58724230b7e17b97121b)
+**1 readable value changes are shown above.** The other 1 changes involve game data references or structures. Their exact before and after values are under ‘Check the exact source values’ below.
+
+[See the source commit](https://github.com/SteamTracking/GameTracking-Deadlock/commit/319b4b8a190e78c66bc80d75997ee909433a73d3)
 
 <details>
 <summary>Check the exact source values</summary>
 
-[Download every original before and after value](data/6821.json). This file includes all tracked changes, including those summarized above.
+[Download every original before and after value](data/6827.json). This file includes all tracked changes, including those summarized above.
 
-Client build `6821` · Source revision `11170534`
+Client build `6827` · Source revision `11191795`
 
 
-Other files in the same upstream commit (9):
+Other files in the same upstream commit (8):
 
 - `M` `DumpSource2/.stringsignore`
-- `M` `DumpSource2/schemas/client/CCitadel_Modifier_Nurse_Fear_Debuff_VData.h`
-- `M` `DumpSource2/schemas/client/EHeroReleaseVoteOption_None.h`
-- `M` `DumpSource2/schemas/client/EModifierEvent.h`
-- `M` `DumpSource2/schemas/server/CCitadel_Modifier_Nurse_Fear_Debuff_VData.h`
+- `A` `DumpSource2/schemas/client/CModifier_CloakingDevice_Active_Invis.h`
+- `A` `DumpSource2/schemas/server/CModifier_CloakingDevice_Active_Invis.h`
 - `M` `game/citadel/bin/win64/client_strings.txt`
 - `M` `game/citadel/bin/win64/server_strings.txt`
 - `M` `game/citadel/pak01_dir.txt`
+- `M` `game/citadel/pak01_dir/panorama/styles/hud_modifiers_center.css`
 - `M` `game/citadel/pak01_dir/soundevents/hero/nurse.vsndevts`
 
 Tracked source files:
 
-- `abilities.vdata`: [upstream file](https://raw.githubusercontent.com/SteamTracking/GameTracking-Deadlock/d251cf9d9a796061c90f58724230b7e17b97121b/game/citadel/pak01_dir/scripts/abilities.vdata), normalized SHA-256 `e6a2f697057ec5abedd71345aecafbaef7238373b65e869ea5fc723d9e24a5c3`
-- `generic_data.vdata`: [upstream file](https://raw.githubusercontent.com/SteamTracking/GameTracking-Deadlock/d251cf9d9a796061c90f58724230b7e17b97121b/game/citadel/pak01_dir/scripts/generic_data.vdata), normalized SHA-256 `89c429009b6baa46fdd0b1357cdec367f1de2a25d9caf4d942dc3b0be115673e`
-- `heroes.vdata`: [upstream file](https://raw.githubusercontent.com/SteamTracking/GameTracking-Deadlock/d251cf9d9a796061c90f58724230b7e17b97121b/game/citadel/pak01_dir/scripts/heroes.vdata), normalized SHA-256 `df211c3e48ae3ef4f23e689ae1a1e5242450bef3cc8891b393733ae7b671088d`
-- `misc.vdata`: [upstream file](https://raw.githubusercontent.com/SteamTracking/GameTracking-Deadlock/d251cf9d9a796061c90f58724230b7e17b97121b/game/citadel/pak01_dir/scripts/misc.vdata), normalized SHA-256 `9c9167a6160b71aba73096d1aff29b63ba21a49583d25f01d63ebf2b0c8a2ac9`
-- `modifiers.vdata`: [upstream file](https://raw.githubusercontent.com/SteamTracking/GameTracking-Deadlock/d251cf9d9a796061c90f58724230b7e17b97121b/game/citadel/pak01_dir/scripts/modifiers.vdata), normalized SHA-256 `acaf491797766311b4bf2581ea8a46bf1099d0951665ffe32ecb35e03b842065`
-- `npc_units.vdata`: [upstream file](https://raw.githubusercontent.com/SteamTracking/GameTracking-Deadlock/d251cf9d9a796061c90f58724230b7e17b97121b/game/citadel/pak01_dir/scripts/npc_units.vdata), normalized SHA-256 `cb9a4e658ae34071c9f5e465f8419da38b6b7120f92c23c385065fea73f5b3d4`
+- `abilities.vdata`: [upstream file](https://raw.githubusercontent.com/SteamTracking/GameTracking-Deadlock/319b4b8a190e78c66bc80d75997ee909433a73d3/game/citadel/pak01_dir/scripts/abilities.vdata), normalized SHA-256 `86108464bf91c935c5542abf23993b13a4fc884c0417aac8c1aeb75d1964c513`
+- `generic_data.vdata`: [upstream file](https://raw.githubusercontent.com/SteamTracking/GameTracking-Deadlock/319b4b8a190e78c66bc80d75997ee909433a73d3/game/citadel/pak01_dir/scripts/generic_data.vdata), normalized SHA-256 `29cacf83edfb0018afda42f71eaccd8475aa40ea06f422c39114a3e6dac01161`
+- `heroes.vdata`: [upstream file](https://raw.githubusercontent.com/SteamTracking/GameTracking-Deadlock/319b4b8a190e78c66bc80d75997ee909433a73d3/game/citadel/pak01_dir/scripts/heroes.vdata), normalized SHA-256 `7cee57d010dc9869c385ab94f2ac753adde352444b59585a4bc322ad1777a6bb`
+- `misc.vdata`: [upstream file](https://raw.githubusercontent.com/SteamTracking/GameTracking-Deadlock/319b4b8a190e78c66bc80d75997ee909433a73d3/game/citadel/pak01_dir/scripts/misc.vdata), normalized SHA-256 `816f4755ee573a036d22d54d4e0c2eb7e01e426dafb130998c3166cd61ac1fcf`
+- `modifiers.vdata`: [upstream file](https://raw.githubusercontent.com/SteamTracking/GameTracking-Deadlock/319b4b8a190e78c66bc80d75997ee909433a73d3/game/citadel/pak01_dir/scripts/modifiers.vdata), normalized SHA-256 `09ff2803c848636068d80973ccea84c5f55181e93a7608c0bc675b514e5b5a14`
+- `npc_units.vdata`: [upstream file](https://raw.githubusercontent.com/SteamTracking/GameTracking-Deadlock/319b4b8a190e78c66bc80d75997ee909433a73d3/game/citadel/pak01_dir/scripts/npc_units.vdata), normalized SHA-256 `2c0c4a9b450f8396916ea6322a018a06654f89516b00d1cbaf0a52afce64ef14`
 
-[Archived snapshot](../data/builds/6821/snapshot.json)
+[Archived snapshot](../data/builds/6827/snapshot.json)
 
 </details>

@@ -9,21 +9,45 @@ These are changes in extracted files. A value changing in a file does not, on it
 <!-- RECENT_CHANGES_START -->
 ## What changed in Deadlock?
 
-**Latest build recorded:** [6821](reports/builds/6821.md) on Oct 26, 2026 at 20:03 UTC.
+**Latest build recorded:** [6827](reports/builds/6827.md) on Oct 30, 2026 at 21:05 UTC.
 
 **Tracker check:** Scheduled every five minutes. [See the most recent check and its time](https://github.com/jordanbenjaminmitchell/deadlock-tracker/actions/workflows/track.yml). GitHub may start a check late.
 
-**History covered:** Oct 25, 2025–Oct 26, 2026 across 386 saved builds. [Browse by month](reports/index.md#updates-by-month).
+**History covered:** Oct 25, 2025–Oct 30, 2026 across 388 saved builds. [Browse by month](reports/index.md#updates-by-month).
 
 ### Latest update
 
 This build changed game data, but there is no simple before-and-after value to highlight.
 
-<a href="reports/infographics/latest.svg"><img src="reports/infographics/latest.svg" width="320" alt="This build changed game data, but there is no simple before-and-after value to highlight. Build 6821."></a>
+<a href="reports/infographics/latest.svg"><img src="reports/infographics/latest.svg" width="320" alt="This build changed game data, but there is no simple before-and-after value to highlight. Build 6827."></a>
 
-[See everything found in build 6821](reports/builds/6821.md) · [Check the source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/d251cf9d9a796061c90f58724230b7e17b97121b).
+[See everything found in build 6827](reports/builds/6827.md) · [Check the source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/319b4b8a190e78c66bc80d75997ee909433a73d3).
 
 ### Previous updates
+
+#### Build 6826 · Oct 30, 2026 20:54 UTC
+
+Graves — Maximum move speed changed from **7.0** to **6.7**.
+
+<a href="reports/infographics/6826.svg"><img src="reports/infographics/6826.svg" width="280" alt="Graves — Maximum move speed changed from 7.0 to 6.7. Build 6826."></a>
+
+Key values in this update:
+
+- **Graves — Maximum move speed**: 7.0 → **6.7** (Down 0.3 · 4.29%)
+- **Silver — Base health regen**: 2.5 → **3** (Up 0.5 · 20.00%)
+- **Solomon — Crit damage bonus scale**: 1.0 → **0.8** (Down 0.2 · 20.00%)
+- **Violet · Abstract Landscape — Immune duration**: 0.5 → **0.75** (Up 0.25 · 50.00%)
+- **Violet · Still Life — Buildup grace period**: 0.3 → **0.45** (Up 0.15 · 50.00%)
+
+[See all changes in build 6826](reports/builds/6826.md) · [Check the source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/fd21313e755aaac0a1625e0851b8d5c3f03ff46d).
+
+#### Build 6821 · Oct 26, 2026 20:03 UTC
+
+This build changed data without a simple value to highlight.
+
+<a href="reports/infographics/6821.svg"><img src="reports/infographics/6821.svg" width="280" alt="This build changed data without a simple value to highlight. Build 6821."></a>
+
+[See all changes in build 6821](reports/builds/6821.md) · [Check the source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/d251cf9d9a796061c90f58724230b7e17b97121b).
 
 #### Build 6819 · Oct 22, 2026 23:53 UTC
 
@@ -48,42 +72,16 @@ Key values in this update:
 
 [See all changes in build 6813](reports/builds/6813.md) · [Check the source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/a94d8b455203f12b176de75a5598dd8e6e8a94d4).
 
-#### Build 6801 · Oct 20, 2026 21:02 UTC
-
-Nurse Harrow changed from **Pre-release** to **Released** in the game data.
-
-<a href="reports/infographics/6801.svg"><img src="reports/infographics/6801.svg" width="280" alt="Nurse Harrow changed from Pre-release to Released in the game data. Build 6801."></a>
-
-Key values in this update:
-
-- **Nurse Harrow — Release status**: Pre-release → **Released**
-- **Nurse Harrow — Maximum health**: 780.0 → **730** (Down 50 · 6.41%)
-- **Nurse Harrow — Sprint speed**: 1.6 → **2.5** (Up 0.9 · 56.25%)
-- **Nurse Harrow — Maximum move speed**: 7.2 → **6.8** (Down 0.4 · 5.56%)
-- **Nurse Harrow — Base health regen**: 2.0 → **0** (Down 2 · 100.00%)
-
-[See all changes in build 6801](reports/builds/6801.md) · [Check the source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/37f9aebdc62766aa13748f73309b9b8120549833).
-
-#### Build 6794 · Oct 17, 2026 21:32 UTC
-
-Street Brawl — Buy time, fifth value changed from **65** to **50**.
-
-<a href="reports/infographics/6794.svg"><img src="reports/infographics/6794.svg" width="280" alt="Street Brawl — Buy time, fifth value changed from 65 to 50. Build 6794."></a>
-
-- **Street Brawl — Buy time, fifth value**: 65 → **50** (Down 15 · 23.08%)
-
-[See all changes in build 6794](reports/builds/6794.md) · [Check the source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/df1192043fd269aee7edf4dffdfb4cfc03d05f64).
-
 <details>
 <summary>Last five changes with a verified before and after</summary>
 
 These are individual values, so several can come from one build.
 
-- **Warden · Last Stand — Fear immunity**: Off → **On** (Fear immunity added) · Oct 22, 2026 04:14 UTC · Build 6813 ([card](reports/infographics/recent/6813-1cd069c8b4a2.svg); [full update](reports/builds/6813.md))
-- **Nurse Harrow — Release status**: Pre-release → **Released** · Oct 20, 2026 21:02 UTC · Build 6801 ([card](reports/infographics/recent/6801-2de523031bd0.svg); [full update](reports/builds/6801.md))
-- **Nurse Harrow — Maximum health**: 780.0 → **730** (Down 50 · 6.41%) · Oct 20, 2026 21:02 UTC · Build 6801 ([card](reports/infographics/recent/6801-a4483b1c959f.svg); [full update](reports/builds/6801.md))
-- **Nurse Harrow — Sprint speed**: 1.6 → **2.5** (Up 0.9 · 56.25%) · Oct 20, 2026 21:02 UTC · Build 6801 ([card](reports/infographics/recent/6801-d6f27d6154ce.svg); [full update](reports/builds/6801.md))
-- **Nurse Harrow — Maximum move speed**: 7.2 → **6.8** (Down 0.4 · 5.56%) · Oct 20, 2026 21:02 UTC · Build 6801 ([card](reports/infographics/recent/6801-8039798a3b0c.svg); [full update](reports/builds/6801.md))
+- **Graves — Maximum move speed**: 7.0 → **6.7** (Down 0.3 · 4.29%) · Oct 30, 2026 20:54 UTC · Build 6826 ([card](reports/infographics/recent/6826-69584e8a99e9.svg); [full update](reports/builds/6826.md))
+- **Silver — Base health regen**: 2.5 → **3** (Up 0.5 · 20.00%) · Oct 30, 2026 20:54 UTC · Build 6826 ([card](reports/infographics/recent/6826-3aa2124330ab.svg); [full update](reports/builds/6826.md))
+- **Solomon — Crit damage bonus scale**: 1.0 → **0.8** (Down 0.2 · 20.00%) · Oct 30, 2026 20:54 UTC · Build 6826 ([card](reports/infographics/recent/6826-708b0c701052.svg); [full update](reports/builds/6826.md))
+- **Violet · Abstract Landscape — Immune duration**: 0.5 → **0.75** (Up 0.25 · 50.00%) · Oct 30, 2026 20:54 UTC · Build 6826 ([card](reports/infographics/recent/6826-b8fae3106743.svg); [full update](reports/builds/6826.md))
+- **Violet · Still Life — Buildup grace period**: 0.3 → **0.45** (Up 0.15 · 50.00%) · Oct 30, 2026 20:54 UTC · Build 6826 ([card](reports/infographics/recent/6826-29d1601b2634.svg); [full update](reports/builds/6826.md))
 
 </details>
 <!-- RECENT_CHANGES_END -->

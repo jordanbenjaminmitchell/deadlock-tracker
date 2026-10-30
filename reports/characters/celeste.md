@@ -4,6 +4,12 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6826 · Oct 30, 2026
+
+- **Celeste · Shining Wonder — Damage**: 140 → **125**
+
+[Full update](../builds/6826.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/fd21313e755aaac0a1625e0851b8d5c3f03ff46d)
+
 ## Build 6736 · Oct 02, 2026
 
 - **Celeste — Hero type**: Marksman → **Mystic**

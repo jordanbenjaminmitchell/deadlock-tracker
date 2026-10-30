@@ -7,54 +7,54 @@ Find an update by character or mode, or browse the builds below. Dates show when
 ## Find changes by character or mode
 
 - **Abrams:** [19 builds](characters/abrams.md)
-- **Apollo:** [20 builds](characters/apollo.md)
-- **Baba:** [3 builds](characters/baba.md)
+- **Apollo:** [21 builds](characters/apollo.md)
+- **Baba:** [4 builds](characters/baba.md)
 - **Bebop:** [24 builds](characters/bebop.md)
-- **Billy:** [21 builds](characters/billy.md)
+- **Billy:** [22 builds](characters/billy.md)
 - **Calico:** [18 builds](characters/calico.md)
-- **Celeste:** [25 builds](characters/celeste.md)
-- **Deadman Danny:** [2 builds](characters/deadman-danny.md)
+- **Celeste:** [26 builds](characters/celeste.md)
+- **Deadman Danny:** [3 builds](characters/deadman-danny.md)
 - **Drifter:** [20 builds](characters/drifter.md)
-- **Dynamo:** [22 builds](characters/dynamo.md)
-- **Graves:** [25 builds](characters/graves.md)
-- **Grey Talon:** [22 builds](characters/grey-talon.md)
+- **Dynamo:** [23 builds](characters/dynamo.md)
+- **Graves:** [26 builds](characters/graves.md)
+- **Grey Talon:** [23 builds](characters/grey-talon.md)
 - **Haze:** [21 builds](characters/haze.md)
 - **Holliday:** [19 builds](characters/holliday.md)
-- **Infernus:** [21 builds](characters/infernus.md)
-- **Ivy:** [24 builds](characters/ivy.md)
-- **Kelvin:** [21 builds](characters/kelvin.md)
+- **Infernus:** [22 builds](characters/infernus.md)
+- **Ivy:** [25 builds](characters/ivy.md)
+- **Kelvin:** [22 builds](characters/kelvin.md)
 - **Lady Geist:** [22 builds](characters/lady-geist.md)
 - **Lash:** [19 builds](characters/lash.md)
-- **McGinnis:** [25 builds](characters/mcginnis.md)
-- **Mina:** [18 builds](characters/mina.md)
-- **Mirage:** [24 builds](characters/mirage.md)
-- **Mo &amp; Krill:** [20 builds](characters/mo-krill.md)
-- **Nurse Harrow:** [1 build](characters/nurse-harrow.md)
-- **Paige:** [23 builds](characters/paige.md)
-- **Paradox:** [21 builds](characters/paradox.md)
+- **McGinnis:** [26 builds](characters/mcginnis.md)
+- **Mina:** [19 builds](characters/mina.md)
+- **Mirage:** [25 builds](characters/mirage.md)
+- **Mo &amp; Krill:** [21 builds](characters/mo-krill.md)
+- **Nurse Harrow:** [2 builds](characters/nurse-harrow.md)
+- **Paige:** [24 builds](characters/paige.md)
+- **Paradox:** [22 builds](characters/paradox.md)
 - **Pocket:** [24 builds](characters/pocket.md)
-- **Rat King:** [3 builds](characters/rat-king.md)
-- **Rem:** [19 builds](characters/rem.md)
+- **Rat King:** [4 builds](characters/rat-king.md)
+- **Rem:** [20 builds](characters/rem.md)
 - **Seven:** [18 builds](characters/seven.md)
-- **Shiv:** [26 builds](characters/shiv.md)
-- **Silver:** [22 builds](characters/silver.md)
+- **Shiv:** [27 builds](characters/shiv.md)
+- **Silver:** [23 builds](characters/silver.md)
 - **Sinclair:** [21 builds](characters/sinclair.md)
-- **Solomon:** [2 builds](characters/solomon.md)
-- **Street Brawl:** [browse mode changes](street-brawl.md) · 24 builds
+- **Solomon:** [3 builds](characters/solomon.md)
+- **Street Brawl:** [browse mode changes](street-brawl.md) · 25 builds
 - **The Doorman:** [25 builds](characters/the-doorman.md)
-- **Venator:** [24 builds](characters/venator.md)
+- **Venator:** [25 builds](characters/venator.md)
 - **Victor:** [25 builds](characters/victor.md)
 - **Vindicta:** [17 builds](characters/vindicta.md)
-- **Violet:** [3 builds](characters/violet.md)
-- **Viscous:** [20 builds](characters/viscous.md)
+- **Violet:** [4 builds](characters/violet.md)
+- **Viscous:** [21 builds](characters/viscous.md)
 - **Vyper:** [23 builds](characters/vyper.md)
-- **Warden:** [22 builds](characters/warden.md)
-- **Wraith:** [24 builds](characters/wraith.md)
-- **Yamato:** [22 builds](characters/yamato.md)
+- **Warden:** [23 builds](characters/warden.md)
+- **Wraith:** [25 builds](characters/wraith.md)
+- **Yamato:** [23 builds](characters/yamato.md)
 
 ### Items
 
-[Browse 153 items with recorded before-and-after values](items.md). Names come from game data and may include development labels.
+[Browse 155 items with recorded before-and-after values](items.md). Names come from game data and may include development labels.
 
 ## Updates by month
 
@@ -62,7 +62,7 @@ The first number counts builds with a change in the files we follow. The second 
 
 | Month | Changes found | Other builds |
 |---|---:|---:|
-| [October 2026](#october-2026) | 20 | 21 |
+| [October 2026](#october-2026) | 22 | 21 |
 | [September 2026](#september-2026) | 6 | 8 |
 | [August 2026](#august-2026) | 7 | 7 |
 | [July 2026](#july-2026) | 8 | 21 |
@@ -80,6 +80,8 @@ The first number counts builds with a change in the files we follow. The second 
 
 | Build | Recorded (UTC) | What stood out | Card |
 |---:|---|---|---|
+| [6827](builds/6827.md) | Oct 30, 2026 21:05 | Game data changed; see the report for exact values. | [Card](infographics/6827.svg) |
+| [6826](builds/6826.md) | Oct 30, 2026 20:54 | Graves — Maximum move speed changed from 7.0 to 6.7. | [Card](infographics/6826.svg) |
 | [6821](builds/6821.md) | Oct 26, 2026 20:03 | Game data changed; see the report for exact values. | [Card](infographics/6821.svg) |
 | [6819](builds/6819.md) | Oct 22, 2026 23:53 | Violet · Living Ink — Minimum stroke distance is now listed as 15.0. There is no confirmed earlier value. | [Card](infographics/6819.svg) |
 | [6813](builds/6813.md) | Oct 22, 2026 04:14 | Warden · Last Stand — Fear immunity changed from Off to On. | [Card](infographics/6813.svg) |

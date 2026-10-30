@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6826 · Oct 30, 2026
+
+- **Violet · Abstract Landscape — Immune duration**: 0.5 → **0.75** (Up 0.25 · 50.00%)
+- **Violet · Still Life — Buildup grace period**: 0.3 → **0.45** (Up 0.15 · 50.00%)
+- **Violet · Abstract Landscape — Ability cooldown**: 165 → **180**
+- **Violet · Still Life — Is hidden**: On → **Off**
+- **Violet · Still Life — Small icon css class**:  → **buildup**
+- 1 more values in the full report
+
+[Full update](../builds/6826.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/fd21313e755aaac0a1625e0851b8d5c3f03ff46d)
+
 ## Build 6819 · Oct 22, 2026
 
 - **Violet · Living Ink — Minimum stroke distance**: new setting **15.0**

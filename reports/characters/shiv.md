@@ -4,6 +4,13 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6826 · Oct 30, 2026
+
+- **Shiv — Modifier value base bullet damage from level alt fire**: 0.24 → **0.228** (Down 0.012 · 5.00%)
+- **Shiv · Killing Blow — Recast window**: 16 → **12**
+
+[Full update](../builds/6826.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/fd21313e755aaac0a1625e0851b8d5c3f03ff46d)
+
 ## Build 6711 · Sep 29, 2026
 
 - **Shiv — Release status**: new setting **Released**
