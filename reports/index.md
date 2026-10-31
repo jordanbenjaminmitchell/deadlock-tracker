@@ -62,7 +62,7 @@ The first number counts builds with a change in the files we follow. The second 
 
 | Month | Changes found | Other builds |
 |---|---:|---:|
-| [October 2026](#october-2026) | 24 | 23 |
+| [October 2026](#october-2026) | 24 | 24 |
 | [September 2026](#september-2026) | 6 | 8 |
 | [August 2026](#august-2026) | 7 | 7 |
 | [July 2026](#july-2026) | 8 | 21 |
@@ -106,12 +106,13 @@ The first number counts builds with a change in the files we follow. The second 
 | [6728](builds/6728.md) | Oct 01, 2026 16:59 | Alt npc boss tier2 — Range ring alpha changed from 0.8 to 0.6. | [Card](infographics/6728.svg) |
 
 <details>
-<summary>Show 23 other builds from October 2026</summary>
+<summary>Show 24 other builds from October 2026</summary>
 
 No value changed in the six files we follow. Other game files may have changed.
 
 | Build | Recorded (UTC) | Card |
 |---:|---|---|
+| [6835](builds/6835.md) | Oct 31, 2026 03:44 | [Card](infographics/6835.svg) |
 | [6829](builds/6829.md) | Oct 30, 2026 21:45 | [Card](infographics/6829.svg) |
 | [6828](builds/6828.md) | Oct 30, 2026 21:23 | [Card](infographics/6828.svg) |
 | [6817](builds/6817.md) | Oct 22, 2026 20:38 | [Card](infographics/6817.svg) |

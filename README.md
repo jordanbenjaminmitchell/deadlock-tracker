@@ -9,21 +9,31 @@ These are changes in extracted files. A value changing in a file does not, on it
 <!-- RECENT_CHANGES_START -->
 ## What changed in Deadlock?
 
-**Latest build recorded:** [6833](reports/builds/6833.md) on Oct 30, 2026 at 22:20 UTC.
+**Latest build recorded:** [6835](reports/builds/6835.md) on Oct 31, 2026 at 03:44 UTC.
 
 **Tracker check:** Scheduled every five minutes. [See the most recent check and its time](https://github.com/jordanbenjaminmitchell/deadlock-tracker/actions/workflows/track.yml). GitHub may start a check late.
 
-**History covered:** Oct 25, 2025–Oct 30, 2026 across 392 saved builds. [Browse by month](reports/index.md#updates-by-month).
+**History covered:** Oct 25, 2025–Oct 31, 2026 across 393 saved builds. [Browse by month](reports/index.md#updates-by-month).
 
 ### Latest update
 
-Baba bench melee — Cooldown on miss changed from **1.6** to **1.5**.
+No value changed in the game data this tracker watches.
 
-<a href="reports/infographics/latest.svg"><img src="reports/infographics/latest.svg" width="320" alt="Baba bench melee — Cooldown on miss changed from 1.6 to 1.5. Build 6833."></a>
+<a href="reports/infographics/latest.svg"><img src="reports/infographics/latest.svg" width="320" alt="No value changed in the game data this tracker watches. Build 6835."></a>
 
-[See everything found in build 6833](reports/builds/6833.md) · [Check the source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/b18c406df07927fc6041d5d010241e7e88b8323b).
+[See everything found in build 6835](reports/builds/6835.md) · [Check the source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/39850583a3cf92559ef285211be91a29467e5172).
 
 ### Previous updates
+
+#### Build 6833 · Oct 30, 2026 22:20 UTC
+
+Baba bench melee — Cooldown on miss changed from **1.6** to **1.5**.
+
+<a href="reports/infographics/6833.svg"><img src="reports/infographics/6833.svg" width="280" alt="Baba bench melee — Cooldown on miss changed from 1.6 to 1.5. Build 6833."></a>
+
+- **Baba bench melee — Cooldown on miss**: 1.6 → **1.5** (Down 0.1 · 6.25%)
+
+[See all changes in build 6833](reports/builds/6833.md) · [Check the source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/b18c406df07927fc6041d5d010241e7e88b8323b).
 
 #### Build 6831 · Oct 30, 2026 22:00 UTC
 
