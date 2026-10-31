@@ -62,7 +62,7 @@ The first number counts builds with a change in the files we follow. The second 
 
 | Month | Changes found | Other builds |
 |---|---:|---:|
-| [October 2026](#october-2026) | 24 | 24 |
+| [October 2026](#october-2026) | 25 | 24 |
 | [September 2026](#september-2026) | 6 | 8 |
 | [August 2026](#august-2026) | 7 | 7 |
 | [July 2026](#july-2026) | 8 | 21 |
@@ -80,6 +80,7 @@ The first number counts builds with a change in the files we follow. The second 
 
 | Build | Recorded (UTC) | What stood out | Card |
 |---:|---|---|---|
+| [6836](builds/6836.md) | Oct 31, 2026 14:01 | Halloween candy pickup — Base changed from 50.0 to 138.0. | [Card](infographics/6836.svg) |
 | [6833](builds/6833.md) | Oct 30, 2026 22:20 | Baba bench melee — Cooldown on miss changed from 1.6 to 1.5. | [Card](infographics/6833.svg) |
 | [6831](builds/6831.md) | Oct 30, 2026 22:00 | Spiritual Overflow — Ability lifesteal percent hero changed from 13 to 15. | [Card](infographics/6831.svg) |
 | [6827](builds/6827.md) | Oct 30, 2026 21:05 | Game data changed; see the report for exact values. | [Card](infographics/6827.svg) |

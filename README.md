@@ -9,19 +9,19 @@ These are changes in extracted files. A value changing in a file does not, on it
 <!-- RECENT_CHANGES_START -->
 ## What changed in Deadlock?
 
-**Latest build recorded:** [6835](reports/builds/6835.md) on Oct 31, 2026 at 03:44 UTC.
+**Latest build recorded:** [6836](reports/builds/6836.md) on Oct 31, 2026 at 14:01 UTC.
 
 **Tracker check:** Scheduled every five minutes. [See the most recent check and its time](https://github.com/jordanbenjaminmitchell/deadlock-tracker/actions/workflows/track.yml). GitHub may start a check late.
 
-**History covered:** Oct 25, 2025–Oct 31, 2026 across 393 saved builds. [Browse by month](reports/index.md#updates-by-month).
+**History covered:** Oct 25, 2025–Oct 31, 2026 across 394 saved builds. [Browse by month](reports/index.md#updates-by-month).
 
 ### Latest update
 
-No value changed in the game data this tracker watches.
+Halloween candy pickup — Base changed from **50.0** to **138.0**.
 
-<a href="reports/infographics/latest.svg"><img src="reports/infographics/latest.svg" width="320" alt="No value changed in the game data this tracker watches. Build 6835."></a>
+<a href="reports/infographics/latest.svg"><img src="reports/infographics/latest.svg" width="320" alt="Halloween candy pickup — Base changed from 50.0 to 138.0. Build 6836."></a>
 
-[See everything found in build 6835](reports/builds/6835.md) · [Check the source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/39850583a3cf92559ef285211be91a29467e5172).
+[See everything found in build 6836](reports/builds/6836.md) · [Check the source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/054a283124561dedd79df03fe82fcf5d99806680).
 
 ### Previous updates
 
@@ -69,24 +69,16 @@ Key values in this update:
 
 [See all changes in build 6826](reports/builds/6826.md) · [Check the source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/fd21313e755aaac0a1625e0851b8d5c3f03ff46d).
 
-#### Build 6821 · Oct 26, 2026 20:03 UTC
-
-This build changed data without a simple value to highlight.
-
-<a href="reports/infographics/6821.svg"><img src="reports/infographics/6821.svg" width="280" alt="This build changed data without a simple value to highlight. Build 6821."></a>
-
-[See all changes in build 6821](reports/builds/6821.md) · [Check the source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/d251cf9d9a796061c90f58724230b7e17b97121b).
-
 <details>
 <summary>Last five changes with a verified before and after</summary>
 
 These are individual values, so several can come from one build.
 
+- **Halloween candy pickup — Base**: 50.0 → **138.0** (Up 88 · 176.00%) · Oct 31, 2026 14:01 UTC · Build 6836 ([card](reports/infographics/recent/6836-00dc0bce3ccd.svg); [full update](reports/builds/6836.md))
 - **Baba bench melee — Cooldown on miss**: 1.6 → **1.5** (Down 0.1 · 6.25%) · Oct 30, 2026 22:20 UTC · Build 6833 ([card](reports/infographics/recent/6833-92649cebfee9.svg); [full update](reports/builds/6833.md))
 - **Spiritual Overflow — Ability lifesteal percent hero**: 13 → **15** · Oct 30, 2026 22:00 UTC · Build 6831 ([card](reports/infographics/recent/6831-7cc198ac25c7.svg); [full update](reports/builds/6831.md))
 - **Graves — Maximum move speed**: 7.0 → **6.7** (Down 0.3 · 4.29%) · Oct 30, 2026 20:54 UTC · Build 6826 ([card](reports/infographics/recent/6826-69584e8a99e9.svg); [full update](reports/builds/6826.md))
 - **Silver — Base health regen**: 2.5 → **3** (Up 0.5 · 20.00%) · Oct 30, 2026 20:54 UTC · Build 6826 ([card](reports/infographics/recent/6826-3aa2124330ab.svg); [full update](reports/builds/6826.md))
-- **Solomon — Crit damage bonus scale**: 1.0 → **0.8** (Down 0.2 · 20.00%) · Oct 30, 2026 20:54 UTC · Build 6826 ([card](reports/infographics/recent/6826-708b0c701052.svg); [full update](reports/builds/6826.md))
 
 </details>
 <!-- RECENT_CHANGES_END -->
