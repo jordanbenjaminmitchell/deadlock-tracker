@@ -1,18 +1,18 @@
 ## What changed in Deadlock?
 
-**Latest build recorded:** [6841](builds/6841.md) on Nov 02, 2026 at 18:39 UTC.
+**Latest build recorded:** [6842](builds/6842.md) on Nov 02, 2026 at 21:40 UTC.
 
 **Tracker check:** Scheduled every five minutes. [See the most recent check and its time](https://github.com/jordanbenjaminmitchell/deadlock-tracker/actions/workflows/track.yml). GitHub may start a check late.
 
-**History covered:** Oct 25, 2025–Nov 02, 2026 across 397 saved builds. [Browse by month](index.md#updates-by-month).
+**History covered:** Oct 25, 2025–Nov 02, 2026 across 398 saved builds. [Browse by month](index.md#updates-by-month).
 
 ### Latest update
 
-No value changed in the game data this tracker watches.
+This build changed game data, but there is no simple before-and-after value to highlight.
 
-<a href="infographics/latest.svg"><img src="infographics/latest.svg" width="320" alt="No value changed in the game data this tracker watches. Build 6841."></a>
+<a href="infographics/latest.svg"><img src="infographics/latest.svg" width="320" alt="This build changed game data, but there is no simple before-and-after value to highlight. Build 6842."></a>
 
-[See everything found in build 6841](builds/6841.md) · [Check the source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/e7cb6805c7925c119bd4781789528543f59b28bd).
+[See everything found in build 6842](builds/6842.md) · [Check the source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/fc53d8b267db6949b03d3fdb975dff4c9028f77b).
 
 ### Previous updates
 
@@ -56,22 +56,6 @@ This build changed data without a simple value to highlight.
 <a href="infographics/6827.svg"><img src="infographics/6827.svg" width="280" alt="This build changed data without a simple value to highlight. Build 6827."></a>
 
 [See all changes in build 6827](builds/6827.md) · [Check the source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/319b4b8a190e78c66bc80d75997ee909433a73d3).
-
-#### Build 6826 · Oct 30, 2026 20:54 UTC
-
-Graves — Maximum move speed changed from **7.0** to **6.7**.
-
-<a href="infographics/6826.svg"><img src="infographics/6826.svg" width="280" alt="Graves — Maximum move speed changed from 7.0 to 6.7. Build 6826."></a>
-
-Key values in this update:
-
-- **Graves — Maximum move speed**: 7.0 → **6.7** (Down 0.3 · 4.29%)
-- **Silver — Base health regen**: 2.5 → **3** (Up 0.5 · 20.00%)
-- **Solomon — Crit damage bonus scale**: 1.0 → **0.8** (Down 0.2 · 20.00%)
-- **Violet · Abstract Landscape — Immune duration**: 0.5 → **0.75** (Up 0.25 · 50.00%)
-- **Violet · Still Life — Buildup grace period**: 0.3 → **0.45** (Up 0.15 · 50.00%)
-
-[See all changes in build 6826](builds/6826.md) · [Check the source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/fd21313e755aaac0a1625e0851b8d5c3f03ff46d).
 
 <details>
 <summary>Last five changes with a verified before and after</summary>

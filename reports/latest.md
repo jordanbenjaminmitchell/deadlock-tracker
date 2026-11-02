@@ -1,38 +1,42 @@
-# Deadlock build 6841
+# Deadlock build 6842
 
-Recorded Nov 02, 2026 at 18:39 UTC. Compared with build 6839.
+Recorded Nov 02, 2026 at 21:40 UTC. Compared with build 6841.
 
-**0 changes found in the game data we follow.**
-
-No value changed in the game data we track for this build.
+**69 changes found in the game data we follow.**
 
 These numbers come from game data. They may not describe how a change feels in a match.
 
-[See the source commit](https://github.com/SteamTracking/GameTracking-Deadlock/commit/e7cb6805c7925c119bd4781789528543f59b28bd)
+Some hero values below belong to characters still marked pre-release in this build. Treat those as development data, not live balance changes.
+
+Some hero records do not list a release status in this build. Their live availability cannot be verified from these files.
+
+**0 readable value changes are shown above.** The other 69 changes involve game data references or structures. Their exact before and after values are under ‘Check the exact source values’ below.
+
+[See the source commit](https://github.com/SteamTracking/GameTracking-Deadlock/commit/fc53d8b267db6949b03d3fdb975dff4c9028f77b)
 
 <details>
 <summary>Check the exact source values</summary>
 
-[Download every original before and after value](data/6841.json). This file includes all tracked changes, including those summarized above.
+[Download every original before and after value](data/6842.json). This file includes all tracked changes, including those summarized above.
 
-Client build `6841` · Source revision `11195544`
+Client build `6842` · Source revision `11196939`
 
 
 Other files in the same upstream commit (3):
 
 - `M` `game/citadel/pak01_dir.txt`
-- `M` `game/citadel/pak01_dir/events/events.vdata`
 - `M` `game/citadel/pak01_dir/panorama/styles/hud.css`
+- `M` `game/citadel/pak01_dir/panorama/styles/hud_minimap.css`
 
 Tracked source files:
 
-- `abilities.vdata`: [upstream file](https://raw.githubusercontent.com/SteamTracking/GameTracking-Deadlock/e7cb6805c7925c119bd4781789528543f59b28bd/game/citadel/pak01_dir/scripts/abilities.vdata), normalized SHA-256 `4b73653d549e89fe4a9210e80a1d58b26ededc0bc733bb61c424310f34671856`
-- `generic_data.vdata`: [upstream file](https://raw.githubusercontent.com/SteamTracking/GameTracking-Deadlock/e7cb6805c7925c119bd4781789528543f59b28bd/game/citadel/pak01_dir/scripts/generic_data.vdata), normalized SHA-256 `29cacf83edfb0018afda42f71eaccd8475aa40ea06f422c39114a3e6dac01161`
-- `heroes.vdata`: [upstream file](https://raw.githubusercontent.com/SteamTracking/GameTracking-Deadlock/e7cb6805c7925c119bd4781789528543f59b28bd/game/citadel/pak01_dir/scripts/heroes.vdata), normalized SHA-256 `7cee57d010dc9869c385ab94f2ac753adde352444b59585a4bc322ad1777a6bb`
-- `misc.vdata`: [upstream file](https://raw.githubusercontent.com/SteamTracking/GameTracking-Deadlock/e7cb6805c7925c119bd4781789528543f59b28bd/game/citadel/pak01_dir/scripts/misc.vdata), normalized SHA-256 `0a09ef2374c956b0bbc950369d7e170f7ced58610cc1cec05eec04697dd7eee8`
-- `modifiers.vdata`: [upstream file](https://raw.githubusercontent.com/SteamTracking/GameTracking-Deadlock/e7cb6805c7925c119bd4781789528543f59b28bd/game/citadel/pak01_dir/scripts/modifiers.vdata), normalized SHA-256 `09ff2803c848636068d80973ccea84c5f55181e93a7608c0bc675b514e5b5a14`
-- `npc_units.vdata`: [upstream file](https://raw.githubusercontent.com/SteamTracking/GameTracking-Deadlock/e7cb6805c7925c119bd4781789528543f59b28bd/game/citadel/pak01_dir/scripts/npc_units.vdata), normalized SHA-256 `2c0c4a9b450f8396916ea6322a018a06654f89516b00d1cbaf0a52afce64ef14`
+- `abilities.vdata`: [upstream file](https://raw.githubusercontent.com/SteamTracking/GameTracking-Deadlock/fc53d8b267db6949b03d3fdb975dff4c9028f77b/game/citadel/pak01_dir/scripts/abilities.vdata), normalized SHA-256 `84584af0f1a1a3cb16d4962e1f3dee1eafac9d2ea209a211bba8efdf97ad1b0c`
+- `generic_data.vdata`: [upstream file](https://raw.githubusercontent.com/SteamTracking/GameTracking-Deadlock/fc53d8b267db6949b03d3fdb975dff4c9028f77b/game/citadel/pak01_dir/scripts/generic_data.vdata), normalized SHA-256 `29cacf83edfb0018afda42f71eaccd8475aa40ea06f422c39114a3e6dac01161`
+- `heroes.vdata`: [upstream file](https://raw.githubusercontent.com/SteamTracking/GameTracking-Deadlock/fc53d8b267db6949b03d3fdb975dff4c9028f77b/game/citadel/pak01_dir/scripts/heroes.vdata), normalized SHA-256 `71a5e455df4b49e0a3ba238a5519cf3f022b0045b89813dd86d8f871dbdc73d6`
+- `misc.vdata`: [upstream file](https://raw.githubusercontent.com/SteamTracking/GameTracking-Deadlock/fc53d8b267db6949b03d3fdb975dff4c9028f77b/game/citadel/pak01_dir/scripts/misc.vdata), normalized SHA-256 `0a09ef2374c956b0bbc950369d7e170f7ced58610cc1cec05eec04697dd7eee8`
+- `modifiers.vdata`: [upstream file](https://raw.githubusercontent.com/SteamTracking/GameTracking-Deadlock/fc53d8b267db6949b03d3fdb975dff4c9028f77b/game/citadel/pak01_dir/scripts/modifiers.vdata), normalized SHA-256 `09ff2803c848636068d80973ccea84c5f55181e93a7608c0bc675b514e5b5a14`
+- `npc_units.vdata`: [upstream file](https://raw.githubusercontent.com/SteamTracking/GameTracking-Deadlock/fc53d8b267db6949b03d3fdb975dff4c9028f77b/game/citadel/pak01_dir/scripts/npc_units.vdata), normalized SHA-256 `2c0c4a9b450f8396916ea6322a018a06654f89516b00d1cbaf0a52afce64ef14`
 
-[Archived snapshot](../data/builds/6841/snapshot.json)
+[Archived snapshot](../data/builds/6842/snapshot.json)
 
 </details>
