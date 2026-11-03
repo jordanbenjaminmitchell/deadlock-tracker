@@ -1,20 +1,28 @@
 ## What changed in Deadlock?
 
-**Latest build recorded:** [6842](builds/6842.md) on Nov 02, 2026 at 21:40 UTC.
+**Latest build recorded:** [6844](builds/6844.md) on Nov 03, 2026 at 20:44 UTC.
 
 **Tracker check:** Scheduled every five minutes. [See the most recent check and its time](https://github.com/jordanbenjaminmitchell/deadlock-tracker/actions/workflows/track.yml). GitHub may start a check late.
 
-**History covered:** Oct 25, 2025–Nov 02, 2026 across 398 saved builds. [Browse by month](index.md#updates-by-month).
+**History covered:** Oct 25, 2025–Nov 03, 2026 across 399 saved builds. [Browse by month](index.md#updates-by-month).
 
 ### Latest update
 
-This build changed game data, but there is no simple before-and-after value to highlight.
+No value changed in the game data this tracker watches.
 
-<a href="infographics/latest.svg"><img src="infographics/latest.svg" width="320" alt="This build changed game data, but there is no simple before-and-after value to highlight. Build 6842."></a>
+<a href="infographics/latest.svg"><img src="infographics/latest.svg" width="320" alt="No value changed in the game data this tracker watches. Build 6844."></a>
 
-[See everything found in build 6842](builds/6842.md) · [Check the source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/fc53d8b267db6949b03d3fdb975dff4c9028f77b).
+[See everything found in build 6844](builds/6844.md) · [Check the source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/55b2f6b152cb0970fb03b9e591cc1697909ce2e3).
 
 ### Previous updates
+
+#### Build 6842 · Nov 02, 2026 21:40 UTC
+
+This build changed data without a simple value to highlight.
+
+<a href="infographics/6842.svg"><img src="infographics/6842.svg" width="280" alt="This build changed data without a simple value to highlight. Build 6842."></a>
+
+[See all changes in build 6842](builds/6842.md) · [Check the source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/fc53d8b267db6949b03d3fdb975dff4c9028f77b).
 
 #### Build 6836 · Oct 31, 2026 14:01 UTC
 
