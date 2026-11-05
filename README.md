@@ -9,21 +9,37 @@ These are changes in extracted files. A value changing in a file does not, on it
 <!-- RECENT_CHANGES_START -->
 ## What changed in Deadlock?
 
-**Latest build recorded:** [6851](reports/builds/6851.md) on Nov 05, 2026 at 14:48 UTC.
+**Latest build recorded:** [6854](reports/builds/6854.md) on Nov 05, 2026 at 20:25 UTC.
 
 **Tracker check:** Scheduled every five minutes. [See the most recent check and its time](https://github.com/jordanbenjaminmitchell/deadlock-tracker/actions/workflows/track.yml). GitHub may start a check late.
 
-**History covered:** Oct 25, 2025–Nov 05, 2026 across 402 saved builds. [Browse by month](reports/index.md#updates-by-month).
+**History covered:** Oct 25, 2025–Nov 05, 2026 across 404 saved builds. [Browse by month](reports/index.md#updates-by-month).
 
 ### Latest update
 
-Baba · Baba's Brew — Ability cooldown changed from **27.0** to **28.0**.
+No value changed in the game data this tracker watches.
 
-<a href="reports/infographics/latest.svg"><img src="reports/infographics/latest.svg" width="320" alt="Baba · Baba&#x27;s Brew — Ability cooldown changed from 27.0 to 28.0. Build 6851."></a>
+<a href="reports/infographics/latest.svg"><img src="reports/infographics/latest.svg" width="320" alt="No value changed in the game data this tracker watches. Build 6854."></a>
 
-[See everything found in build 6851](reports/builds/6851.md) · [Check the source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/87a62330fc2bff904c29d0ed381a15a50d7ba9ae).
+[See everything found in build 6854](reports/builds/6854.md) · [Check the source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/ff987253a39ab725cd81878f58715b877c5be406).
 
 ### Previous updates
+
+#### Build 6851 · Nov 05, 2026 14:48 UTC
+
+Baba · Baba's Brew — Ability cooldown changed from **27.0** to **28.0**.
+
+<a href="reports/infographics/6851.svg"><img src="reports/infographics/6851.svg" width="280" alt="Baba · Baba&#x27;s Brew — Ability cooldown changed from 27.0 to 28.0. Build 6851."></a>
+
+Key values in this update:
+
+- **Baba · Baba's Brew — Ability cooldown**: 27.0 → **28.0** (Up 1 · 3.70%)
+- **Rat King · Scrap Grenade — Melee minimum fuse remaining**: 0.4 → **0.25** (Down 0.15 · 37.50%)
+- **Citadel weapon nurse set — Bullet damage**: 13.372 → **14.442** (Up 1.07 · 8.00%)
+- **Citadel weapon ratking set — Bullet damage**: 5.7 → **5.8** (Up 0.1 · 1.75%)
+- **Citadel weapon ratking set — I clip size**: 24 → **26** (Up 2 · 8.33%)
+
+[See all changes in build 6851](reports/builds/6851.md) · [Check the source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/87a62330fc2bff904c29d0ed381a15a50d7ba9ae).
 
 #### Build 6842 · Nov 02, 2026 21:40 UTC
 
