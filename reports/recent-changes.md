@@ -1,18 +1,18 @@
 ## What changed in Deadlock?
 
-**Latest build recorded:** [6857](builds/6857.md) on Nov 05, 2026 at 20:58 UTC.
+**Latest build recorded:** [6858](builds/6858.md) on Nov 05, 2026 at 21:49 UTC.
 
 **Tracker check:** Scheduled every five minutes. [See the most recent check and its time](https://github.com/jordanbenjaminmitchell/deadlock-tracker/actions/workflows/track.yml). GitHub may start a check late.
 
-**History covered:** Oct 25, 2025–Nov 05, 2026 across 406 saved builds. [Browse by month](index.md#updates-by-month).
+**History covered:** Oct 25, 2025–Nov 05, 2026 across 407 saved builds. [Browse by month](index.md#updates-by-month).
 
 ### Latest update
 
 No value changed in the game data this tracker watches.
 
-<a href="infographics/latest.svg"><img src="infographics/latest.svg" width="320" alt="No value changed in the game data this tracker watches. Build 6857."></a>
+<a href="infographics/latest.svg"><img src="infographics/latest.svg" width="320" alt="No value changed in the game data this tracker watches. Build 6858."></a>
 
-[See everything found in build 6857](builds/6857.md) · [Check the source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/73152924b3d52c5f273d63976b91d4e1794a16f4).
+[See everything found in build 6858](builds/6858.md) · [Check the source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/01cd7477fc56cf05164e622a1ce63d1861797065).
 
 ### Previous updates
 
