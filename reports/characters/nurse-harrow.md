@@ -4,6 +4,12 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6851 · Nov 05, 2026
+
+- **Nurse Harrow · Lurking Terrors — Buildup look angle vertical**: 50 → **65**
+
+[Full update](../builds/6851.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/87a62330fc2bff904c29d0ed381a15a50d7ba9ae)
+
 ## Build 6826 · Oct 30, 2026
 
 - **Nurse Harrow · Healing Needles — Heal regen**: 25 → **22**

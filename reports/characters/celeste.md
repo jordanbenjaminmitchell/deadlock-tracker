@@ -4,6 +4,15 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6851 · Nov 05, 2026
+
+- **Celeste · Shining Wonder — Ability cooldown**: 160 → **170**
+- **Celeste · Shining Wonder — Slow percent**: 32 → **28**
+- **Celeste · Radiant Daggers — Ability cast range**: 30m → **25m**
+- **Celeste · Radiant Daggers — Magic increase per stack**: 7 → **6**
+
+[Full update](../builds/6851.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/87a62330fc2bff904c29d0ed381a15a50d7ba9ae)
+
 ## Build 6826 · Oct 30, 2026
 
 - **Celeste · Shining Wonder — Damage**: 140 → **125**

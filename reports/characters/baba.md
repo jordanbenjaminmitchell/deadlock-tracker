@@ -4,6 +4,16 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6851 · Nov 05, 2026
+
+- **Baba · Baba's Brew — Ability cooldown**: 27.0 → **28.0** (Up 1 · 3.70%)
+- **Baba — Fl scale**: 0.07 → **0.05** (Down 0.02 · 28.57%)
+- **Baba — Modifier value base melee damage from level**: 0.7 → **0.63** (Down 0.07 · 10.00%)
+- **Baba · Granny Long Legs — Melee resist**: 30 → **25**
+- **Baba · Granny Long Legs — Status resistance percent**: 30 → **25**
+
+[Full update](../builds/6851.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/87a62330fc2bff904c29d0ed381a15a50d7ba9ae)
+
 ## Build 6826 · Oct 30, 2026
 
 - **Baba — Fl scale**: 0.1 → **0.07** (Down 0.03 · 30.00%)

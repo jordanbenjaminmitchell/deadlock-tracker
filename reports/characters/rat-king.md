@@ -4,6 +4,13 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6851 · Nov 05, 2026
+
+- **Rat King · Scrap Grenade — Melee minimum fuse remaining**: 0.4 → **0.25** (Down 0.15 · 37.50%)
+- **Rat King · Rule, Ratannia\! — Bonus move speed**: 3m → **4m**
+
+[Full update](../builds/6851.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/87a62330fc2bff904c29d0ed381a15a50d7ba9ae)
+
 ## Build 6826 · Oct 30, 2026
 
 - **Rat King — Modifier value base bullet damage from level**: 0.18 → **0.144** (Down 0.036 · 20.00%)

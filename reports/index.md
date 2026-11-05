@@ -8,12 +8,12 @@ Find an update by character or mode, or browse the builds below. Dates show when
 
 - **Abrams:** [19 builds](characters/abrams.md)
 - **Apollo:** [21 builds](characters/apollo.md)
-- **Baba:** [4 builds](characters/baba.md)
+- **Baba:** [5 builds](characters/baba.md)
 - **Bebop:** [24 builds](characters/bebop.md)
 - **Billy:** [22 builds](characters/billy.md)
 - **Calico:** [18 builds](characters/calico.md)
-- **Celeste:** [26 builds](characters/celeste.md)
-- **Deadman Danny:** [3 builds](characters/deadman-danny.md)
+- **Celeste:** [27 builds](characters/celeste.md)
+- **Deadman Danny:** [4 builds](characters/deadman-danny.md)
 - **Drifter:** [20 builds](characters/drifter.md)
 - **Dynamo:** [23 builds](characters/dynamo.md)
 - **Graves:** [26 builds](characters/graves.md)
@@ -28,12 +28,12 @@ Find an update by character or mode, or browse the builds below. Dates show when
 - **McGinnis:** [26 builds](characters/mcginnis.md)
 - **Mina:** [19 builds](characters/mina.md)
 - **Mirage:** [25 builds](characters/mirage.md)
-- **Mo &amp; Krill:** [21 builds](characters/mo-krill.md)
-- **Nurse Harrow:** [2 builds](characters/nurse-harrow.md)
+- **Mo &amp; Krill:** [22 builds](characters/mo-krill.md)
+- **Nurse Harrow:** [3 builds](characters/nurse-harrow.md)
 - **Paige:** [24 builds](characters/paige.md)
 - **Paradox:** [22 builds](characters/paradox.md)
 - **Pocket:** [24 builds](characters/pocket.md)
-- **Rat King:** [4 builds](characters/rat-king.md)
+- **Rat King:** [5 builds](characters/rat-king.md)
 - **Rem:** [20 builds](characters/rem.md)
 - **Seven:** [18 builds](characters/seven.md)
 - **Shiv:** [27 builds](characters/shiv.md)
@@ -62,7 +62,7 @@ The first number counts builds with a change in the files we follow. The second 
 
 | Month | Changes found | Other builds |
 |---|---:|---:|
-| [November 2026](#november-2026) | 1 | 4 |
+| [November 2026](#november-2026) | 2 | 4 |
 | [October 2026](#october-2026) | 25 | 26 |
 | [September 2026](#september-2026) | 6 | 8 |
 | [August 2026](#august-2026) | 7 | 7 |
@@ -81,6 +81,7 @@ The first number counts builds with a change in the files we follow. The second 
 
 | Build | Recorded (UTC) | What stood out | Card |
 |---:|---|---|---|
+| [6851](builds/6851.md) | Nov 05, 2026 14:48 | Baba · Baba's Brew — Ability cooldown changed from 27.0 to 28.0. | [Card](infographics/6851.svg) |
 | [6842](builds/6842.md) | Nov 02, 2026 21:40 | Game data changed; see the report for exact values. | [Card](infographics/6842.svg) |
 
 <details>

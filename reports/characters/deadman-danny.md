@@ -4,6 +4,12 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6851 · Nov 05, 2026
+
+- **Deadman Danny · Close The Deal — Bonus damage percent**: 75 → **55**
+
+[Full update](../builds/6851.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/87a62330fc2bff904c29d0ed381a15a50d7ba9ae)
+
 ## Build 6826 · Oct 30, 2026
 
 - **Deadman Danny · Chimera Mk1 — Slow effectiveness lateral**: 0.7 → **0.8** (Up 0.1 · 14.29%)
