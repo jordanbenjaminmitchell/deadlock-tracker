@@ -9,19 +9,19 @@ These are changes in extracted files. A value changing in a file does not, on it
 <!-- RECENT_CHANGES_START -->
 ## What changed in Deadlock?
 
-**Latest build recorded:** [6858](reports/builds/6858.md) on Nov 05, 2026 at 21:49 UTC.
+**Latest build recorded:** [6860](reports/builds/6860.md) on Nov 06, 2026 at 00:52 UTC.
 
 **Tracker check:** Scheduled every five minutes. [See the most recent check and its time](https://github.com/jordanbenjaminmitchell/deadlock-tracker/actions/workflows/track.yml). GitHub may start a check late.
 
-**History covered:** Oct 25, 2025–Nov 05, 2026 across 407 saved builds. [Browse by month](reports/index.md#updates-by-month).
+**History covered:** Oct 25, 2025–Nov 06, 2026 across 408 saved builds. [Browse by month](reports/index.md#updates-by-month).
 
 ### Latest update
 
-No value changed in the game data this tracker watches.
+McGinnis · Spectral Wall — Wall back trace distance is now listed as **600**. There is no confirmed earlier value.
 
-<a href="reports/infographics/latest.svg"><img src="reports/infographics/latest.svg" width="320" alt="No value changed in the game data this tracker watches. Build 6858."></a>
+<a href="reports/infographics/latest.svg"><img src="reports/infographics/latest.svg" width="320" alt="McGinnis · Spectral Wall — Wall back trace distance is now listed as 600. There is no confirmed earlier value. Build 6860."></a>
 
-[See everything found in build 6858](reports/builds/6858.md) · [Check the source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/01cd7477fc56cf05164e622a1ce63d1861797065).
+[See everything found in build 6860](reports/builds/6860.md) · [Check the source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/3cfcaf9ed882f2d85cc5d915315f754790b8ffb7).
 
 ### Previous updates
 
@@ -71,16 +71,6 @@ Baba bench melee — Cooldown on miss changed from **1.6** to **1.5**.
 - **Baba bench melee — Cooldown on miss**: 1.6 → **1.5** (Down 0.1 · 6.25%)
 
 [See all changes in build 6833](reports/builds/6833.md) · [Check the source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/b18c406df07927fc6041d5d010241e7e88b8323b).
-
-#### Build 6831 · Oct 30, 2026 22:00 UTC
-
-Spiritual Overflow — Ability lifesteal percent hero changed from **13** to **15**.
-
-<a href="reports/infographics/6831.svg"><img src="reports/infographics/6831.svg" width="280" alt="Spiritual Overflow — Ability lifesteal percent hero changed from 13 to 15. Build 6831."></a>
-
-- **Spiritual Overflow — Ability lifesteal percent hero**: 13 → **15**
-
-[See all changes in build 6831](reports/builds/6831.md) · [Check the source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/f6be4e77c8be192a904a22de58adf3e66a26104f).
 
 <details>
 <summary>Last five changes with a verified before and after</summary>

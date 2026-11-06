@@ -1,0 +1,1 @@
+{"build":6860,"changes":[{"category":"abilities","kind":"added","new":600,"old":null,"path":"abilities.citadel_ability_fissure_wall.m_flWallBackTraceDistance"}],"compared_with":6858,"recorded_at":"2026-11-06T00:52:12Z","source":"https://github.com/SteamTracking/GameTracking-Deadlock/commit/3cfcaf9ed882f2d85cc5d915315f754790b8ffb7"}

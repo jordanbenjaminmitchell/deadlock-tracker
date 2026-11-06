@@ -4,6 +4,12 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6860 · Nov 06, 2026
+
+- **McGinnis · Spectral Wall — Wall back trace distance**: new setting **600**
+
+[Full update](../builds/6860.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/3cfcaf9ed882f2d85cc5d915315f754790b8ffb7)
+
 ## Build 6826 · Oct 30, 2026
 
 - **McGinnis · Mini Turret — Non hero damage percent outgoing**: 50 → **65**

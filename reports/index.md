@@ -25,7 +25,7 @@ Find an update by character or mode, or browse the builds below. Dates show when
 - **Kelvin:** [22 builds](characters/kelvin.md)
 - **Lady Geist:** [22 builds](characters/lady-geist.md)
 - **Lash:** [19 builds](characters/lash.md)
-- **McGinnis:** [26 builds](characters/mcginnis.md)
+- **McGinnis:** [27 builds](characters/mcginnis.md)
 - **Mina:** [19 builds](characters/mina.md)
 - **Mirage:** [25 builds](characters/mirage.md)
 - **Mo &amp; Krill:** [22 builds](characters/mo-krill.md)
@@ -62,7 +62,7 @@ The first number counts builds with a change in the files we follow. The second 
 
 | Month | Changes found | Other builds |
 |---|---:|---:|
-| [November 2026](#november-2026) | 2 | 9 |
+| [November 2026](#november-2026) | 3 | 9 |
 | [October 2026](#october-2026) | 25 | 26 |
 | [September 2026](#september-2026) | 6 | 8 |
 | [August 2026](#august-2026) | 7 | 7 |
@@ -81,6 +81,7 @@ The first number counts builds with a change in the files we follow. The second 
 
 | Build | Recorded (UTC) | What stood out | Card |
 |---:|---|---|---|
+| [6860](builds/6860.md) | Nov 06, 2026 00:52 | McGinnis · Spectral Wall — Wall back trace distance is now listed as 600. There is no confirmed earlier value. | [Card](infographics/6860.svg) |
 | [6851](builds/6851.md) | Nov 05, 2026 14:48 | Baba · Baba's Brew — Ability cooldown changed from 27.0 to 28.0. | [Card](infographics/6851.svg) |
 | [6842](builds/6842.md) | Nov 02, 2026 21:40 | Game data changed; see the report for exact values. | [Card](infographics/6842.svg) |
 
