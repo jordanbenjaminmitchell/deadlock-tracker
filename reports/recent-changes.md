@@ -1,20 +1,30 @@
 ## What changed in Deadlock?
 
-**Latest build recorded:** [6860](builds/6860.md) on Nov 06, 2026 at 00:52 UTC.
+**Latest build recorded:** [6861](builds/6861.md) on Nov 11, 2026 at 21:38 UTC.
 
 **Tracker check:** Scheduled every five minutes. [See the most recent check and its time](https://github.com/jordanbenjaminmitchell/deadlock-tracker/actions/workflows/track.yml). GitHub may start a check late.
 
-**History covered:** Oct 25, 2025–Nov 06, 2026 across 408 saved builds. [Browse by month](index.md#updates-by-month).
+**History covered:** Oct 25, 2025–Nov 11, 2026 across 409 saved builds. [Browse by month](index.md#updates-by-month).
 
 ### Latest update
 
-McGinnis · Spectral Wall — Wall back trace distance is now listed as **600**. There is no confirmed earlier value.
+No value changed in the game data this tracker watches.
 
-<a href="infographics/latest.svg"><img src="infographics/latest.svg" width="320" alt="McGinnis · Spectral Wall — Wall back trace distance is now listed as 600. There is no confirmed earlier value. Build 6860."></a>
+<a href="infographics/latest.svg"><img src="infographics/latest.svg" width="320" alt="No value changed in the game data this tracker watches. Build 6861."></a>
 
-[See everything found in build 6860](builds/6860.md) · [Check the source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/3cfcaf9ed882f2d85cc5d915315f754790b8ffb7).
+[See everything found in build 6861](builds/6861.md) · [Check the source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/82735ebcc9c89d1b3f6b3262c23c9580798ad362).
 
 ### Previous updates
+
+#### Build 6860 · Nov 06, 2026 00:52 UTC
+
+McGinnis · Spectral Wall — Wall back trace distance is now listed as **600**. There is no confirmed earlier value.
+
+<a href="infographics/6860.svg"><img src="infographics/6860.svg" width="280" alt="McGinnis · Spectral Wall — Wall back trace distance is now listed as 600. There is no confirmed earlier value. Build 6860."></a>
+
+- **McGinnis · Spectral Wall — Wall back trace distance**: new setting **600**
+
+[See all changes in build 6860](builds/6860.md) · [Check the source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/3cfcaf9ed882f2d85cc5d915315f754790b8ffb7).
 
 #### Build 6851 · Nov 05, 2026 14:48 UTC
 

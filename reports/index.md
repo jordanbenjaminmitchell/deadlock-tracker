@@ -62,7 +62,7 @@ The first number counts builds with a change in the files we follow. The second 
 
 | Month | Changes found | Other builds |
 |---|---:|---:|
-| [November 2026](#november-2026) | 3 | 9 |
+| [November 2026](#november-2026) | 3 | 10 |
 | [October 2026](#october-2026) | 25 | 26 |
 | [September 2026](#september-2026) | 6 | 8 |
 | [August 2026](#august-2026) | 7 | 7 |
@@ -86,12 +86,13 @@ The first number counts builds with a change in the files we follow. The second 
 | [6842](builds/6842.md) | Nov 02, 2026 21:40 | Game data changed; see the report for exact values. | [Card](infographics/6842.svg) |
 
 <details>
-<summary>Show 9 other builds from November 2026</summary>
+<summary>Show 10 other builds from November 2026</summary>
 
 No value changed in the six files we follow. Other game files may have changed.
 
 | Build | Recorded (UTC) | Card |
 |---:|---|---|
+| [6861](builds/6861.md) | Nov 11, 2026 21:38 | [Card](infographics/6861.svg) |
 | [6858](builds/6858.md) | Nov 05, 2026 21:49 | [Card](infographics/6858.svg) |
 | [6857](builds/6857.md) | Nov 05, 2026 20:58 | [Card](infographics/6857.svg) |
 | [6855](builds/6855.md) | Nov 05, 2026 20:39 | [Card](infographics/6855.svg) |
