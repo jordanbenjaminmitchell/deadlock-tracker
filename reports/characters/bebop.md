@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6866 · Nov 24, 2026
+
+- **Bebop — Pick pct**: 47.426003 → **54.528183** (Up 7.10218 · 14.98%)
+- **Bebop — Winrate pct**: 48.420193 → **48.638** (Up 0.217807 · 0.45%)
+- **Bebop — Pick pct**: 41.221027 → **34.275417** (Down 6.94561 · 16.85%)
+- **Bebop — Winrate pct**: 48.039818 → **48.45575** (Up 0.415932 · 0.87%)
+- **Bebop — Pick pct**: 16.52582 → **16.972647** (Up 0.446827 · 2.70%)
+- 124 more values in the full report
+
+[Full update](../builds/6866.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/dca492d664e77bdef97eeb80bbcbf0b749df651a)
+
 ## Build 6711 · Sep 29, 2026
 
 - **Bebop · Exploding Uppercut — Melee lockout duration**: new setting **0.8**

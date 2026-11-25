@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6866 · Nov 24, 2026
+
+- **Paige — Pick pct**: 42.194138 → **44.20989** (Up 2.01575 · 4.78%)
+- **Paige — Winrate pct**: 58.054028 → **58.254284** (Up 0.200256 · 0.34%)
+- **Paige — Pick pct**: 40.07663 → **42.786995** (Up 2.71036 · 6.76%)
+- **Paige — Winrate pct**: 57.029644 → **57.108498** (Up 0.078854 · 0.14%)
+- **Paige — Pick pct**: 32.03752 → **34.855045** (Up 2.81752 · 8.79%)
+- 136 more values in the full report
+
+[Full update](../builds/6866.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/dca492d664e77bdef97eeb80bbcbf0b749df651a)
+
 ## Build 6826 · Oct 30, 2026
 
 - **Paige — Modifier value base bullet damage from level**: 0.52 → **0.61** (Up 0.09 · 17.31%)

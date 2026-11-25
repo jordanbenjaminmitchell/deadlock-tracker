@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6866 · Nov 24, 2026
+
+- **Haze — Pick pct**: 36.619625 → **36.10201** (Down 0.517615 · 1.41%)
+- **Haze — Winrate pct**: 56.515755 → **56.224915** (Down 0.29084 · 0.51%)
+- **Haze — Pick pct**: 61.638435 → **59.203003** (Down 2.43543 · 3.95%)
+- **Haze — Winrate pct**: 55.213737 → **55.136658** (Down 0.077079 · 0.14%)
+- **Haze — Pick pct**: 23.671015 → **26.14804** (Up 2.47702 · 10.46%)
+- 112 more values in the full report
+
+[Full update](../builds/6866.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/dca492d664e77bdef97eeb80bbcbf0b749df651a)
+
 ## Build 6711 · Sep 29, 2026
 
 - **Haze — Release status**: new setting **Released**

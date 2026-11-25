@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6866 · Nov 24, 2026
+
+- **Calico — Pick pct**: 75.64749 → **74.86863** (Down 0.77886 · 1.03%)
+- **Calico — Winrate pct**: 52.009003 → **47.5955** (Down 4.4135 · 8.49%)
+- **Calico — Pick pct**: 7.350875 → **14.339404** (Up 6.98853 · 95.07%)
+- **Calico — Winrate pct**: 50.48904 → **48.47089** (Down 2.01815 · 4.00%)
+- **Calico — Pick pct**: 16.606615 → **19.495037** (Up 2.88842 · 17.39%)
+- 104 more values in the full report
+
+[Full update](../builds/6866.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/dca492d664e77bdef97eeb80bbcbf0b749df651a)
+
 ## Build 6711 · Sep 29, 2026
 
 - **Calico — Release status**: new setting **Released**

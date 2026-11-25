@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6866 · Nov 24, 2026
+
+- **Venator — Pick pct**: 9.225687 → **8.703609** (Down 0.522078 · 5.66%)
+- **Venator — Winrate pct**: 47.136196 → **46.561417** (Down 0.574779 · 1.22%)
+- **Venator — Pick pct**: 17.281727 → **30.273804** (Up 12.9921 · 75.18%)
+- **Venator — Winrate pct**: 45.57794 → **45.394314** (Down 0.183626 · 0.40%)
+- **Venator — Pick pct**: 60.657307 → **54.18986** (Down 6.46745 · 10.66%)
+- 126 more values in the full report
+
+[Full update](../builds/6866.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/dca492d664e77bdef97eeb80bbcbf0b749df651a)
+
 ## Build 6826 · Oct 30, 2026
 
 - **Venator · Ira Domini — Bonus damage**: 115 → **95**

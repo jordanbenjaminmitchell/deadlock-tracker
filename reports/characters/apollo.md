@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6866 · Nov 24, 2026
+
+- **Apollo — Pick pct**: 11.603749 → **43.99926** (Up 32.3955 · 279.18%)
+- **Apollo — Winrate pct**: 48.878925 → **50.663986** (Up 1.78506 · 3.65%)
+- **Apollo — Pick pct**: 6.089969 → **32.882782** (Up 26.7928 · 439.95%)
+- **Apollo — Winrate pct**: 48.73398 → **50.71418** (Up 1.9802 · 4.06%)
+- **Apollo — Pick pct**: 49.120167 → **24.244314** (Down 24.8759 · 50.64%)
+- 112 more values in the full report
+
+[Full update](../builds/6866.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/dca492d664e77bdef97eeb80bbcbf0b749df651a)
+
 ## Build 6826 · Oct 30, 2026
 
 - **Apollo · Riposte — Loc token override**: new setting **ImmobilizeDuration**

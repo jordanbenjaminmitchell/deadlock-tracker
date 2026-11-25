@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6866 · Nov 24, 2026
+
+- **Lash — Pick pct**: 9.016225 → **6.091093** (Down 2.92513 · 32.44%)
+- **Lash — Winrate pct**: 50.318207 → **50.331547** (Up 0.01334 · 0.03%)
+- **Lash — Pick pct**: 44.793755 → **52.06356** (Up 7.2698 · 16.23%)
+- **Lash — Winrate pct**: 52.01158 → **52.436077** (Up 0.424497 · 0.82%)
+- **Lash — Pick pct**: 69.769264 → **56.45958** (Down 13.3097 · 19.08%)
+- 108 more values in the full report
+
+[Full update](../builds/6866.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/dca492d664e77bdef97eeb80bbcbf0b749df651a)
+
 ## Build 6711 · Sep 29, 2026
 
 - **Lash — Release status**: new setting **Released**

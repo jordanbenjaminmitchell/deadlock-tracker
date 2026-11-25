@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6866 · Nov 24, 2026
+
+- **Silver — Pick pct**: 5.537527 → **6.189305** (Up 0.651778 · 11.77%)
+- **Silver — Winrate pct**: 46.142147 → **46.311733** (Up 0.169586 · 0.37%)
+- **Silver — Pick pct**: 58.87644 → **65.2352** (Up 6.35876 · 10.80%)
+- **Silver — Winrate pct**: 48.06515 → **46.643066** (Down 1.42208 · 2.96%)
+- **Silver — Pick pct**: 31.810322 → **7.573563** (Down 24.2368 · 76.19%)
+- 128 more values in the full report
+
+[Full update](../builds/6866.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/dca492d664e77bdef97eeb80bbcbf0b749df651a)
+
 ## Build 6826 · Oct 30, 2026
 
 - **Silver — Base health regen**: 2.5 → **3** (Up 0.5 · 20.00%)

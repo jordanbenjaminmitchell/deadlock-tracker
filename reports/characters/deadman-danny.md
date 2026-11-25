@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6866 · Nov 24, 2026
+
+- **Deadman Danny — Pick pct**: 40.909092 → **15.839055** (Down 25.07 · 61.28%)
+- **Deadman Danny — Winrate pct**: 38.88889 → **54.12184** (Up 15.233 · 39.17%)
+- **Deadman Danny — Pick pct**: 6.818182 → **40.868904** (Up 34.0507 · 499.41%)
+- **Deadman Danny — Winrate pct**: 0.0 → **54.378456** (Up 54.3785)
+- **Deadman Danny — Pick pct**: 86.36364 → **83.82513** (Down 2.53851 · 2.94%)
+- 90 more values in the full report
+
+[Full update](../builds/6866.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/dca492d664e77bdef97eeb80bbcbf0b749df651a)
+
 ## Build 6851 · Nov 05, 2026
 
 - **Deadman Danny · Close The Deal — Bonus damage percent**: 75 → **55**

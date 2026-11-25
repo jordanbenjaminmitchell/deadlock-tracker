@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6866 · Nov 24, 2026
+
+- **Billy — Pick pct**: 16.636997 → **18.396067** (Up 1.75907 · 10.57%)
+- **Billy — Winrate pct**: 48.30715 → **49.16962** (Up 0.86247 · 1.79%)
+- **Billy — Pick pct**: 77.63283 → **77.50645** (Down 0.12638 · 0.16%)
+- **Billy — Winrate pct**: 48.982395 → **49.487698** (Up 0.505303 · 1.03%)
+- **Billy — Pick pct**: 22.993761 → **17.593136** (Down 5.40062 · 23.49%)
+- 126 more values in the full report
+
+[Full update](../builds/6866.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/dca492d664e77bdef97eeb80bbcbf0b749df651a)
+
 ## Build 6826 · Oct 30, 2026
 
 - **Billy · Blasted — Ability cooldown**: 27 → **25**

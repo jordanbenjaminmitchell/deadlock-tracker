@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6866 · Nov 24, 2026
+
+- **Mo &amp; Krill — Pick pct**: 18.40965 → **15.61987** (Down 2.78978 · 15.15%)
+- **Mo &amp; Krill — Winrate pct**: 59.94569 → **53.142956** (Down 6.80273 · 11.35%)
+- **Mo &amp; Krill — Pick pct**: 13.944545 → **14.1912** (Up 0.246655 · 1.77%)
+- **Mo &amp; Krill — Winrate pct**: 51.32164 → **45.220398** (Down 6.10124 · 11.89%)
+- **Mo &amp; Krill — Pick pct**: 22.146904 → **19.194038** (Down 2.95287 · 13.33%)
+- 118 more values in the full report
+
+[Full update](../builds/6866.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/dca492d664e77bdef97eeb80bbcbf0b749df651a)
+
 ## Build 6851 · Nov 05, 2026
 
 - **Mo &amp; Krill · Combo — Bonus health on kill**: 40 → **50**

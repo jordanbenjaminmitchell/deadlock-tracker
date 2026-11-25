@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6866 · Nov 24, 2026
+
+- **Baba — Pick pct**: 16.666666 → **61.105316** (Up 44.4387 · 266.63%)
+- **Baba — Winrate pct**: 28.571428 → **58.156593** (Up 29.5852 · 103.55%)
+- **Baba — Pick pct**: 28.571428 → **31.396942** (Up 2.82551 · 9.89%)
+- **Baba — Winrate pct**: 41.666668 → **53.24589** (Up 11.5792 · 27.79%)
+- **Baba — Pick pct**: 83.333336 → **80.92522** (Down 2.40812 · 2.89%)
+- 94 more values in the full report
+
+[Full update](../builds/6866.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/dca492d664e77bdef97eeb80bbcbf0b749df651a)
+
 ## Build 6851 · Nov 05, 2026
 
 - **Baba · Baba's Brew — Ability cooldown**: 27.0 → **28.0** (Up 1 · 3.70%)

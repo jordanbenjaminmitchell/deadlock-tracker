@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6866 · Nov 24, 2026
+
+- **Warden — Pick pct**: 11.128203 → **9.959796** (Down 1.16841 · 10.50%)
+- **Warden — Winrate pct**: 53.56404 → **56.38095** (Up 2.81691 · 5.26%)
+- **Warden — Pick pct**: 43.212048 → **43.308697** (Up 0.096649 · 0.22%)
+- **Warden — Winrate pct**: 49.44906 → **50.92326** (Up 1.4742 · 2.98%)
+- **Warden — Pick pct**: 25.372807 → **13.250177** (Down 12.1226 · 47.78%)
+- 122 more values in the full report
+
+[Full update](../builds/6866.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/dca492d664e77bdef97eeb80bbcbf0b749df651a)
+
 ## Build 6826 · Oct 30, 2026
 
 - **Warden · Alchemical Flask — Speed**: 700.0 → **980.0** (Up 280 · 40.00%)

@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6866 · Nov 24, 2026
+
+- **Paradox — Pick pct**: 33.304485 → **21.213516** (Down 12.091 · 36.30%)
+- **Paradox — Winrate pct**: 47.034496 → **48.030544** (Up 0.996048 · 2.12%)
+- **Paradox — Pick pct**: 12.257051 → **5.439212** (Down 6.81784 · 55.62%)
+- **Paradox — Winrate pct**: 46.114067 → **45.794945** (Down 0.319122 · 0.69%)
+- **Paradox — Pick pct**: 48.11582 → **32.477165** (Down 15.6387 · 32.50%)
+- 92 more values in the full report
+
+[Full update](../builds/6866.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/dca492d664e77bdef97eeb80bbcbf0b749df651a)
+
 ## Build 6826 · Oct 30, 2026
 
 - **Paradox · Paradoxical Swap — Ability cooldown**: 110.0 → **95.0** (Down 15 · 13.64%)

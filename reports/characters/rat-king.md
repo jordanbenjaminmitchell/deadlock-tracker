@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6866 · Nov 24, 2026
+
+- **Rat King — Pick pct**: 5.363481 → **5.558141** (Up 0.19466 · 3.63%)
+- **Rat King — Winrate pct**: 64.702675 → **57.013294** (Down 7.68938 · 11.88%)
+- **Rat King — Pick pct**: 28.40314 → **22.902248** (Down 5.50089 · 19.37%)
+- **Rat King — Winrate pct**: 61.224766 → **54.711178** (Down 6.51359 · 10.64%)
+- **Rat King — Pick pct**: 13.209412 → **14.533203** (Up 1.32379 · 10.02%)
+- 108 more values in the full report
+
+[Full update](../builds/6866.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/dca492d664e77bdef97eeb80bbcbf0b749df651a)
+
 ## Build 6851 · Nov 05, 2026
 
 - **Rat King · Scrap Grenade — Melee minimum fuse remaining**: 0.4 → **0.25** (Down 0.15 · 37.50%)

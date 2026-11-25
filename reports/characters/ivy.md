@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6866 · Nov 24, 2026
+
+- **Ivy — Pick pct**: 10.23851 → **15.997582** (Up 5.75907 · 56.25%)
+- **Ivy — Winrate pct**: 58.89217 → **56.734562** (Down 2.15761 · 3.66%)
+- **Ivy — Pick pct**: 63.07918 → **67.82968** (Up 4.7505 · 7.53%)
+- **Ivy — Winrate pct**: 52.32184 → **51.887157** (Down 0.434683 · 0.83%)
+- **Ivy — Pick pct**: 20.091259 → **12.543452** (Down 7.54781 · 37.57%)
+- 136 more values in the full report
+
+[Full update](../builds/6866.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/dca492d664e77bdef97eeb80bbcbf0b749df651a)
+
 ## Build 6826 · Oct 30, 2026
 
 - **Ivy — Hero type**: Marksman → **Healer**

@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6866 · Nov 24, 2026
+
+- **Dynamo — Pick pct**: 11.002733 → **16.980618** (Up 5.97788 · 54.33%)
+- **Dynamo — Winrate pct**: 54.16908 → **51.478027** (Down 2.69105 · 4.97%)
+- **Dynamo — Pick pct**: 49.407814 → **29.241056** (Down 20.1668 · 40.82%)
+- **Dynamo — Winrate pct**: 52.016094 → **50.58665** (Down 1.42944 · 2.75%)
+- **Dynamo — Pick pct**: 72.31414 → **65.20465** (Down 7.10949 · 9.83%)
+- 126 more values in the full report
+
+[Full update](../builds/6866.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/dca492d664e77bdef97eeb80bbcbf0b749df651a)
+
 ## Build 6826 · Oct 30, 2026
 
 - **Dynamo — Hero type**: Mystic → **Healer**

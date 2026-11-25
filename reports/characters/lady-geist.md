@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6866 · Nov 24, 2026
+
+- **Lady Geist — Pick pct**: 45.945686 → **51.445698** (Up 5.50001 · 11.97%)
+- **Lady Geist — Winrate pct**: 52.302124 → **57.934826** (Up 5.6327 · 10.77%)
+- **Lady Geist — Pick pct**: 7.551741 → **8.56001** (Up 1.00827 · 13.35%)
+- **Lady Geist — Winrate pct**: 60.57462 → **59.830997** (Down 0.743623 · 1.23%)
+- **Lady Geist — Pick pct**: 49.19661 → **44.10635** (Down 5.09026 · 10.35%)
+- 102 more values in the full report
+
+[Full update](../builds/6866.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/dca492d664e77bdef97eeb80bbcbf0b749df651a)
+
 ## Build 6711 · Sep 29, 2026
 
 - **Lady Geist — Release status**: new setting **Released**

@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6866 · Nov 24, 2026
+
+- **McGinnis — Pick pct**: 5.593492 → **8.073405** (Up 2.47991 · 44.34%)
+- **McGinnis — Winrate pct**: 53.52324 → **54.819714** (Up 1.29647 · 2.42%)
+- **McGinnis — Pick pct**: 16.618746 → **13.745562** (Down 2.87318 · 17.29%)
+- **McGinnis — Winrate pct**: 46.518166 → **45.495663** (Down 1.0225 · 2.20%)
+- **McGinnis — Pick pct**: 16.19585 → **9.183334** (Down 7.01252 · 43.30%)
+- 122 more values in the full report
+
+[Full update](../builds/6866.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/dca492d664e77bdef97eeb80bbcbf0b749df651a)
+
 ## Build 6860 · Nov 06, 2026
 
 - **McGinnis · Spectral Wall — Wall back trace distance**: new setting **600**

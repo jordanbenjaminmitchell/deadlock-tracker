@@ -6,51 +6,51 @@ Find an update by character or mode, or browse the builds below. Dates show when
 
 ## Find changes by character or mode
 
-- **Abrams:** [19 builds](characters/abrams.md)
-- **Apollo:** [21 builds](characters/apollo.md)
-- **Baba:** [5 builds](characters/baba.md)
-- **Bebop:** [24 builds](characters/bebop.md)
-- **Billy:** [22 builds](characters/billy.md)
-- **Calico:** [18 builds](characters/calico.md)
-- **Celeste:** [27 builds](characters/celeste.md)
-- **Deadman Danny:** [4 builds](characters/deadman-danny.md)
-- **Drifter:** [20 builds](characters/drifter.md)
-- **Dynamo:** [23 builds](characters/dynamo.md)
-- **Graves:** [26 builds](characters/graves.md)
-- **Grey Talon:** [23 builds](characters/grey-talon.md)
-- **Haze:** [21 builds](characters/haze.md)
-- **Holliday:** [19 builds](characters/holliday.md)
-- **Infernus:** [22 builds](characters/infernus.md)
-- **Ivy:** [25 builds](characters/ivy.md)
-- **Kelvin:** [22 builds](characters/kelvin.md)
-- **Lady Geist:** [22 builds](characters/lady-geist.md)
-- **Lash:** [19 builds](characters/lash.md)
-- **McGinnis:** [27 builds](characters/mcginnis.md)
-- **Mina:** [19 builds](characters/mina.md)
-- **Mirage:** [25 builds](characters/mirage.md)
-- **Mo &amp; Krill:** [22 builds](characters/mo-krill.md)
-- **Nurse Harrow:** [3 builds](characters/nurse-harrow.md)
-- **Paige:** [24 builds](characters/paige.md)
-- **Paradox:** [22 builds](characters/paradox.md)
-- **Pocket:** [24 builds](characters/pocket.md)
-- **Rat King:** [5 builds](characters/rat-king.md)
-- **Rem:** [20 builds](characters/rem.md)
-- **Seven:** [18 builds](characters/seven.md)
-- **Shiv:** [27 builds](characters/shiv.md)
-- **Silver:** [23 builds](characters/silver.md)
-- **Sinclair:** [21 builds](characters/sinclair.md)
-- **Solomon:** [3 builds](characters/solomon.md)
-- **Street Brawl:** [browse mode changes](street-brawl.md) · 25 builds
-- **The Doorman:** [25 builds](characters/the-doorman.md)
-- **Venator:** [25 builds](characters/venator.md)
-- **Victor:** [25 builds](characters/victor.md)
-- **Vindicta:** [17 builds](characters/vindicta.md)
-- **Violet:** [4 builds](characters/violet.md)
-- **Viscous:** [21 builds](characters/viscous.md)
-- **Vyper:** [23 builds](characters/vyper.md)
-- **Warden:** [23 builds](characters/warden.md)
-- **Wraith:** [25 builds](characters/wraith.md)
-- **Yamato:** [23 builds](characters/yamato.md)
+- **Abrams:** [20 builds](characters/abrams.md)
+- **Apollo:** [22 builds](characters/apollo.md)
+- **Baba:** [6 builds](characters/baba.md)
+- **Bebop:** [25 builds](characters/bebop.md)
+- **Billy:** [23 builds](characters/billy.md)
+- **Calico:** [19 builds](characters/calico.md)
+- **Celeste:** [28 builds](characters/celeste.md)
+- **Deadman Danny:** [5 builds](characters/deadman-danny.md)
+- **Drifter:** [21 builds](characters/drifter.md)
+- **Dynamo:** [24 builds](characters/dynamo.md)
+- **Graves:** [27 builds](characters/graves.md)
+- **Grey Talon:** [24 builds](characters/grey-talon.md)
+- **Haze:** [22 builds](characters/haze.md)
+- **Holliday:** [20 builds](characters/holliday.md)
+- **Infernus:** [23 builds](characters/infernus.md)
+- **Ivy:** [26 builds](characters/ivy.md)
+- **Kelvin:** [23 builds](characters/kelvin.md)
+- **Lady Geist:** [23 builds](characters/lady-geist.md)
+- **Lash:** [20 builds](characters/lash.md)
+- **McGinnis:** [28 builds](characters/mcginnis.md)
+- **Mina:** [20 builds](characters/mina.md)
+- **Mirage:** [26 builds](characters/mirage.md)
+- **Mo &amp; Krill:** [23 builds](characters/mo-krill.md)
+- **Nurse Harrow:** [4 builds](characters/nurse-harrow.md)
+- **Paige:** [25 builds](characters/paige.md)
+- **Paradox:** [23 builds](characters/paradox.md)
+- **Pocket:** [25 builds](characters/pocket.md)
+- **Rat King:** [6 builds](characters/rat-king.md)
+- **Rem:** [21 builds](characters/rem.md)
+- **Seven:** [19 builds](characters/seven.md)
+- **Shiv:** [28 builds](characters/shiv.md)
+- **Silver:** [24 builds](characters/silver.md)
+- **Sinclair:** [22 builds](characters/sinclair.md)
+- **Solomon:** [4 builds](characters/solomon.md)
+- **Street Brawl:** [browse mode changes](street-brawl.md) · 26 builds
+- **The Doorman:** [26 builds](characters/the-doorman.md)
+- **Venator:** [26 builds](characters/venator.md)
+- **Victor:** [26 builds](characters/victor.md)
+- **Vindicta:** [18 builds](characters/vindicta.md)
+- **Violet:** [5 builds](characters/violet.md)
+- **Viscous:** [22 builds](characters/viscous.md)
+- **Vyper:** [24 builds](characters/vyper.md)
+- **Warden:** [24 builds](characters/warden.md)
+- **Wraith:** [26 builds](characters/wraith.md)
+- **Yamato:** [24 builds](characters/yamato.md)
 
 ### Items
 
@@ -62,7 +62,7 @@ The first number counts builds with a change in the files we follow. The second 
 
 | Month | Changes found | Other builds |
 |---|---:|---:|
-| [November 2026](#november-2026) | 3 | 13 |
+| [November 2026](#november-2026) | 5 | 13 |
 | [October 2026](#october-2026) | 25 | 26 |
 | [September 2026](#september-2026) | 6 | 8 |
 | [August 2026](#august-2026) | 7 | 7 |
@@ -81,6 +81,8 @@ The first number counts builds with a change in the files we follow. The second 
 
 | Build | Recorded (UTC) | What stood out | Card |
 |---:|---|---|---|
+| [6868](builds/6868.md) | Nov 24, 2026 23:43 | Game data changed; see the report for exact values. | [Card](infographics/6868.svg) |
+| [6866](builds/6866.md) | Nov 24, 2026 20:01 | Violet — Pick pct changed from 35.555557 to 24.772562. | [Card](infographics/6866.svg) |
 | [6860](builds/6860.md) | Nov 06, 2026 00:52 | McGinnis · Spectral Wall — Wall back trace distance is now listed as 600. There is no confirmed earlier value. | [Card](infographics/6860.svg) |
 | [6851](builds/6851.md) | Nov 05, 2026 14:48 | Baba · Baba's Brew — Ability cooldown changed from 27.0 to 28.0. | [Card](infographics/6851.svg) |
 | [6842](builds/6842.md) | Nov 02, 2026 21:40 | Game data changed; see the report for exact values. | [Card](infographics/6842.svg) |

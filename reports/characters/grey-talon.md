@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6866 · Nov 24, 2026
+
+- **Grey Talon — Pick pct**: 8.942844 → **7.513103** (Down 1.42974 · 15.99%)
+- **Grey Talon — Winrate pct**: 49.987534 → **50.48729** (Up 0.499756 · 1.00%)
+- **Grey Talon — Pick pct**: 6.711035 → **12.937267** (Up 6.22623 · 92.78%)
+- **Grey Talon — Winrate pct**: 47.774086 → **49.147507** (Up 1.37342 · 2.87%)
+- **Grey Talon — Pick pct**: 66.83946 → **79.66465** (Up 12.8252 · 19.19%)
+- 98 more values in the full report
+
+[Full update](../builds/6866.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/dca492d664e77bdef97eeb80bbcbf0b749df651a)
+
 ## Build 6826 · Oct 30, 2026
 
 - **Grey Talon · Guided Owl — Arrow initial pitch**: -45 → **89** (Up 134)

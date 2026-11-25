@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6866 · Nov 24, 2026
+
+- **Wraith — Pick pct**: 13.402428 → **18.732552** (Up 5.33012 · 39.77%)
+- **Wraith — Winrate pct**: 48.62923 → **49.726013** (Up 1.09678 · 2.26%)
+- **Wraith — Pick pct**: 8.042977 → **6.813729** (Down 1.22925 · 15.28%)
+- **Wraith — Winrate pct**: 45.84121 → **46.66124** (Up 0.82003 · 1.79%)
+- **Wraith — Pick pct**: 24.72506 → **26.649767** (Up 1.92471 · 7.78%)
+- 110 more values in the full report
+
+[Full update](../builds/6866.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/dca492d664e77bdef97eeb80bbcbf0b749df651a)
+
 ## Build 6826 · Oct 30, 2026
 
 - **Wraith · Project Mind — Ability cooldown**: 46.0 → **50.0** (Up 4 · 8.70%)

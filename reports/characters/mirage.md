@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6866 · Nov 24, 2026
+
+- **Mirage — Pick pct**: 7.361685 → **13.125877** (Up 5.76419 · 78.30%)
+- **Mirage — Winrate pct**: 44.141975 → **42.438194** (Down 1.70378 · 3.86%)
+- **Mirage — Pick pct**: 6.423898 → **5.515667** (Down 0.908231 · 14.14%)
+- **Mirage — Winrate pct**: 47.36298 → **44.530712** (Down 2.83227 · 5.98%)
+- **Mirage — Pick pct**: 23.010662 → **14.541907** (Down 8.46875 · 36.80%)
+- 102 more values in the full report
+
+[Full update](../builds/6866.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/dca492d664e77bdef97eeb80bbcbf0b749df651a)
+
 ## Build 6826 · Oct 30, 2026
 
 - **Mirage · Traveler — Combat barrier**: 0 → **400**

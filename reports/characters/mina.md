@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6866 · Nov 24, 2026
+
+- **Mina — Pick pct**: 5.677498 → **15.066265** (Up 9.38877 · 165.37%)
+- **Mina — Winrate pct**: 46.42798 → **45.97722** (Down 0.45076 · 0.97%)
+- **Mina — Pick pct**: 17.217375 → **16.29954** (Down 0.917835 · 5.33%)
+- **Mina — Winrate pct**: 46.611515 → **45.037315** (Down 1.5742 · 3.38%)
+- **Mina — Pick pct**: 90.75603 → **87.62079** (Down 3.13524 · 3.45%)
+- 98 more values in the full report
+
+[Full update](../builds/6866.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/dca492d664e77bdef97eeb80bbcbf0b749df651a)
+
 ## Build 6826 · Oct 30, 2026
 
 - **Mina — Hero type**: Marksman → **Mystic**

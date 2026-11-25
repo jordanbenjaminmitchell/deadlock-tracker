@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6866 · Nov 24, 2026
+
+- **Vindicta — Pick pct**: 54.062565 → **53.44887** (Down 0.613695 · 1.14%)
+- **Vindicta — Winrate pct**: 51.72302 → **50.81617** (Down 0.90685 · 1.75%)
+- **Vindicta — Pick pct**: 76.92558 → **72.188934** (Down 4.73665 · 6.16%)
+- **Vindicta — Winrate pct**: 49.931503 → **49.4878** (Down 0.443703 · 0.89%)
+- **Vindicta — Pick pct**: 34.10133 → **49.899536** (Up 15.7982 · 46.33%)
+- 114 more values in the full report
+
+[Full update](../builds/6866.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/dca492d664e77bdef97eeb80bbcbf0b749df651a)
+
 ## Build 6711 · Sep 29, 2026
 
 - **Vindicta · Assassinate — Required upgrade bits**: new setting ****

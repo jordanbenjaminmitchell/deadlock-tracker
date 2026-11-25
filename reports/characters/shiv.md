@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6866 · Nov 24, 2026
+
+- **Shiv — Pick pct**: 7.512414 → **12.753941** (Up 5.24153 · 69.77%)
+- **Shiv — Winrate pct**: 48.60721 → **47.000683** (Down 1.60653 · 3.31%)
+- **Shiv — Pick pct**: 20.344553 → **10.914346** (Down 9.43021 · 46.35%)
+- **Shiv — Winrate pct**: 44.653976 → **46.998943** (Up 2.34497 · 5.25%)
+- **Shiv — Pick pct**: 53.18027 → **42.41591** (Down 10.7644 · 20.24%)
+- 116 more values in the full report
+
+[Full update](../builds/6866.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/dca492d664e77bdef97eeb80bbcbf0b749df651a)
+
 ## Build 6826 · Oct 30, 2026
 
 - **Shiv — Modifier value base bullet damage from level alt fire**: 0.24 → **0.228** (Down 0.012 · 5.00%)

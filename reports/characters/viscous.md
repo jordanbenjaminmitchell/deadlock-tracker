@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6866 · Nov 24, 2026
+
+- **Viscous — Pick pct**: 21.882702 → **21.446615** (Down 0.436087 · 1.99%)
+- **Viscous — Winrate pct**: 49.56839 → **48.486618** (Down 1.08177 · 2.18%)
+- **Viscous — Pick pct**: 19.857368 → **17.901012** (Down 1.95636 · 9.85%)
+- **Viscous — Winrate pct**: 49.094517 → **48.807804** (Down 0.286713 · 0.58%)
+- **Viscous — Pick pct**: 13.719747 → **13.376448** (Down 0.343299 · 2.50%)
+- 152 more values in the full report
+
+[Full update](../builds/6866.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/dca492d664e77bdef97eeb80bbcbf0b749df651a)
+
 ## Build 6826 · Oct 30, 2026
 
 - **Viscous — Modifier value base bullet damage from level alt fire**: 1.44 → **1.512** (Up 0.072 · 5.00%)

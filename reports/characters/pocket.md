@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6866 · Nov 24, 2026
+
+- **Pocket — Pick pct**: 9.658454 → **9.977488** (Up 0.319034 · 3.30%)
+- **Pocket — Winrate pct**: 46.62341 → **43.803665** (Down 2.81975 · 6.05%)
+- **Pocket — Pick pct**: 34.097733 → **29.104906** (Down 4.99283 · 14.64%)
+- **Pocket — Winrate pct**: 46.75582 → **45.743305** (Down 1.01252 · 2.17%)
+- **Pocket — Pick pct**: 51.038162 → **38.39337** (Down 12.6448 · 24.78%)
+- 118 more values in the full report
+
+[Full update](../builds/6866.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/dca492d664e77bdef97eeb80bbcbf0b749df651a)
+
 ## Build 6711 · Sep 29, 2026
 
 - **Pocket · Flying Cloak — Ability cooldown**: 25.0 → **26.0** (Up 1 · 4.00%)

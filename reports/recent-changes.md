@@ -1,20 +1,36 @@
 ## What changed in Deadlock?
 
-**Latest build recorded:** [6865](builds/6865.md) on Nov 23, 2026 at 19:41 UTC.
+**Latest build recorded:** [6868](builds/6868.md) on Nov 24, 2026 at 23:43 UTC.
 
 **Tracker check:** Scheduled every five minutes. [See the most recent check and its time](https://github.com/jordanbenjaminmitchell/deadlock-tracker/actions/workflows/track.yml). GitHub may start a check late.
 
-**History covered:** Oct 25, 2025–Nov 23, 2026 across 412 saved builds. [Browse by month](index.md#updates-by-month).
+**History covered:** Oct 25, 2025–Nov 24, 2026 across 414 saved builds. [Browse by month](index.md#updates-by-month).
 
 ### Latest update
 
-No value changed in the game data this tracker watches.
+This build changed game data, but there is no simple before-and-after value to highlight.
 
-<a href="infographics/latest.svg"><img src="infographics/latest.svg" width="320" alt="No value changed in the game data this tracker watches. Build 6865."></a>
+<a href="infographics/latest.svg"><img src="infographics/latest.svg" width="320" alt="This build changed game data, but there is no simple before-and-after value to highlight. Build 6868."></a>
 
-[See everything found in build 6865](builds/6865.md) · [Check the source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/c68b966d918d30dd5c8efa302ffde233de70ad0e).
+[See everything found in build 6868](builds/6868.md) · [Check the source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/e835dad025d2d4ec7ef126aa13863d1df25d726d).
 
 ### Previous updates
+
+#### Build 6866 · Nov 24, 2026 20:01 UTC
+
+Violet — Pick pct changed from **35.555557** to **24.772562**.
+
+<a href="infographics/6866.svg"><img src="infographics/6866.svg" width="280" alt="Violet — Pick pct changed from 35.555557 to 24.772562. Build 6866."></a>
+
+Key values in this update:
+
+- **Violet — Pick pct**: 35.555557 → **24.772562** (Down 10.783 · 30.33%)
+- **Violet — Winrate pct**: 43.75 → **47.15085** (Up 3.40085 · 7.77%)
+- **Violet — Pick pct**: 86.666664 → **73.34479** (Down 13.3219 · 15.37%)
+- **Violet — Winrate pct**: 46.153847 → **47.932564** (Up 1.77872 · 3.85%)
+- **Violet — Pick pct**: 40.0 → **13.717844** (Down 26.2822 · 65.71%)
+
+[See all changes in build 6866](builds/6866.md) · [Check the source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/dca492d664e77bdef97eeb80bbcbf0b749df651a).
 
 #### Build 6860 · Nov 06, 2026 00:52 UTC
 
@@ -50,38 +66,15 @@ This build changed data without a simple value to highlight.
 
 [See all changes in build 6842](builds/6842.md) · [Check the source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/fc53d8b267db6949b03d3fdb975dff4c9028f77b).
 
-#### Build 6836 · Oct 31, 2026 14:01 UTC
-
-Halloween candy pickup — Base changed from **50.0** to **138.0**.
-
-<a href="infographics/6836.svg"><img src="infographics/6836.svg" width="280" alt="Halloween candy pickup — Base changed from 50.0 to 138.0. Build 6836."></a>
-
-Key values in this update:
-
-- **Halloween candy pickup — Base**: 50.0 → **138.0** (Up 88 · 176.00%)
-- **Halloween candy pickup — Collection method**: new setting **VacuumTrigger**
-
-[See all changes in build 6836](builds/6836.md) · [Check the source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/054a283124561dedd79df03fe82fcf5d99806680).
-
-#### Build 6833 · Oct 30, 2026 22:20 UTC
-
-Baba bench melee — Cooldown on miss changed from **1.6** to **1.5**.
-
-<a href="infographics/6833.svg"><img src="infographics/6833.svg" width="280" alt="Baba bench melee — Cooldown on miss changed from 1.6 to 1.5. Build 6833."></a>
-
-- **Baba bench melee — Cooldown on miss**: 1.6 → **1.5** (Down 0.1 · 6.25%)
-
-[See all changes in build 6833](builds/6833.md) · [Check the source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/b18c406df07927fc6041d5d010241e7e88b8323b).
-
 <details>
 <summary>Last five changes with a verified before and after</summary>
 
 These are individual values, so several can come from one build.
 
-- **Baba · Baba's Brew — Ability cooldown**: 27.0 → **28.0** (Up 1 · 3.70%) · Nov 05, 2026 14:48 UTC · Build 6851 ([card](infographics/recent/6851-8eb2ac7a7974.svg); [full update](builds/6851.md))
-- **Rat King · Scrap Grenade — Melee minimum fuse remaining**: 0.4 → **0.25** (Down 0.15 · 37.50%) · Nov 05, 2026 14:48 UTC · Build 6851 ([card](infographics/recent/6851-ef47cb8c0353.svg); [full update](builds/6851.md))
-- **Citadel weapon nurse set — Bullet damage**: 13.372 → **14.442** (Up 1.07 · 8.00%) · Nov 05, 2026 14:48 UTC · Build 6851 ([card](infographics/recent/6851-3a2b0b9100f3.svg); [full update](builds/6851.md))
-- **Citadel weapon ratking set — Bullet damage**: 5.7 → **5.8** (Up 0.1 · 1.75%) · Nov 05, 2026 14:48 UTC · Build 6851 ([card](infographics/recent/6851-9fa0a0deb57e.svg); [full update](builds/6851.md))
-- **Citadel weapon ratking set — I clip size**: 24 → **26** (Up 2 · 8.33%) · Nov 05, 2026 14:48 UTC · Build 6851 ([card](infographics/recent/6851-8f0158f01161.svg); [full update](builds/6851.md))
+- **Violet — Pick pct**: 35.555557 → **24.772562** (Down 10.783 · 30.33%) · Nov 24, 2026 20:01 UTC · Build 6866 ([card](infographics/recent/6866-8c6843807b4d.svg); [full update](builds/6866.md))
+- **Violet — Winrate pct**: 43.75 → **47.15085** (Up 3.40085 · 7.77%) · Nov 24, 2026 20:01 UTC · Build 6866 ([card](infographics/recent/6866-e004f4438c22.svg); [full update](builds/6866.md))
+- **Violet — Pick pct**: 86.666664 → **73.34479** (Down 13.3219 · 15.37%) · Nov 24, 2026 20:01 UTC · Build 6866 ([card](infographics/recent/6866-2821f5503f08.svg); [full update](builds/6866.md))
+- **Violet — Winrate pct**: 46.153847 → **47.932564** (Up 1.77872 · 3.85%) · Nov 24, 2026 20:01 UTC · Build 6866 ([card](infographics/recent/6866-bb02fa90d886.svg); [full update](builds/6866.md))
+- **Violet — Pick pct**: 40.0 → **13.717844** (Down 26.2822 · 65.71%) · Nov 24, 2026 20:01 UTC · Build 6866 ([card](infographics/recent/6866-9b4df03dc8d8.svg); [full update](builds/6866.md))
 
 </details>

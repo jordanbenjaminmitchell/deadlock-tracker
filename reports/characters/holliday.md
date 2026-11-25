@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6866 · Nov 24, 2026
+
+- **Holliday — Pick pct**: 6.294121 → **7.647859** (Up 1.35374 · 21.51%)
+- **Holliday — Winrate pct**: 48.087433 → **48.73119** (Up 0.643757 · 1.34%)
+- **Holliday — Pick pct**: 84.54157 → **78.08043** (Down 6.46114 · 7.64%)
+- **Holliday — Winrate pct**: 46.988945 → **49.180954** (Up 2.19201 · 4.66%)
+- **Holliday — Pick pct**: 59.426994 → **56.157444** (Down 3.26955 · 5.50%)
+- 130 more values in the full report
+
+[Full update](../builds/6866.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/dca492d664e77bdef97eeb80bbcbf0b749df651a)
+
 ## Build 6711 · Sep 29, 2026
 
 - **Holliday · Spirit Lasso — Offset basis**: new setting **Source view**

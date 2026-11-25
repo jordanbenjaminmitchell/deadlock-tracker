@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6866 · Nov 24, 2026
+
+- **Rem — Pick pct**: 13.191826 → **7.515467** (Down 5.67636 · 43.03%)
+- **Rem — Winrate pct**: 49.58423 → **45.564785** (Down 4.01945 · 8.11%)
+- **Rem — Pick pct**: 19.621824 → **7.420998** (Down 12.2008 · 62.18%)
+- **Rem — Winrate pct**: 48.679245 → **45.2063** (Down 3.47295 · 7.13%)
+- **Rem — Pick pct**: 67.63153 → **66.01804** (Down 1.61349 · 2.39%)
+- 136 more values in the full report
+
+[Full update](../builds/6866.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/dca492d664e77bdef97eeb80bbcbf0b749df651a)
+
 ## Build 6826 · Oct 30, 2026
 
 - **Rem — Hero type**: Mystic → **Healer**

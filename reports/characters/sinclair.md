@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6866 · Nov 24, 2026
+
+- **Sinclair — Pick pct**: 7.818367 → **10.922756** (Up 3.10439 · 39.71%)
+- **Sinclair — Winrate pct**: 42.42105 → **45.04757** (Up 2.62652 · 6.19%)
+- **Sinclair — Pick pct**: 68.12781 → **77.38205** (Up 9.25424 · 13.58%)
+- **Sinclair — Winrate pct**: 43.027557 → **45.29638** (Up 2.26882 · 5.27%)
+- **Sinclair — Pick pct**: 50.436695 → **27.300858** (Down 23.1358 · 45.87%)
+- 110 more values in the full report
+
+[Full update](../builds/6866.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/dca492d664e77bdef97eeb80bbcbf0b749df651a)
+
 ## Build 6753 · Oct 05, 2026
 
 - **Sinclair — Base health regen**: 2.0 → **1.0** (Down 1 · 50.00%)

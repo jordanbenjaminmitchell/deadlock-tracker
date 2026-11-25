@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6866 · Nov 24, 2026
+
+- **Vyper — Pick pct**: 14.538018 → **10.472137** (Down 4.06588 · 27.97%)
+- **Vyper — Winrate pct**: 47.40874 → **46.361084** (Down 1.04766 · 2.21%)
+- **Vyper — Pick pct**: 6.071469 → **8.74017** (Up 2.6687 · 43.95%)
+- **Vyper — Winrate pct**: 44.78187 → **41.96817** (Down 2.8137 · 6.28%)
+- **Vyper — Pick pct**: 73.333084 → **73.08475** (Down 0.248334 · 0.34%)
+- 132 more values in the full report
+
+[Full update](../builds/6866.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/dca492d664e77bdef97eeb80bbcbf0b749df651a)
+
 ## Build 6711 · Sep 29, 2026
 
 - **Vyper — Release status**: new setting **Released**

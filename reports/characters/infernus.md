@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6866 · Nov 24, 2026
+
+- **Infernus — Pick pct**: 7.239438 → **11.197575** (Up 3.95814 · 54.67%)
+- **Infernus — Winrate pct**: 52.416492 → **50.741337** (Down 1.67515 · 3.20%)
+- **Infernus — Pick pct**: 31.735987 → **25.907103** (Down 5.82888 · 18.37%)
+- **Infernus — Winrate pct**: 50.95943 → **50.32042** (Down 0.63901 · 1.25%)
+- **Infernus — Pick pct**: 60.34076 → **58.23173** (Down 2.10903 · 3.50%)
+- 114 more values in the full report
+
+[Full update](../builds/6866.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/dca492d664e77bdef97eeb80bbcbf0b749df651a)
+
 ## Build 6826 · Oct 30, 2026
 
 - **Infernus — Hero type**: Marksman → **Mystic**

@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6866 · Nov 24, 2026
+
+- **Drifter — Pick pct**: 35.238773 → **46.786705** (Up 11.5479 · 32.77%)
+- **Drifter — Winrate pct**: 51.857395 → **50.56795** (Down 1.28944 · 2.49%)
+- **Drifter — Pick pct**: 39.42046 → **38.490273** (Down 0.930187 · 2.36%)
+- **Drifter — Winrate pct**: 52.786274 → **50.543015** (Down 2.24326 · 4.25%)
+- **Drifter — Pick pct**: 12.921906 → **7.81152** (Down 5.11039 · 39.55%)
+- 140 more values in the full report
+
+[Full update](../builds/6866.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/dca492d664e77bdef97eeb80bbcbf0b749df651a)
+
 ## Build 6711 · Sep 29, 2026
 
 - **Drifter · Eternal Night — Spring target**: -20.0 → **-15.0** (Up 5)

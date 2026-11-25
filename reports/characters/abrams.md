@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6866 · Nov 24, 2026
+
+- **Abrams — Pick pct**: 26.343645 → **22.397326** (Down 3.94632 · 14.98%)
+- **Abrams — Winrate pct**: 52.953857 → **52.32143** (Down 0.632427 · 1.19%)
+- **Abrams — Pick pct**: 68.41348 → **71.66822** (Up 3.25474 · 4.76%)
+- **Abrams — Winrate pct**: 52.511524 → **52.044983** (Down 0.466541 · 0.89%)
+- **Abrams — Pick pct**: 60.441032 → **27.140085** (Down 33.3009 · 55.10%)
+- 110 more values in the full report
+
+[Full update](../builds/6866.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/dca492d664e77bdef97eeb80bbcbf0b749df651a)
+
 ## Build 6711 · Sep 29, 2026
 
 - **Abrams · Siphon Life — Loscheck**: Bounds → **Bounds**

@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6866 · Nov 24, 2026
+
+- **Yamato — Pick pct**: 64.39395 → **64.81589** (Up 0.42194 · 0.66%)
+- **Yamato — Winrate pct**: 50.545948 → **47.792793** (Down 2.75316 · 5.45%)
+- **Yamato — Pick pct**: 7.828377 → **5.323422** (Down 2.50495 · 32.00%)
+- **Yamato — Winrate pct**: 53.27212 → **46.90924** (Down 6.36288 · 11.94%)
+- **Yamato — Pick pct**: 23.076721 → **10.115493** (Down 12.9612 · 56.17%)
+- 108 more values in the full report
+
+[Full update](../builds/6866.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/dca492d664e77bdef97eeb80bbcbf0b749df651a)
+
 ## Build 6826 · Oct 30, 2026
 
 - **Yamato · Shadow Transformation — Ability cooldown**: 150.0 → **160.0** (Up 10 · 6.67%)

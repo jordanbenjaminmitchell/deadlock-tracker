@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6866 · Nov 24, 2026
+
+- **Kelvin — Pick pct**: 13.178553 → **7.714956** (Down 5.4636 · 41.46%)
+- **Kelvin — Winrate pct**: 56.359344 → **57.562** (Up 1.20266 · 2.13%)
+- **Kelvin — Pick pct**: 57.605362 → **35.99729** (Down 21.6081 · 37.51%)
+- **Kelvin — Winrate pct**: 54.729416 → **54.81434** (Up 0.084924 · 0.16%)
+- **Kelvin — Pick pct**: 65.97962 → **69.63618** (Up 3.65656 · 5.54%)
+- 122 more values in the full report
+
+[Full update](../builds/6866.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/dca492d664e77bdef97eeb80bbcbf0b749df651a)
+
 ## Build 6826 · Oct 30, 2026
 
 - **Kelvin · Frozen Shelter — Ability cooldown**: 185 → **190** (Up 5 · 2.70%)

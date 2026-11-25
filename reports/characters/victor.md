@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6866 · Nov 24, 2026
+
+- **Victor — Pick pct**: 82.03323 → **44.85741** (Down 37.1758 · 45.32%)
+- **Victor — Winrate pct**: 57.70331 → **52.999416** (Down 4.70389 · 8.15%)
+- **Victor — Pick pct**: 23.660357 → **24.780567** (Up 1.12021 · 4.73%)
+- **Victor — Winrate pct**: 55.949974 → **52.27784** (Down 3.67213 · 6.56%)
+- **Victor — Pick pct**: 26.20686 → **18.55665** (Down 7.65021 · 29.19%)
+- 120 more values in the full report
+
+[Full update](../builds/6866.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/dca492d664e77bdef97eeb80bbcbf0b749df651a)
+
 ## Build 6711 · Sep 29, 2026
 
 - **Victor · Aura of Suffering — Toggle off delay**: new setting **0.5**

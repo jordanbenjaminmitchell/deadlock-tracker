@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6866 · Nov 24, 2026
+
+- **Solomon — Pick pct**: 38.29787 → **13.439053** (Down 24.8588 · 64.91%)
+- **Solomon — Winrate pct**: 66.666664 → **46.883816** (Down 19.7828 · 29.67%)
+- **Solomon — Pick pct**: 8.510638 → **9.442987** (Up 0.932349 · 10.96%)
+- **Solomon — Winrate pct**: 75.0 → **46.27479** (Down 28.7252 · 38.30%)
+- **Solomon — Pick pct**: 40.425533 → **33.10619** (Down 7.31934 · 18.11%)
+- 96 more values in the full report
+
+[Full update](../builds/6866.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/dca492d664e77bdef97eeb80bbcbf0b749df651a)
+
 ## Build 6826 · Oct 30, 2026
 
 - **Solomon — Crit damage bonus scale**: 1.0 → **0.8** (Down 0.2 · 20.00%)

@@ -1,25 +1,28 @@
 # Street Brawl changes
 
-The latest archived build is [6865](builds/6865.md). It has no confirmed Street Brawl value change.
+The latest archived build is [6868](builds/6868.md). It has no confirmed Street Brawl value change.
 
-## Most recent confirmed change: build 6826
+## Most recent confirmed change: build 6866
 
-Recorded Oct 30, 2026 at 20:54 UTC. [Read the build report](builds/6826.md) or [check the source commit](https://github.com/SteamTracking/GameTracking-Deadlock/commit/fd21313e755aaac0a1625e0851b8d5c3f03ff46d).
+Recorded Nov 24, 2026 at 20:01 UTC. [Read the build report](builds/6866.md) or [check the source commit](https://github.com/SteamTracking/GameTracking-Deadlock/commit/dca492d664e77bdef97eeb80bbcbf0b749df651a).
+
+- **Street Brawl — Good item pick rate threshold**: new setting **15.0**
+- **Street Brawl — Good item pick rate threshold**: new setting **10.0**
+- **Street Brawl — Good item pick rate threshold**: new setting **5.0**
+- **Street Brawl — Good item pick rate threshold**: new setting **5.0**
+
+## Earlier Street Brawl updates
+
+### Build 6826 · Oct 30, 2026
 
 - **Violet · Abstract Landscape — Street brawl value**: new setting **5**
 - **Violet · Abstract Landscape — Street brawl bonus**: new setting **3**
 - **Paige · Bookwyrm — Street brawl bonus**: new setting **1**
-- **Deadman Danny · Chimera Mk1 — Street brawl stat scale**: new setting **-0.25**
 - **Deadman Danny · Chimera Mk1 — Street brawl bonus**: new setting **30**
-- **Nurse Harrow · Lurking Terrors — Street brawl value**: new setting **Game data reference**
-- **Nurse Harrow · Lurking Terrors — Street brawl bonus**: new setting **Game data reference**
 - **Rat King · Scrap Grenade — Street brawl value**: new setting **6m**
-- **Rat King · Scrap Grenade — Street brawl bonus**: new setting **10m**
-- **Rat King · Rule, Ratannia\! — Street brawl value**: new setting **9**
-- **Rat King · Rule, Ratannia\! — Street brawl value**: new setting **16m**
-- **Rat King · Rule, Ratannia\! — Street brawl bonus**: new setting **6m**
+- 4 more values in the full report
 
-## Earlier Street Brawl updates
+[Full update](builds/6826.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/fd21313e755aaac0a1625e0851b8d5c3f03ff46d)
 
 ### Build 6794 · Oct 17, 2026
 

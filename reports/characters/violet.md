@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6866 · Nov 24, 2026
+
+- **Violet — Pick pct**: 35.555557 → **24.772562** (Down 10.783 · 30.33%)
+- **Violet — Winrate pct**: 43.75 → **47.15085** (Up 3.40085 · 7.77%)
+- **Violet — Pick pct**: 86.666664 → **73.34479** (Down 13.3219 · 15.37%)
+- **Violet — Winrate pct**: 46.153847 → **47.932564** (Up 1.77872 · 3.85%)
+- **Violet — Pick pct**: 40.0 → **13.717844** (Down 26.2822 · 65.71%)
+- 84 more values in the full report
+
+[Full update](../builds/6866.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/dca492d664e77bdef97eeb80bbcbf0b749df651a)
+
 ## Build 6826 · Oct 30, 2026
 
 - **Violet · Abstract Landscape — Immune duration**: 0.5 → **0.75** (Up 0.25 · 50.00%)

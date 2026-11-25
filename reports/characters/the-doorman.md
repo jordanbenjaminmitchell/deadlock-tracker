@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6866 · Nov 24, 2026
+
+- **The Doorman — Pick pct**: 9.845125 → **6.905741** (Down 2.93938 · 29.86%)
+- **The Doorman — Winrate pct**: 45.418163 → **45.650303** (Up 0.23214 · 0.51%)
+- **The Doorman — Pick pct**: 52.22513 → **67.5335** (Up 15.3084 · 29.31%)
+- **The Doorman — Winrate pct**: 45.877666 → **46.139618** (Up 0.261952 · 0.57%)
+- **The Doorman — Pick pct**: 23.66669 → **13.504857** (Down 10.1618 · 42.94%)
+- 108 more values in the full report
+
+[Full update](../builds/6866.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/dca492d664e77bdef97eeb80bbcbf0b749df651a)
+
 ## Build 6711 · Sep 29, 2026
 
 - **The Doorman · Call Bell — Loscheck**: Bounds → **Bounds**

@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6866 · Nov 24, 2026
+
+- **Graves — Pick pct**: 25.373198 → **5.733883** (Down 19.6393 · 77.40%)
+- **Graves — Winrate pct**: 60.289143 → **58.77413** (Down 1.51501 · 2.51%)
+- **Graves — Pick pct**: 28.777033 → **23.704357** (Down 5.07268 · 17.63%)
+- **Graves — Winrate pct**: 60.296593 → **60.023106** (Down 0.273487 · 0.45%)
+- **Graves — Pick pct**: 10.85929 → **8.851108** (Down 2.00818 · 18.49%)
+- 104 more values in the full report
+
+[Full update](../builds/6866.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/dca492d664e77bdef97eeb80bbcbf0b749df651a)
+
 ## Build 6826 · Oct 30, 2026
 
 - **Graves — Maximum move speed**: 7.0 → **6.7** (Down 0.3 · 4.29%)

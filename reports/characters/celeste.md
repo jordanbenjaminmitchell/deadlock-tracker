@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6866 · Nov 24, 2026
+
+- **Celeste — Pick pct**: 66.30017 → **63.189743** (Down 3.11043 · 4.69%)
+- **Celeste — Winrate pct**: 49.884064 → **47.992138** (Down 1.89193 · 3.79%)
+- **Celeste — Pick pct**: 10.965174 → **15.56001** (Up 4.59484 · 41.90%)
+- **Celeste — Winrate pct**: 48.64332 → **46.4147** (Down 2.22862 · 4.58%)
+- **Celeste — Pick pct**: 8.122611 → **19.130608** (Up 11.008 · 135.52%)
+- 122 more values in the full report
+
+[Full update](../builds/6866.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/dca492d664e77bdef97eeb80bbcbf0b749df651a)
+
 ## Build 6851 · Nov 05, 2026
 
 - **Celeste · Shining Wonder — Ability cooldown**: 160 → **170**
