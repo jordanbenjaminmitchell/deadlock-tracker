@@ -4,6 +4,16 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6871 · Nov 26, 2026
+
+- **Lady Geist — Maximum health**: 880.0 → **805.0** (Down 75 · 8.52%)
+- **Lady Geist · Essence Bomb — Damage**: 90 → **85** (Down 5 · 5.56%)
+- **Lady Geist — Modifier value base bullet damage from level**: 1.0 → **1.05** (Up 0.05 · 5.00%)
+- **Lady Geist — Modifier value base health from level**: 51.0 → **54.0** (Up 3 · 5.88%)
+- **Lady Geist · Essence Bomb — Self damage pct**: 30 → **50**
+
+[Full update](../builds/6871.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd)
+
 ## Build 6866 · Nov 24, 2026
 
 - **Lady Geist — Pick pct**: 45.945686 → **51.445698** (Up 5.50001 · 11.97%)

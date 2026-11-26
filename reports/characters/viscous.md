@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6871 · Nov 26, 2026
+
+- **Viscous — Maximum health**: 780.0 → **715.0** (Down 65 · 8.33%)
+- **Viscous — Crit damage received scale**: 1.0 → **0.9** (Down 0.1 · 10.00%)
+- **Viscous — Modifier value base bullet damage from level**: 0.36 → **0.378** (Up 0.018 · 5.00%)
+- **Viscous — Modifier value base bullet damage from level alt fire**: 1.512 → **1.588** (Up 0.076 · 5.03%)
+- **Viscous — Modifier value base health from level**: 45.0 → **47.0** (Up 2 · 4.44%)
+- 4 more values in the full report
+
+[Full update](../builds/6871.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd)
+
 ## Build 6866 · Nov 24, 2026
 
 - **Viscous — Pick pct**: 21.882702 → **21.446615** (Down 0.436087 · 1.99%)

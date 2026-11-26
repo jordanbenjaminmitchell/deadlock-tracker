@@ -4,6 +4,14 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6871 · Nov 26, 2026
+
+- **Mo &amp; Krill — Maximum health**: 930.0 → **855.0** (Down 75 · 8.06%)
+- **Mo &amp; Krill — Modifier value base bullet damage from level**: 0.0881 → **0.0925** (Up 0.0044 · 4.99%)
+- **Mo &amp; Krill — Modifier value base health from level**: 65.0 → **68.0** (Up 3 · 4.62%)
+
+[Full update](../builds/6871.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd)
+
 ## Build 6866 · Nov 24, 2026
 
 - **Mo &amp; Krill — Pick pct**: 18.40965 → **15.61987** (Down 2.78978 · 15.15%)

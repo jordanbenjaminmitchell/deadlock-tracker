@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6871 · Nov 26, 2026
+
+- **Apollo — Maximum health**: 770.0 → **705.0** (Down 65 · 8.44%)
+- **Apollo · Riposte — Bullet speed**: 10000.0 → **64000.0** (Up 54000 · 540.00%)
+- **Apollo — Modifier value base bullet damage from level**: 0.825 → **0.866** (Up 0.041 · 4.97%)
+- **Apollo — Modifier value base bullet damage from level alt fire**: 0.5 → **0.525** (Up 0.025 · 5.00%)
+- **Apollo — Modifier value base health from level**: 45.0 → **47.0** (Up 2 · 4.44%)
+- 42 more values in the full report
+
+[Full update](../builds/6871.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd)
+
 ## Build 6866 · Nov 24, 2026
 
 - **Apollo — Pick pct**: 11.603749 → **43.99926** (Up 32.3955 · 279.18%)

@@ -4,6 +4,15 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6871 · Nov 26, 2026
+
+- **Mina — Maximum health**: 660.0 → **605.0** (Down 55 · 8.33%)
+- **Mina — Base health regen**: 2.0 → **1.5** (Down 0.5 · 25.00%)
+- **Mina — Modifier value base bullet damage from level**: 0.275 → **0.289** (Up 0.014 · 5.09%)
+- **Mina — Modifier value base health from level**: 27.0 → **29.0** (Up 2 · 7.41%)
+
+[Full update](../builds/6871.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd)
+
 ## Build 6866 · Nov 24, 2026
 
 - **Mina — Pick pct**: 5.677498 → **15.066265** (Up 9.38877 · 165.37%)

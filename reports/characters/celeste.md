@@ -4,6 +4,14 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6871 · Nov 26, 2026
+
+- **Celeste — Maximum health**: 690.0 → **630.0** (Down 60 · 8.70%)
+- **Celeste — Modifier value base bullet damage from level**: 0.82 → **0.861** (Up 0.041 · 5.00%)
+- **Celeste — Modifier value base health from level**: 33.0 → **35.0** (Up 2 · 6.06%)
+
+[Full update](../builds/6871.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd)
+
 ## Build 6866 · Nov 24, 2026
 
 - **Celeste — Pick pct**: 66.30017 → **63.189743** (Down 3.11043 · 4.69%)

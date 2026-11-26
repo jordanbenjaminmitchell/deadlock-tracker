@@ -1,17 +1,26 @@
 # Street Brawl changes
 
-The latest archived build is [6868](builds/6868.md). It has no confirmed Street Brawl value change.
+The latest archived build is [6871](builds/6871.md). It has 4 confirmed Street Brawl changes.
 
-## Most recent confirmed change: build 6866
+## Most recent confirmed change: build 6871
 
-Recorded Nov 24, 2026 at 20:01 UTC. [Read the build report](builds/6866.md) or [check the source commit](https://github.com/SteamTracking/GameTracking-Deadlock/commit/dca492d664e77bdef97eeb80bbcbf0b749df651a).
+Recorded Nov 26, 2026 at 17:24 UTC. [Read the build report](builds/6871.md) or [check the source commit](https://github.com/SteamTracking/GameTracking-Deadlock/commit/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd).
+
+- **Baba · Threadsap — Street brawl value**: 14 → **7**
+- **Warden · Last Stand — Street brawl value**: Game data reference → **Game data reference**
+- **Warden · Last Stand — Street brawl value**: Game data reference → **Game data reference**
+- **Street Brawl — Gold per round\[4\]**: 14000 → **14600** (Up 600 · 4.29%)
+
+## Earlier Street Brawl updates
+
+### Build 6866 · Nov 24, 2026
 
 - **Street Brawl — Good item pick rate threshold**: new setting **15.0**
 - **Street Brawl — Good item pick rate threshold**: new setting **10.0**
 - **Street Brawl — Good item pick rate threshold**: new setting **5.0**
 - **Street Brawl — Good item pick rate threshold**: new setting **5.0**
 
-## Earlier Street Brawl updates
+[Full update](builds/6866.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/dca492d664e77bdef97eeb80bbcbf0b749df651a)
 
 ### Build 6826 · Oct 30, 2026
 

@@ -4,6 +4,14 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6871 · Nov 26, 2026
+
+- **Solomon — Maximum health**: 780.0 → **715.0** (Down 65 · 8.33%)
+- **Solomon — Modifier value base bullet damage from level**: 0.4 → **0.42** (Up 0.02 · 5.00%)
+- **Solomon — Modifier value base health from level**: 40.0 → **42.0** (Up 2 · 5.00%)
+
+[Full update](../builds/6871.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd)
+
 ## Build 6866 · Nov 24, 2026
 
 - **Solomon — Pick pct**: 38.29787 → **13.439053** (Down 24.8588 · 64.91%)

@@ -4,6 +4,14 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6871 · Nov 26, 2026
+
+- **Holliday — Maximum health**: 780.0 → **715.0** (Down 65 · 8.33%)
+- **Holliday — Modifier value base bullet damage from level**: 1.144 → **1.05** (Down 0.094 · 8.22%)
+- **Holliday — Modifier value base health from level**: 43.0 → **45.0** (Up 2 · 4.65%)
+
+[Full update](../builds/6871.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd)
+
 ## Build 6866 · Nov 24, 2026
 
 - **Holliday — Pick pct**: 6.294121 → **7.647859** (Up 1.35374 · 21.51%)

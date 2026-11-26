@@ -4,6 +4,16 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6871 · Nov 26, 2026
+
+- **Venator — Maximum health**: 820.0 → **750.0** (Down 70 · 8.54%)
+- **Venator · Hex-Lined Snap Trap — Climb height**: 1.0 → **18.0** (Up 17 · 1700.00%)
+- **Venator — Modifier value base health from level**: 43.0 → **45.0** (Up 2 · 4.65%)
+- **Venator · Gutshot — Ability cooldown**: 23 → **20**
+- **Venator · Consecrating Grenade — Climb height**: new setting **18.0**
+
+[Full update](../builds/6871.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd)
+
 ## Build 6866 · Nov 24, 2026
 
 - **Venator — Pick pct**: 9.225687 → **8.703609** (Down 0.522078 · 5.66%)

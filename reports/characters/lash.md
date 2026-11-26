@@ -4,6 +4,14 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6871 · Nov 26, 2026
+
+- **Lash — Maximum health**: 780.0 → **715.0** (Down 65 · 8.33%)
+- **Lash — Modifier value base bullet damage from level**: 0.31 → **0.326** (Up 0.016 · 5.16%)
+- **Lash — Modifier value base health from level**: 50.0 → **52.0** (Up 2 · 4.00%)
+
+[Full update](../builds/6871.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd)
+
 ## Build 6866 · Nov 24, 2026
 
 - **Lash — Pick pct**: 9.016225 → **6.091093** (Down 2.92513 · 32.44%)

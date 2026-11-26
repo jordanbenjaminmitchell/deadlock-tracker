@@ -4,6 +4,15 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6871 · Nov 26, 2026
+
+- **Shiv — Maximum health**: 830.0 → **760.0** (Down 70 · 8.43%)
+- **Shiv — Modifier value base bullet damage from level**: 0.165 → **0.173** (Up 0.008 · 4.85%)
+- **Shiv — Modifier value base bullet damage from level alt fire**: 0.228 → **0.239** (Up 0.011 · 4.82%)
+- **Shiv — Modifier value base health from level**: 46.0 → **48.0** (Up 2 · 4.35%)
+
+[Full update](../builds/6871.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd)
+
 ## Build 6866 · Nov 24, 2026
 
 - **Shiv — Pick pct**: 7.512414 → **12.753941** (Up 5.24153 · 69.77%)

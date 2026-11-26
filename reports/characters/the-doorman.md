@@ -4,6 +4,14 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6871 · Nov 26, 2026
+
+- **The Doorman — Maximum health**: 755.0 → **690.0** (Down 65 · 8.61%)
+- **The Doorman — Modifier value base bullet damage from level**: 1.25 → **1.313** (Up 0.063 · 5.04%)
+- **The Doorman — Modifier value base health from level**: 42.0 → **44.0** (Up 2 · 4.76%)
+
+[Full update](../builds/6871.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd)
+
 ## Build 6866 · Nov 24, 2026
 
 - **The Doorman — Pick pct**: 9.845125 → **6.905741** (Down 2.93938 · 29.86%)

@@ -4,6 +4,14 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6871 · Nov 26, 2026
+
+- **Pocket — Maximum health**: 780.0 → **715.0** (Down 65 · 8.33%)
+- **Pocket — Modifier value base bullet damage from level**: 0.14 → **0.147** (Up 0.007 · 5.00%)
+- **Pocket — Modifier value base health from level**: 36.0 → **38.0** (Up 2 · 5.56%)
+
+[Full update](../builds/6871.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd)
+
 ## Build 6866 · Nov 24, 2026
 
 - **Pocket — Pick pct**: 9.658454 → **9.977488** (Up 0.319034 · 3.30%)

@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6871 · Nov 26, 2026
+
+- **Baba — Maximum health**: 780.0 → **715.0** (Down 65 · 8.33%)
+- **Baba — Maximum move speed**: 6.5 → **6.4** (Down 0.1 · 1.54%)
+- **Baba — Fl scale**: 0.05 → **0.02** (Down 0.03 · 60.00%)
+- **Baba — Modifier value base bullet damage from level**: 0.41 → **0.431** (Up 0.021 · 5.12%)
+- **Baba — Modifier value base health from level**: 45.0 → **47.0** (Up 2 · 4.44%)
+- 5 more values in the full report
+
+[Full update](../builds/6871.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd)
+
 ## Build 6866 · Nov 24, 2026
 
 - **Baba — Pick pct**: 16.666666 → **61.105316** (Up 44.4387 · 266.63%)

@@ -4,6 +4,14 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6871 · Nov 26, 2026
+
+- **McGinnis — Maximum health**: 780.0 → **715.0** (Down 65 · 8.33%)
+- **McGinnis — Modifier value base bullet damage from level**: 0.171 → **0.18** (Up 0.009 · 5.26%)
+- **McGinnis — Modifier value base health from level**: 52.0 → **54.0** (Up 2 · 3.85%)
+
+[Full update](../builds/6871.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd)
+
 ## Build 6866 · Nov 24, 2026
 
 - **McGinnis — Pick pct**: 5.593492 → **8.073405** (Up 2.47991 · 44.34%)

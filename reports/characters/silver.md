@@ -4,6 +4,15 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6871 · Nov 26, 2026
+
+- **Silver — Maximum health**: 830.0 → **760.0** (Down 70 · 8.43%)
+- **Silver — Modifier value base bullet damage from level**: 0.117 → **0.123** (Up 0.006 · 5.13%)
+- **Silver — Modifier value base bullet damage from level alt fire**: 0.7735 → **0.8122** (Up 0.0387 · 5.00%)
+- **Silver — Modifier value base health from level**: 31.0 → **33.0** (Up 2 · 6.45%)
+
+[Full update](../builds/6871.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd)
+
 ## Build 6866 · Nov 24, 2026
 
 - **Silver — Pick pct**: 5.537527 → **6.189305** (Up 0.651778 · 11.77%)

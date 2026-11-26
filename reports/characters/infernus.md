@@ -4,6 +4,14 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6871 · Nov 26, 2026
+
+- **Infernus — Maximum health**: 830.0 → **760.0** (Down 70 · 8.43%)
+- **Infernus — Modifier value base bullet damage from level**: 0.088 → **0.092** (Up 0.004 · 4.55%)
+- **Infernus — Modifier value base health from level**: 39.0 → **41.0** (Up 2 · 5.13%)
+
+[Full update](../builds/6871.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd)
+
 ## Build 6866 · Nov 24, 2026
 
 - **Infernus — Pick pct**: 7.239438 → **11.197575** (Up 3.95814 · 54.67%)

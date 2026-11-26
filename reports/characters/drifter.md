@@ -4,6 +4,14 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6871 · Nov 26, 2026
+
+- **Drifter — Maximum health**: 755.0 → **690.0** (Down 65 · 8.61%)
+- **Drifter — Modifier value base bullet damage from level**: 0.49 → **0.515** (Up 0.025 · 5.10%)
+- **Drifter — Modifier value base health from level**: 41.0 → **43.0** (Up 2 · 4.88%)
+
+[Full update](../builds/6871.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd)
+
 ## Build 6866 · Nov 24, 2026
 
 - **Drifter — Pick pct**: 35.238773 → **46.786705** (Up 11.5479 · 32.77%)

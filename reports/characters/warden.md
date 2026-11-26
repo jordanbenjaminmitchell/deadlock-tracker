@@ -4,6 +4,15 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6871 · Nov 26, 2026
+
+- **Warden — Maximum health**: 805.0 → **740.0** (Down 65 · 8.07%)
+- **Warden — Modifier value base health from level**: 60.0 → **67.0** (Up 7 · 11.67%)
+- **Warden · Last Stand — Health steal pct**: 10 → **15**
+- **Warden · Last Stand — Health steal pct hero**: 75 → **90**
+
+[Full update](../builds/6871.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd)
+
 ## Build 6866 · Nov 24, 2026
 
 - **Warden — Pick pct**: 11.128203 → **9.959796** (Down 1.16841 · 10.50%)

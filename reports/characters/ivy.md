@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6871 · Nov 26, 2026
+
+- **Ivy — Maximum health**: 755.0 → **690.0** (Down 65 · 8.61%)
+- **Ivy — Modifier value base bullet damage from level**: 0.08 → **0.084** (Up 0.004 · 5.00%)
+- **Ivy — Modifier value base health from level**: 45.0 → **44.0** (Down 1 · 2.22%)
+- **Ivy · Air Drop — Scale stat filter**: new setting **ETechPower**
+- **Ivy · Air Drop — Upgrade type**: new setting **EAddToScale**
+- 1 more values in the full report
+
+[Full update](../builds/6871.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd)
+
 ## Build 6866 · Nov 24, 2026
 
 - **Ivy — Pick pct**: 10.23851 → **15.997582** (Up 5.75907 · 56.25%)

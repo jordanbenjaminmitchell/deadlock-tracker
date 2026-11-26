@@ -4,6 +4,14 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6871 · Nov 26, 2026
+
+- **Paige — Maximum health**: 680.0 → **625.0** (Down 55 · 8.09%)
+- **Paige — Modifier value base bullet damage from level**: 0.61 → **0.641** (Up 0.031 · 5.08%)
+- **Paige — Modifier value base health from level**: 31.0 → **33.0** (Up 2 · 6.45%)
+
+[Full update](../builds/6871.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd)
+
 ## Build 6866 · Nov 24, 2026
 
 - **Paige — Pick pct**: 42.194138 → **44.20989** (Up 2.01575 · 4.78%)

@@ -4,6 +4,15 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6871 · Nov 26, 2026
+
+- **Nurse Harrow — Maximum health**: 730 → **670** (Down 60 · 8.22%)
+- **Nurse Harrow · Leech Therapy — Bullet speed**: 1315.0 → **1118.0** (Down 197 · 14.98%)
+- **Nurse Harrow — Modifier value base bullet damage from level**: 0.37436 → **0.39308** (Up 0.01872 · 5.00%)
+- **Nurse Harrow — Modifier value base health from level**: 32.0 → **34.0** (Up 2 · 6.25%)
+
+[Full update](../builds/6871.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd)
+
 ## Build 6866 · Nov 24, 2026
 
 - **Nurse Harrow — Pick pct**: 20.0 → **12.426978** (Down 7.57302 · 37.87%)

@@ -4,6 +4,13 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6871 · Nov 26, 2026
+
+- **Vindicta — Maximum health**: 755.0 → **690.0** (Down 65 · 8.61%)
+- **Vindicta — Modifier value base health from level**: 28.0 → **30.0** (Up 2 · 7.14%)
+
+[Full update](../builds/6871.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd)
+
 ## Build 6866 · Nov 24, 2026
 
 - **Vindicta — Pick pct**: 54.062565 → **53.44887** (Down 0.613695 · 1.14%)

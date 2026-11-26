@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6871 · Nov 26, 2026
+
+- **Deadman Danny — Maximum health**: 730.0 → **670.0** (Down 60 · 8.22%)
+- **Deadman Danny · Strix Salvo — Ability cooldown**: 25.0 → **26.0** (Up 1 · 4.00%)
+- **Deadman Danny · Chimera Mk1 — Slope incoming**: 9880.866 → **5928.52** (Down 3952.35 · 40.00%)
+- **Deadman Danny · Chimera Mk1 — Slope outgoing**: 9880.866 → **5928.52** (Down 3952.35 · 40.00%)
+- **Deadman Danny · Chimera Mk1 — Slope incoming**: 509.24374 → **305.54626** (Down 203.697 · 40.00%)
+- 18 more values in the full report
+
+[Full update](../builds/6871.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd)
+
 ## Build 6866 · Nov 24, 2026
 
 - **Deadman Danny — Pick pct**: 40.909092 → **15.839055** (Down 25.07 · 61.28%)

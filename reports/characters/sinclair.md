@@ -4,6 +4,16 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6871 · Nov 26, 2026
+
+- **Sinclair — Maximum health**: 730.0 → **670.0** (Down 60 · 8.22%)
+- **Sinclair · Vexing Bolt — Boss damage scale**: 0.5 → **1.0** (Up 0.5 · 100.00%)
+- **Sinclair — Modifier value base bullet damage from level**: 0.55 → **0.578** (Up 0.028 · 5.09%)
+- **Sinclair — Modifier value base bullet damage from level alt fire**: 0.55 → **0.578** (Up 0.028 · 5.09%)
+- **Sinclair — Modifier value base health from level**: 38.0 → **40.0** (Up 2 · 5.26%)
+
+[Full update](../builds/6871.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd)
+
 ## Build 6866 · Nov 24, 2026
 
 - **Sinclair — Pick pct**: 7.818367 → **10.922756** (Up 3.10439 · 39.71%)

@@ -4,6 +4,14 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6871 · Nov 26, 2026
+
+- **Bebop — Maximum health**: 880.0 → **805.0** (Down 75 · 8.52%)
+- **Bebop — Modifier value base bullet damage from level**: 0.115 → **0.121** (Up 0.006 · 5.22%)
+- **Bebop — Modifier value base health from level**: 52.0 → **55.0** (Up 3 · 5.77%)
+
+[Full update](../builds/6871.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd)
+
 ## Build 6866 · Nov 24, 2026
 
 - **Bebop — Pick pct**: 47.426003 → **54.528183** (Up 7.10218 · 14.98%)

@@ -4,6 +4,14 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6871 · Nov 26, 2026
+
+- **Dynamo — Maximum health**: 880.0 → **805.0** (Down 75 · 8.52%)
+- **Dynamo — Modifier value base bullet damage from level**: 0.5 → **0.525** (Up 0.025 · 5.00%)
+- **Dynamo — Modifier value base health from level**: 61.0 → **64.0** (Up 3 · 4.92%)
+
+[Full update](../builds/6871.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd)
+
 ## Build 6866 · Nov 24, 2026
 
 - **Dynamo — Pick pct**: 11.002733 → **16.980618** (Up 5.97788 · 54.33%)

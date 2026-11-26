@@ -4,6 +4,14 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6871 · Nov 26, 2026
+
+- **Grey Talon — Maximum health**: 780.0 → **715.0** (Down 65 · 8.33%)
+- **Grey Talon — Modifier value base bullet damage from level**: 0.85 → **0.893** (Up 0.043 · 5.06%)
+- **Grey Talon — Modifier value base health from level**: 38.0 → **40.0** (Up 2 · 5.26%)
+
+[Full update](../builds/6871.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd)
+
 ## Build 6866 · Nov 24, 2026
 
 - **Grey Talon — Pick pct**: 8.942844 → **7.513103** (Down 1.42974 · 15.99%)

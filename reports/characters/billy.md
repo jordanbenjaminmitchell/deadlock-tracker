@@ -4,6 +4,14 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6871 · Nov 26, 2026
+
+- **Billy — Maximum health**: 820.0 → **750.0** (Down 70 · 8.54%)
+- **Billy — Modifier value base bullet damage from level**: 0.127 → **0.133** (Up 0.006 · 4.72%)
+- **Billy — Modifier value base health from level**: 53.0 → **55.0** (Up 2 · 3.77%)
+
+[Full update](../builds/6871.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd)
+
 ## Build 6866 · Nov 24, 2026
 
 - **Billy — Pick pct**: 16.636997 → **18.396067** (Up 1.75907 · 10.57%)

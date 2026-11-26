@@ -4,6 +4,14 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6871 · Nov 26, 2026
+
+- **Vyper — Maximum health**: 780.0 → **715.0** (Down 65 · 8.33%)
+- **Vyper — Modifier value base bullet damage from level**: 0.178 → **0.187** (Up 0.009 · 5.06%)
+- **Vyper — Modifier value base health from level**: 35.0 → **37.0** (Up 2 · 5.71%)
+
+[Full update](../builds/6871.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd)
+
 ## Build 6866 · Nov 24, 2026
 
 - **Vyper — Pick pct**: 14.538018 → **10.472137** (Down 4.06588 · 27.97%)

@@ -4,6 +4,15 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6871 · Nov 26, 2026
+
+- **Calico — Maximum health**: 730.0 → **670.0** (Down 60 · 8.22%)
+- **Calico — Modifier value base bullet damage from level**: 0.043 → **0.045** (Up 0.002 · 4.65%)
+- **Calico — Modifier value base health from level**: 37.0 → **39.0** (Up 2 · 5.41%)
+- **Calico · Leaping Slash — Enemy stop check radius**: new setting **60.0**
+
+[Full update](../builds/6871.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd)
+
 ## Build 6866 · Nov 24, 2026
 
 - **Calico — Pick pct**: 75.64749 → **74.86863** (Down 0.77886 · 1.03%)

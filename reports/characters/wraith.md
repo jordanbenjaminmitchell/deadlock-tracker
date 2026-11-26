@@ -4,6 +4,17 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6871 · Nov 26, 2026
+
+- **Wraith — Maximum health**: 730.0 → **670.0** (Down 60 · 8.22%)
+- **Wraith — Sprint speed**: 1.6 → **1.2** (Down 0.4 · 25.00%)
+- **Wraith — Maximum move speed**: 7.2 → **6.8** (Down 0.4 · 5.56%)
+- **Wraith — Base health regen**: 2.0 → **1.0** (Down 1 · 50.00%)
+- **Wraith — Modifier value base health from level**: 35.0 → **37.0** (Up 2 · 5.71%)
+- 1 more values in the full report
+
+[Full update](../builds/6871.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd)
+
 ## Build 6866 · Nov 24, 2026
 
 - **Wraith — Pick pct**: 13.402428 → **18.732552** (Up 5.33012 · 39.77%)

@@ -103,6 +103,8 @@ Items with a recorded value in both saved builds. Names come from game data and 
 
 ## Capacitor
 
+- **Capacitor — Bonus per chain**: 43 → **37** · Nov 26, 2026 · [build 6871](builds/6871.md)
+- **Capacitor — Damage per chain**: 43 → **37** · Nov 26, 2026 · [build 6871](builds/6871.md)
 - **Capacitor — Maximum slow percent**: 75 → **60** · Sep 16, 2026 · [build 6694](builds/6694.md)
 - **Capacitor — Ability cooldown**: 50 → **40** · Jan 30, 2026 · [build 6211](builds/6211.md)
 - **Capacitor — Slow duration**: 4 → **3** · Jan 30, 2026 · [build 6211](builds/6211.md)
@@ -121,6 +123,7 @@ Items with a recorded value in both saved builds. Names come from game data and 
 
 ## Cheat Death
 
+- **Cheat Death — Ability cooldown**: 90.0 → **105.0** (Up 15 · 16.67%) · Nov 26, 2026 · [build 6871](builds/6871.md)
 - **Cheat Death — Bonus move speed**: -2m → **0m** · Mar 06, 2026 · [build 6359](builds/6359.md)
 
 ## Cloak of Opportunity
@@ -219,6 +222,7 @@ Items with a recorded value in both saved builds. Names come from game data and 
 
 ## Dispel Magic
 
+- **Dispel Magic — Ability cooldown**: 45.0 → **52.0** (Up 7 · 15.56%) · Nov 26, 2026 · [build 6871](builds/6871.md)
 - **Dispel Magic — Ability cooldown**: 40.0 → **45.0** (Up 5 · 12.50%) · May 22, 2026 · [build 6514](builds/6514.md)
 - **Dispel Magic — Tech resist**: 16 → **10** · Apr 30, 2026 · [build 6468](builds/6468.md)
 - **Dispel Magic — Ability cooldown**: 50.0 → **40.0** (Down 10 · 20.00%) · Mar 06, 2026 · [build 6359](builds/6359.md)
@@ -791,6 +795,7 @@ Items with a recorded value in both saved builds. Names come from game data and 
 
 ## Sharpshooter
 
+- **Sharpshooter — Bonus attack range percent**: 20 → **18** · Nov 26, 2026 · [build 6871](builds/6871.md)
 - **Sharpshooter — Long range bonus weapon power**: 70 → **60** · May 22, 2026 · [build 6514](builds/6514.md)
 
 ## Silence Wave
@@ -850,6 +855,7 @@ Items with a recorded value in both saved builds. Names come from game data and 
 
 ## Spirit Burn
 
+- **Spirit Burn — Debuff duration**: 8 → **7** · Nov 26, 2026 · [build 6871](builds/6871.md)
 - **Spirit Burn — Is hidden**: On → **Off** · Sep 29, 2026 · [build 6711](builds/6711.md)
 - **Spirit Burn — Ability cooldown**: 20 → **0** · Jul 28, 2026 · [build 6642](builds/6642.md)
 - **Spirit Burn — Cooldown reduction pct on non heroes**: 50 → **0** · Jul 28, 2026 · [build 6642](builds/6642.md)

@@ -4,6 +4,15 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6871 · Nov 26, 2026
+
+- **Kelvin — Maximum health**: 880.0 → **805.0** (Down 75 · 8.52%)
+- **Kelvin · Arctic Beam — Ability cooldown**: 28.0 → **29.0** (Up 1 · 3.57%)
+- **Kelvin — Modifier value base bullet damage from level**: 0.418 → **0.439** (Up 0.021 · 5.02%)
+- **Kelvin — Modifier value base health from level**: 60.0 → **63.0** (Up 3 · 5.00%)
+
+[Full update](../builds/6871.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd)
+
 ## Build 6866 · Nov 24, 2026
 
 - **Kelvin — Pick pct**: 13.178553 → **7.714956** (Down 5.4636 · 41.46%)

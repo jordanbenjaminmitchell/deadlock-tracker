@@ -4,6 +4,14 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6871 · Nov 26, 2026
+
+- **Rem — Maximum health**: 680.0 → **625.0** (Down 55 · 8.09%)
+- **Rem — Modifier value base bullet damage from level**: 0.34 → **0.357** (Up 0.017 · 5.00%)
+- **Rem — Modifier value base health from level**: 28.0 → **30.0** (Up 2 · 7.14%)
+
+[Full update](../builds/6871.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/77b862290ad3050cafd2e9c3f47e0532e9d6dcfd)
+
 ## Build 6866 · Nov 24, 2026
 
 - **Rem — Pick pct**: 13.191826 → **7.515467** (Down 5.67636 · 43.03%)
