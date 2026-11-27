@@ -62,7 +62,7 @@ The first number counts builds with a change in the files we follow. The second 
 
 | Month | Changes found | Other builds |
 |---|---:|---:|
-| [November 2026](#november-2026) | 7 | 15 |
+| [November 2026](#november-2026) | 9 | 15 |
 | [October 2026](#october-2026) | 25 | 26 |
 | [September 2026](#september-2026) | 6 | 8 |
 | [August 2026](#august-2026) | 7 | 7 |
@@ -81,6 +81,8 @@ The first number counts builds with a change in the files we follow. The second 
 
 | Build | Recorded (UTC) | What stood out | Card |
 |---:|---|---|---|
+| [6880](builds/6880.md) | Nov 27, 2026 17:03 | Game data changed; see the report for exact values. | [Card](infographics/6880.svg) |
+| [6877](builds/6877.md) | Nov 27, 2026 15:02 | Game data changed; see the report for exact values. | [Card](infographics/6877.svg) |
 | [6875](builds/6875.md) | Nov 27, 2026 06:41 | Game data changed; see the report for exact values. | [Card](infographics/6875.svg) |
 | [6871](builds/6871.md) | Nov 26, 2026 17:24 | Violet — Maximum health changed from 710.0 to 650.0. | [Card](infographics/6871.svg) |
 | [6868](builds/6868.md) | Nov 24, 2026 23:43 | Game data changed; see the report for exact values. | [Card](infographics/6868.svg) |
