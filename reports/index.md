@@ -62,7 +62,7 @@ The first number counts builds with a change in the files we follow. The second 
 
 | Month | Changes found | Other builds |
 |---|---:|---:|
-| [November 2026](#november-2026) | 6 | 13 |
+| [November 2026](#november-2026) | 7 | 15 |
 | [October 2026](#october-2026) | 25 | 26 |
 | [September 2026](#september-2026) | 6 | 8 |
 | [August 2026](#august-2026) | 7 | 7 |
@@ -81,6 +81,7 @@ The first number counts builds with a change in the files we follow. The second 
 
 | Build | Recorded (UTC) | What stood out | Card |
 |---:|---|---|---|
+| [6875](builds/6875.md) | Nov 27, 2026 06:41 | Game data changed; see the report for exact values. | [Card](infographics/6875.svg) |
 | [6871](builds/6871.md) | Nov 26, 2026 17:24 | Violet — Maximum health changed from 710.0 to 650.0. | [Card](infographics/6871.svg) |
 | [6868](builds/6868.md) | Nov 24, 2026 23:43 | Game data changed; see the report for exact values. | [Card](infographics/6868.svg) |
 | [6866](builds/6866.md) | Nov 24, 2026 20:01 | Violet — Pick pct changed from 35.555557 to 24.772562. | [Card](infographics/6866.svg) |
@@ -89,12 +90,14 @@ The first number counts builds with a change in the files we follow. The second 
 | [6842](builds/6842.md) | Nov 02, 2026 21:40 | Game data changed; see the report for exact values. | [Card](infographics/6842.svg) |
 
 <details>
-<summary>Show 13 other builds from November 2026</summary>
+<summary>Show 15 other builds from November 2026</summary>
 
 No value changed in the six files we follow. Other game files may have changed.
 
 | Build | Recorded (UTC) | Card |
 |---:|---|---|
+| [6873](builds/6873.md) | Nov 27, 2026 05:29 | [Card](infographics/6873.svg) |
+| [6872](builds/6872.md) | Nov 27, 2026 05:07 | [Card](infographics/6872.svg) |
 | [6865](builds/6865.md) | Nov 23, 2026 19:41 | [Card](infographics/6865.svg) |
 | [6864](builds/6864.md) | Nov 18, 2026 22:38 | [Card](infographics/6864.svg) |
 | [6863](builds/6863.md) | Nov 18, 2026 21:33 | [Card](infographics/6863.svg) |
