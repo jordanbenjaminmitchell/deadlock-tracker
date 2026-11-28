@@ -4,6 +4,15 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6882 · Nov 28, 2026
+
+- **Baba — Bullet armor damage reduction**: -7.0 → **-4.0** (Up 3)
+- **Baba · Threadsap — Ability cooldown**: 28.0 → **26.0** (Down 2 · 7.14%)
+- **Baba · Granny Long Legs — Ability cooldown**: 32 → **30**
+- **Baba · Threadsap — Magic damage per bullet**: 12 → **18**
+
+[Full update](../builds/6882.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/09f9017193cc65084ef86aff45b7b3458fb2db0c)
+
 ## Build 6871 · Nov 26, 2026
 
 - **Baba — Maximum health**: 780.0 → **715.0** (Down 65 · 8.33%)

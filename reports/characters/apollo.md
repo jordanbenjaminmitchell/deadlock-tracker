@@ -4,6 +4,12 @@ Builds with clear value changes for a character on the current released roster. 
 
 [All builds](../index.md) · [Recent updates](../recent-changes.md)
 
+## Build 6882 · Nov 28, 2026
+
+- **Apollo · Riposte — Ability cooldown**: 22 → **20**
+
+[Full update](../builds/6882.md) · [Source](https://github.com/SteamTracking/GameTracking-Deadlock/commit/09f9017193cc65084ef86aff45b7b3458fb2db0c)
+
 ## Build 6871 · Nov 26, 2026
 
 - **Apollo — Maximum health**: 770.0 → **705.0** (Down 65 · 8.44%)

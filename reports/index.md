@@ -7,8 +7,8 @@ Find an update by character or mode, or browse the builds below. Dates show when
 ## Find changes by character or mode
 
 - **Abrams:** [21 builds](characters/abrams.md)
-- **Apollo:** [23 builds](characters/apollo.md)
-- **Baba:** [7 builds](characters/baba.md)
+- **Apollo:** [24 builds](characters/apollo.md)
+- **Baba:** [8 builds](characters/baba.md)
 - **Bebop:** [26 builds](characters/bebop.md)
 - **Billy:** [24 builds](characters/billy.md)
 - **Calico:** [20 builds](characters/calico.md)
@@ -62,7 +62,7 @@ The first number counts builds with a change in the files we follow. The second 
 
 | Month | Changes found | Other builds |
 |---|---:|---:|
-| [November 2026](#november-2026) | 9 | 15 |
+| [November 2026](#november-2026) | 10 | 15 |
 | [October 2026](#october-2026) | 25 | 26 |
 | [September 2026](#september-2026) | 6 | 8 |
 | [August 2026](#august-2026) | 7 | 7 |
@@ -81,6 +81,7 @@ The first number counts builds with a change in the files we follow. The second 
 
 | Build | Recorded (UTC) | What stood out | Card |
 |---:|---|---|---|
+| [6882](builds/6882.md) | Nov 28, 2026 02:35 | Baba — Bullet armor damage reduction changed from -7.0 to -4.0. | [Card](infographics/6882.svg) |
 | [6880](builds/6880.md) | Nov 27, 2026 17:03 | Game data changed; see the report for exact values. | [Card](infographics/6880.svg) |
 | [6877](builds/6877.md) | Nov 27, 2026 15:02 | Game data changed; see the report for exact values. | [Card](infographics/6877.svg) |
 | [6875](builds/6875.md) | Nov 27, 2026 06:41 | Game data changed; see the report for exact values. | [Card](infographics/6875.svg) |
